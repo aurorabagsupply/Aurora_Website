@@ -1,0 +1,11 @@
+<?php get_header(); ?>
+<main>
+  <section class="page-title"><div class="container"><h1>Contact Aurora Bag Supply</h1><p>Tell us what products you need. We will reply with details, pricing and solutions.</p></div></section>
+  <section class="section"><div class="container contact-grid">
+    <form class="panel form-grid" method="post" action="mailto:sales@aurorabagsupply.com">
+      <div class="field"><label>Name</label><input name="name" required /></div><div class="field"><label>Email</label><input name="email" type="email" required /></div><div class="field"><label>Company</label><input name="company" /></div><div class="field"><label>Country</label><input name="country" /></div><div class="field"><label>WhatsApp / WeChat</label><input name="contact" /></div><div class="field"><label>Product Category</label><select name="category"><option>Accessories</option><option>Bag</option><option>Hardware</option><option>Leather</option><option>Tools</option><option>Zipper</option></select></div><div class="field"><label>Product Name</label><input name="product" value="<?php echo isset($_GET['product']) ? esc_attr(wp_unslash($_GET['product'])) : ''; ?>" /></div><div class="field"><label>SKU</label><input name="sku" value="<?php echo isset($_GET['sku']) ? esc_attr(wp_unslash($_GET['sku'])) : ''; ?>" /></div><div class="field"><label>Quantity</label><input name="quantity" /></div><div class="field full"><label>Custom Requirement</label><textarea name="custom_requirement" rows="4"></textarea></div><div class="field full"><label>Message</label><textarea name="message" rows="5"></textarea></div><div class="field full"><button class="btn btn-primary">Request a Quote</button></div>
+    </form>
+    <aside class="panel"><h2>Business Contact</h2><p><strong>Email:</strong> sales@aurorabagsupply.com</p><p><strong>Business:</strong> Bag hardware, leather materials, custom accessories</p><p><strong>Response Time:</strong> Within 24 hours</p><p>Please include product photos, drawings, size, finish, quantity and destination country when available.</p></aside>
+  </div></section>
+</main>
+<?php get_footer(); ?>

@@ -1,0 +1,12 @@
+/*
+Theme Name: Aurora Bag Supply
+Author: Aurora Bag Supply
+Version: 1.0.10-preview
+Description: A WooCommerce theme for bag hardware and leather materials supplier.
+Requires at least: 6.0
+Tested up to: 6.5
+Requires PHP: 7.4
+Text Domain: aurora-bag-supply
+*/
+
+@import url("assets/css/aurora-commerce.css");
