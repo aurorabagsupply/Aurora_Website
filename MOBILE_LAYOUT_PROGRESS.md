@@ -229,3 +229,41 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `git diff --check`: passed with only line-ending warnings.
 - Rollback point:
   - To return to the previous version, revert commit `656acd6`.
+
+### 2026-08-09 - Apple-Style Mobile Homepage Refinement
+
+- Commit: `b0ce14e`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home header, hero, trust row, category overview, product carousel cards
+- Changes:
+  - Added mobile-only Apple-style refinement using white and `#f5f5f7` backgrounds, `#1d1d1f` primary text, and restrained brown accents.
+  - Changed mobile header to a lighter sticky glass surface; hid the brand subtitle on mobile to reduce crowding.
+  - Repositioned the mobile language selector so Menu, Logo and language button remain aligned; language menu order is now `EN, RU, ES, FR, DE, IT, AR, 中文`.
+  - Kept search logic but restyled mobile search as a lighter integrated search field; verified live suggestions appear after typing.
+  - Simplified mobile hero copy to one large title, one natural sentence and lighter text-link actions while preserving carousel images, dots and arrows.
+  - Replaced the thick trust cards with simple text blocks and fine separators.
+  - Reworked mobile category tiles into square light-gray image panels with category names below and a simple arrow, removing the nested pill-label look.
+  - Reduced mobile product card density: large square product image area, hidden quick-view button, visible `Add to Quote` and `View Details` text actions, and simplified specs/MOQ.
+  - Added new static cache-busting query strings.
+  - Updated the WordPress theme asset version to `1.0.68-preview`.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Header: sticky glass background, brand subtitle hidden, Menu/Logo/language/search aligned.
+  - Search: typing `zipper` produced product suggestions.
+  - Mobile menu: still toggles category navigation open.
+  - Language order: Chinese is last in the selector.
+  - Category media: square `172 x 172`, background `rgb(245, 245, 247)`, title position `static`.
+  - Product card image share: about `68%` of card height.
+  - Quick View hidden on mobile; Add to Quote and View Details remain visible.
+  - Static CSS and WordPress theme CSS hash matched.
+- Rollback point:
+  - To return to the previous version, revert commit `b0ce14e`.
