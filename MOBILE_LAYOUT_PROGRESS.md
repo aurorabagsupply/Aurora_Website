@@ -98,3 +98,39 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `git diff --check`: passed with only line-ending warnings.
 - Rollback point:
   - To return to the previous version, revert commit `37adc30`.
+
+### 2026-08-08 - Mobile Image Fit and Compact Product Cards
+
+- Commit: `689a580`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home hero image
+  - Mobile category overview images
+  - Mobile home product sections
+  - Mobile catalog product cards
+- Changes:
+  - Added CSS cache-busting query strings on the static home and products pages.
+  - Updated the WordPress theme asset version to `1.0.64-preview`.
+  - Forced mobile category title bands to Aurora beige/brown so stale green styles are overridden.
+  - Changed mobile hero, category and product images to `object-fit: contain` to avoid cropping product images.
+  - Reduced category image height and description line count.
+  - Converted mobile product cards to a shorter left-image/right-content layout.
+  - Hid mobile quick-view and detail links inside product cards, keeping the quote action visible.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Home hero image `object-fit`: `contain`.
+  - Category image `object-fit`: `contain`.
+  - Category title background: `rgba(248, 239, 231, 0.94)`.
+  - Featured product card approx size: `250 x 192`.
+  - Catalog product card approx size: `358 x 169`.
+  - Catalog quick-view hidden, quote action visible, detail link hidden.
+  - Static CSS and WordPress theme CSS hash matched.
+  - `git diff --check`: passed with only line-ending warnings.
+- Rollback point:
+  - To return to the previous version, revert commit `689a580`.
