@@ -198,3 +198,34 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `git diff --check`: passed with only line-ending warnings.
 - Rollback point:
   - To return to the previous version, revert commit `df4062d`.
+
+### 2026-08-09 - Mobile Square Category Tile Polish
+
+- Commit: `656acd6`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home category overview section
+- Changes:
+  - Kept the two-column square category tile layout.
+  - Changed the full-width bottom title band into a smaller soft pill label.
+  - Reduced visual heaviness with lighter spacing, softer shadow and smaller label text.
+  - Increased usable image area by reducing bottom reserved space.
+  - Added new static asset cache-busting query strings.
+  - Updated the WordPress theme asset version to `1.0.67-preview`.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Category grid columns: `175px 175px`.
+  - First category card approx size: `175 x 175`.
+  - Category label approx size: `149 x 30`.
+  - Category label radius: `999px`.
+  - Category image `object-fit`: `contain`.
+  - Static CSS and WordPress theme CSS hash matched.
+  - `git diff --check`: passed with only line-ending warnings.
+- Rollback point:
+  - To return to the previous version, revert commit `656acd6`.
