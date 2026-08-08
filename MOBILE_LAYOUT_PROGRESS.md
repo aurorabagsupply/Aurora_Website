@@ -134,3 +134,36 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `git diff --check`: passed with only line-ending warnings.
 - Rollback point:
   - To return to the previous version, revert commit `689a580`.
+
+### 2026-08-08 - Mobile Category Directory Redesign
+
+- Commit: `97e2f88`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home category overview section
+- Changes:
+  - Replaced the two-column category tile layout with a single-column mobile procurement directory.
+  - Changed category cards to left-image and right-content structure.
+  - Removed the image-overlay title band from mobile category cards.
+  - Kept full category images with `object-fit: contain`.
+  - Reduced the section title size and tightened mobile spacing.
+  - Kept Aurora beige/brown palette and soft card styling.
+  - Added new static asset cache-busting query strings.
+  - Updated the WordPress theme asset version to `1.0.65-preview`.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Category grid: single column.
+  - Category card approx size: `362 x 126`.
+  - Category image `object-fit`: `contain`.
+  - Category title position: `static`, no overlay band.
+  - Category title color: `rgb(138, 93, 75)`.
+  - Static CSS and WordPress theme CSS hash matched.
+  - `git diff --check`: passed with only line-ending warnings.
+- Rollback point:
+  - To return to the previous version, revert commit `97e2f88`.
