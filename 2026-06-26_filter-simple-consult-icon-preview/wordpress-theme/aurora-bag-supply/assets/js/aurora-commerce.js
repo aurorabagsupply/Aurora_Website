@@ -124,6 +124,7 @@ const I18N = {
     cart: "Cart",
     search: "Search products...",
     searchButton: "Search",
+    searchAll: "View all results",
     home: "Home",
     contact: "Contact Us",
     about: "About Us",
@@ -331,6 +332,7 @@ const I18N = {
     cart: "询价清单",
     search: "搜索产品...",
     searchButton: "搜索",
+    searchAll: "查看全部搜索结果",
     home: "首页",
     contact: "联系我们",
     about: "关于我们",
@@ -382,24 +384,24 @@ const I18N = {
     shipping: "运输交付",
     quantity: "数量",
     noResults: "没有符合当前筛选条件的产品。",
-    sample: "准备样本支持",
-    custom: "定制标志硬件",
+    sample: "现货样品支持",
+    custom: "定制 Logo 五金",
     repeat: "重复订单 SKU",
     alloy: "锌合金",
-    brass: "铜管",
+    brass: "黄铜",
     leatherMaterial: "真皮",
     steel: "钢",
-    gold: "金牌",
+    gold: "金色",
     nickel: "镍",
-    gunmetal: "枪金属",
-    black: "布莱克",
+    gunmetal: "枪色",
+    black: "黑色",
     plated: "电镀",
-    brushed: "刷子",
+    brushed: "拉丝",
     polished: "抛光",
     customFinish: "定制表面",
     small: "小",
-    medium: "媒介",
-    customSize: "习俗",
+    medium: "中号",
+    customSize: "定制",
     handbag: "手提包",
     luggage: "行李",
     belt: "腰带",
@@ -1628,6 +1630,94 @@ function categoryText(category) {
   return CATEGORY_TEXT.en[category];
 }
 
+function normalizeSearchText(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function searchQueryFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return normalizeSearchText(params.get("q") || params.get("s"));
+}
+
+function productSearchHaystack(productInput) {
+  const product = enrichProduct(productInput);
+  const categoryTexts = Object.values(CATEGORY_TEXT)
+    .flatMap((pack) => pack[product.category] || [])
+    .join(" ");
+  const categoryLabels = Object.values(CATEGORY_LABELS)
+    .map((pack) => pack[product.category])
+    .filter(Boolean)
+    .join(" ");
+  return normalizeSearchText([
+    product.name,
+    product.sku,
+    product.category,
+    categoryLabel(product.category),
+    categoryLabels,
+    product.material,
+    product.finish,
+    product.application,
+    product.description,
+    product.moq,
+    product.price,
+    categoryTexts,
+    String(product.number),
+    String(product.number).padStart(2, "0"),
+  ].join(" "));
+}
+
+function productMatchesSearch(productInput, query) {
+  const normalized = normalizeSearchText(query);
+  if (!normalized) return true;
+  return normalized.split(/\s+/).every((term) => productSearchHaystack(productInput).includes(term));
+}
+
+function searchResultsHref(query) {
+  const url = new URL("products.html", window.location.href);
+  const normalized = String(query || "").trim();
+  if (normalized) url.searchParams.set("q", normalized);
+  url.searchParams.set("lang", currentLang());
+  return `${url.pathname.split("/").pop()}${url.search}`;
+}
+
+function productDetailHref(product) {
+  const url = new URL("product-detail.html", window.location.href);
+  url.searchParams.set("sku", product.sku);
+  url.searchParams.set("lang", currentLang());
+  return `${url.pathname.split("/").pop()}${url.search}`;
+}
+
+function renderSearchSuggestions(form) {
+  const input = form.querySelector('input[type="search"], input[name="q"], input[name="s"]');
+  if (!input) return;
+  const query = input.value.trim();
+  let panel = form.querySelector(".search-suggestions");
+  if (!panel) {
+    panel = document.createElement("div");
+    panel.className = "search-suggestions";
+    form.append(panel);
+  }
+  if (!query) {
+    panel.classList.remove("is-open");
+    panel.innerHTML = "";
+    return;
+  }
+  const matches = AURORA_PRODUCTS.filter((item) => productMatchesSearch(item, query)).slice(0, 6);
+  panel.innerHTML = matches.length ? `
+    ${matches.map((item) => {
+      const product = enrichProduct(item);
+      return `
+        <a class="search-suggestion" href="${productDetailHref(product)}">
+          <img src="${encodeURI(product.image)}" alt="${escapeInfoHtml(product.name)}" />
+          <span><strong>${escapeInfoHtml(product.name)}</strong><small>${escapeInfoHtml(product.sku)} · ${escapeInfoHtml(categoryLabel(product.category))}</small></span>
+        </a>
+      `;
+    }).join("")}
+    <a class="search-suggestion search-suggestion--all" href="${searchResultsHref(query)}">${t("searchAll")}</a>
+  ` : `<div class="search-suggestion search-suggestion--empty">${t("noResults")}</div>`;
+  panel.classList.add("is-open");
+}
+
 function translatedFilterLabel(key) {
   const filterPack = FILTER_LABELS[currentLang()] || {};
   if (filterPack[key]) return filterPack[key];
@@ -2200,15 +2290,12 @@ function renderCatalog() {
   grid.classList.add("aurora-products-grid", "is-updating");
   renderFilterPanel();
   updateFilterOptionStates(document.querySelector("[data-filter-panel]") || document);
-  const params = new URLSearchParams(window.location.search);
-  const query = (params.get("q") || "").toLowerCase();
+  const query = searchQueryFromUrl();
+  document.querySelectorAll(".site-search input").forEach((input) => {
+    input.value = query;
+  });
   let products = AURORA_PRODUCTS;
-  if (query) {
-    products = products.filter((item) => {
-      const product = enrichProduct(item);
-      return [product.name, product.sku, categoryLabel(product.category), product.material, product.finish, product.application].join(" ").toLowerCase().includes(query);
-    });
-  }
+  if (query) products = products.filter((item) => productMatchesSearch(item, query));
   const filters = activeFilters();
   products = sortedProducts(products.filter((item) => productMatchesSeoFilters(item, filters)));
   const count = document.querySelector("[data-catalog-count]");
@@ -2354,25 +2441,39 @@ function openQuoteDrawer() {
   drawer.classList.add("is-open");
 }
 
-function insertLanguageSwitcher() {
-  const target = document.querySelector(".header-actions") || document.querySelector(".top-strip__right");
-  if (!target || document.querySelector(".language-select")) return;
-  const active = currentLang();
-  const wrapper = document.createElement("div");
-  wrapper.className = "language-select";
-  wrapper.innerHTML = `
-    <button class="language-select__button" type="button" data-lang-toggle>${LANGUAGES.find(([code]) => code === active)?.[1] || "EN"}</button>
+function languageSwitcherHtml(active) {
+  return `
+    <button class="language-select__button" type="button" data-lang-toggle aria-label="Select language">${LANGUAGES.find(([code]) => code === active)?.[1] || "EN"}</button>
     <div class="language-select__menu">
       ${LANGUAGES.map(([code, label]) => `<button type="button" data-lang="${code}">${label}</button>`).join("")}
     </div>
   `;
-  target.prepend(wrapper);
+}
+
+function insertLanguageSwitcher() {
+  const active = currentLang();
+  const desktopTarget = document.querySelector(".header-actions") || document.querySelector(".top-strip__right");
+  if (desktopTarget && !document.querySelector(".language-select--desktop")) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "language-select language-select--desktop";
+    wrapper.innerHTML = languageSwitcherHtml(active);
+    desktopTarget.prepend(wrapper);
+  }
+
+  const mobileTarget = document.querySelector(".main-header .container");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+  if (mobileTarget && mobileMenu && !document.querySelector(".language-select--mobile")) {
+    const wrapper = document.createElement("div");
+    wrapper.className = "language-select language-select--mobile";
+    wrapper.innerHTML = languageSwitcherHtml(active);
+    mobileMenu.insertAdjacentElement("afterend", wrapper);
+  }
 }
 
 function syncLanguageSwitcherLabel() {
-  const button = document.querySelector(".language-select__button");
-  if (!button) return;
-  button.textContent = LANGUAGES.find(([code]) => code === currentLang())?.[1] || "EN";
+  document.querySelectorAll(".language-select__button").forEach((button) => {
+    button.textContent = LANGUAGES.find(([code]) => code === currentLang())?.[1] || "EN";
+  });
 }
 
 function applyLanguageText() {
@@ -2389,7 +2490,10 @@ function applyLanguageText() {
   document.querySelectorAll("[data-cat]").forEach((node) => {
     node.textContent = categoryLabel(node.dataset.cat);
   });
-  document.querySelectorAll(".site-search input").forEach((input) => { input.placeholder = t("search"); });
+  document.querySelectorAll(".site-search input").forEach((input) => {
+    input.placeholder = t("search");
+    if (document.querySelector("[data-catalog-grid]")) input.value = searchQueryFromUrl();
+  });
   document.querySelectorAll(".site-search button").forEach((button) => { button.textContent = t("searchButton"); });
   document.querySelector(".top-strip .container > div:first-child") && (document.querySelector(".top-strip .container > div:first-child").textContent = t("topLine"));
   const topRight = document.querySelector(".top-strip__right");
@@ -2727,10 +2831,10 @@ function applyFooterTranslations() {
   }
   if (footerCols[2]) {
     setTextFromNode(footerCols[2], "h3", t("footerSupport"));
-    footerCols[2].querySelectorAll("a").forEach((link, index) => {
+    footerCols[2].querySelectorAll("a").forEach((link) => {
       const href = link.getAttribute("href") || "";
       if (href === "contact.html" || href.includes("/contact/")) {
-        link.textContent = link.dataset.footerAction === "quote" || index > 0 ? t("requestQuote") : t("contact");
+        link.textContent = link.dataset.footerAction === "quote" ? t("requestQuote") : t("contact");
       }
       if (href === "account.html" || href.includes("/my-account/")) link.textContent = t("orderStatus");
       if (href.includes("shipping.html") || href.includes("/shipping/")) link.textContent = t("shippingLink");
@@ -3587,14 +3691,20 @@ function bindActions() {
     if (add) addToQuote(add.dataset.addQuote);
     if (closeModal) document.querySelector(".quick-view")?.classList.remove("is-open");
     if (closeQuote) document.querySelector(".quote-drawer")?.classList.remove("is-open");
-    if (langToggle) langToggle.closest(".language-select").classList.toggle("is-open");
+    if (langToggle) {
+      const select = langToggle.closest(".language-select");
+      document.querySelectorAll(".language-select.is-open").forEach((item) => {
+        if (item !== select) item.classList.remove("is-open");
+      });
+      select.classList.toggle("is-open");
+    }
     if (lang) {
       localStorage.setItem("auroraLang", lang.dataset.lang);
       const url = new URL(window.location.href);
       url.searchParams.set("lang", lang.dataset.lang);
       window.history.replaceState({}, "", url);
       syncLanguageSwitcherLabel();
-      lang.closest(".language-select").classList.remove("is-open");
+      document.querySelectorAll(".language-select.is-open").forEach((item) => item.classList.remove("is-open"));
       rerenderDynamicContent();
     }
     if (thumb) {
@@ -3629,6 +3739,34 @@ function bindForms() {
       event.preventDefault();
       alert(form.dataset.success || "Thank you. Our sales team will contact you within 24 hours.");
     });
+  });
+  document.querySelectorAll(".site-search").forEach((form) => {
+    const input = form.querySelector('input[type="search"], input[name="q"], input[name="s"]');
+    if (input) {
+      input.addEventListener("input", () => renderSearchSuggestions(form));
+      input.addEventListener("focus", () => renderSearchSuggestions(form));
+    }
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const query = input ? input.value.trim() : "";
+      const action = form.getAttribute("action") || "products.html";
+      const url = new URL(action, window.location.href);
+      const searchParam = input?.name === "s" ? "s" : "q";
+      if (query) url.searchParams.set(searchParam, query);
+      else url.searchParams.delete(searchParam);
+      url.searchParams.set("lang", currentLang());
+      FILTER_URL_PARAMS.forEach((param) => url.searchParams.delete(param));
+      if (document.querySelector("[data-catalog-grid]") && url.pathname.endsWith("products.html")) {
+        window.history.replaceState({}, "", url);
+        renderCatalog();
+        return;
+      }
+      window.location.href = url.href;
+    });
+  });
+  document.addEventListener("click", (event) => {
+    if (event.target.closest(".site-search")) return;
+    document.querySelectorAll(".search-suggestions.is-open").forEach((panel) => panel.classList.remove("is-open"));
   });
   const menu = document.querySelector("[data-mobile-menu]");
   const nav = document.querySelector(".category-nav");
