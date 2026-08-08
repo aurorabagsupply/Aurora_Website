@@ -167,3 +167,34 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `git diff --check`: passed with only line-ending warnings.
 - Rollback point:
   - To return to the previous version, revert commit `97e2f88`.
+
+### 2026-08-08 - Mobile Square Category Tiles
+
+- Commit: `df4062d`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home category overview section
+- Changes:
+  - Replaced the previous mobile category directory cards with square category tiles.
+  - Restored a two-column mobile grid while keeping each card square.
+  - Kept category images fully visible with `object-fit: contain`.
+  - Hid mobile category descriptions and product-count pills to reduce clutter.
+  - Kept only the category name in a soft Aurora beige title band.
+  - Added new static asset cache-busting query strings.
+  - Updated the WordPress theme asset version to `1.0.66-preview`.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Category grid columns: `174px 174px`.
+  - First category cards approx size: `174 x 174`.
+  - Category images `object-fit`: `contain`.
+  - Description and count elements hidden on mobile.
+  - Static CSS and WordPress theme CSS hash matched.
+  - `git diff --check`: passed with only line-ending warnings.
+- Rollback point:
+  - To return to the previous version, revert commit `df4062d`.
