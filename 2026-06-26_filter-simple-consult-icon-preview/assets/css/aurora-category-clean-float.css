@@ -142,6 +142,7 @@
   }
 
   .section:has([data-category-grid]) .section-head h2 {
+    color: #4f4640;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 38px;
     font-weight: 900;
@@ -152,6 +153,7 @@
   .section:has([data-category-grid]) .section-head p {
     max-width: none;
     margin: 10px 0 0;
+    color: #82736a;
     font-size: 13px;
     line-height: 1.45;
   }
@@ -178,7 +180,7 @@
     padding: 0;
     overflow: hidden;
     border-radius: 0;
-    background: #eee8df;
+    background: #f7efe8;
     box-shadow: none;
   }
 
@@ -228,8 +230,10 @@
     align-items: center;
     justify-content: center;
     padding: 0 8px;
-    background: rgba(133, 143, 23, 0.82);
-    color: #fff;
+    border-top: 1px solid rgba(139, 95, 74, 0.14);
+    border-bottom: 1px solid rgba(139, 95, 74, 0.14);
+    background: rgba(248, 239, 231, 0.9);
+    color: #8a5d4b;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
     font-weight: 900;
@@ -242,7 +246,7 @@
     overflow: hidden;
     min-height: 58px;
     margin: 0 auto;
-    color: #5f5a55;
+    color: #756860;
     font-size: 14px;
     line-height: 1.38;
     -webkit-box-orient: vertical;
