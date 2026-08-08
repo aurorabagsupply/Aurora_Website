@@ -71,3 +71,30 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `git diff --check`: passed with only line-ending warnings.
 - Rollback point:
   - To return to the previous version, revert commit `c9f159e`.
+
+### 2026-08-08 - Mobile Category Soft Palette Correction
+
+- Commit: `37adc30`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-commerce.css`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-commerce.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+- Page area:
+  - Mobile category overview grid
+- Changes:
+  - Kept the two-column category layout inspired by the reference image.
+  - Replaced the green category title band with Aurora soft beige.
+  - Changed category title text back to Aurora brown.
+  - Adjusted supporting text and media background to softer beige/brown tones.
+  - Kept desktop layout unchanged by limiting the edits to mobile media queries.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Category grid stayed two columns.
+  - Category title background: `rgba(248, 239, 231, 0.9)`.
+  - Category title color: `rgb(138, 93, 75)`.
+  - Static CSS and WordPress theme CSS hash matched.
+  - `git diff --check`: passed with only line-ending warnings.
+- Rollback point:
+  - To return to the previous version, revert commit `37adc30`.
