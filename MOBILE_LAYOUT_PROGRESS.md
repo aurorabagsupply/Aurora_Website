@@ -42,3 +42,32 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Static CSS and WordPress theme CSS hash matched.
 - Rollback point:
   - To return to the previous version, revert commit `c165d65`.
+
+### 2026-08-08 - Mobile Category Directory Layout
+
+- Commit: `c9f159e`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-commerce.css`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-commerce.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+- Page area:
+  - Mobile language dropdown
+  - Mobile category overview grid
+- Changes:
+  - Reordered the mobile language dropdown so Chinese appears last.
+  - Rebuilt the mobile category overview as a compact two-column directory.
+  - Moved category names into a band across the bottom of each image.
+  - Kept category descriptions below each image for easier scanning.
+  - Reduced card framing so the section feels closer to a B2B product directory reference.
+  - Kept the changes inside mobile media queries so desktop layout is not intentionally changed.
+- Verification:
+  - Mobile viewport `390 x 844`: passed.
+  - Language menu visual order: `EN`, `RU`, `ES`, `FR`, `DE`, `IT`, `AR`, `中文`.
+  - Category grid: two columns, first card media `168 x 146`.
+  - Category label bands visible on mobile cards.
+  - Static CSS and WordPress theme CSS hash matched.
+  - `git diff --check`: passed with only line-ending warnings.
+- Rollback point:
+  - To return to the previous version, revert commit `c9f159e`.
