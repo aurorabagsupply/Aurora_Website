@@ -9,13 +9,13 @@
 
 const LANGUAGES = [
   ["en", "EN"],
-  ["zh", "中文"],
   ["ru", "RU"],
   ["es", "ES"],
   ["fr", "FR"],
   ["de", "DE"],
   ["it", "IT"],
   ["ar", "AR"],
+  ["zh", "中文"],
 ];
 
 const HERO_SLIDES = [
