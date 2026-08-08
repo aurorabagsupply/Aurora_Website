@@ -126,6 +126,135 @@
   }
 }
 
+/* Mobile category overview inspired by compact B2B category directories */
+@media (max-width: 760px) {
+  .section:has([data-category-grid]) {
+    padding-top: 42px;
+  }
+
+  .section:has([data-category-grid]) .container {
+    width: calc(100% - 32px);
+  }
+
+  .section:has([data-category-grid]) .section-head {
+    margin-bottom: 24px;
+    text-align: left;
+  }
+
+  .section:has([data-category-grid]) .section-head h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .section:has([data-category-grid]) .section-head p {
+    max-width: none;
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 22px;
+  }
+
+  .category-card {
+    position: relative;
+    min-height: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .category-card__media {
+    min-height: 0;
+    height: 146px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 0;
+    background: #eee8df;
+    box-shadow: none;
+  }
+
+  .category-card__media::before,
+  .category-card__media::after {
+    display: none;
+  }
+
+  .category-card__media img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    object-fit: cover;
+    object-position: center;
+    filter: none;
+    mix-blend-mode: normal;
+  }
+
+  .category-card[href*="Leather"] .category-card__media img,
+  .category-card[href*="Zipper"] .category-card__media img,
+  .category-card[href*="Accessories"] .category-card__media img,
+  .category-card[href*="Tools"] .category-card__media img {
+    max-width: none;
+    max-height: none;
+  }
+
+  .category-card__body {
+    display: block;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    background: transparent;
+    text-align: center;
+  }
+
+  .category-card h3 {
+    position: absolute;
+    left: 0;
+    top: 108px;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    min-height: 38px;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    background: rgba(133, 143, 23, 0.82);
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+  }
+
+  .category-card p {
+    display: -webkit-box;
+    overflow: hidden;
+    min-height: 58px;
+    margin: 0 auto;
+    color: #5f5a55;
+    font-size: 14px;
+    line-height: 1.38;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .category-card__count,
+  .category-card__link {
+    display: none;
+  }
+}
+
 /* Clean full-image product cards */
 .product-card {
   isolation: isolate;
