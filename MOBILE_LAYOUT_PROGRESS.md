@@ -382,7 +382,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Bag Product Image Blend V6
 
-- Commit: `pending`
+- Commit: `f720cd3`
 - Base source commit: `5b054b1`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -405,4 +405,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Mobile Bag catalog viewport `390 x 844`: passed with system Edge headless.
   - Bag product media padding measured `0px`; background measured `rgb(245, 245, 247)`; image object-fit measured `cover`.
 - Rollback point:
-  - Replace `pending` with the final commit id after commit; revert that commit to return to the previous version.
+  - To return to the previous version, revert commit `f720cd3`.
