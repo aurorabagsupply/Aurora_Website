@@ -308,3 +308,40 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Static CSS/JS and WordPress theme CSS/JS hash matched.
 - Rollback point:
   - To return to the previous version, revert commits `a2c9ac1` and `058bed0` in that order.
+
+### 2026-08-09 - Mobile Hero Swipe And Catalog Grid V4
+
+- Commit: `3bd04c0`
+- Base source commit: `a2c9ac1`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home hero carousel
+  - Mobile category/product image stages
+  - Mobile product catalog page
+- Changes:
+  - Added real mobile hero swipe support using pointer movement with vertical-scroll protection, while keeping existing autoplay and dot navigation.
+  - Forced mobile category and product image stages to pure white so product images blend with their original white backgrounds.
+  - Converted the mobile product catalog list into a compact two-column grid.
+  - Reduced mobile catalog product cards to image, product name and quote/price text only; hid SKU pills, specs, MOQ text, repeated quote button and detail link in the catalog grid.
+  - Added a mobile-only `Filters` trigger and moved the filter panel into a hidden left-side drawer with backdrop close behavior.
+  - Added new static cache-busting query strings: `20260809-mobile-catalog-grid-v4`.
+  - Updated the WordPress theme asset version to `1.0.71-preview`.
+- Verification:
+  - JS syntax check passed for static and WordPress theme JS.
+  - Static JS/CSS and WordPress theme JS/CSS hashes matched.
+  - Mobile viewport `390 x 844`: passed with system Edge headless.
+  - Hero swipe changed active slide from `0` to `1`; `touch-action` is `pan-y`.
+  - Catalog grid columns measured `172px 172px`, first two product cards are on the same row.
+  - Catalog product image background measured `rgb(255, 255, 255)` and image box ratio measured `1`.
+  - Product meta/spec/actions are hidden in mobile catalog grid; quote text remains visible as the current basic price/quote value.
+  - Filter panel is hidden by default and opens from the left after tapping `Filters`.
+- Rollback point:
+  - To return to the previous version, revert commit `3bd04c0`.
