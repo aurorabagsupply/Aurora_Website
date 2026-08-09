@@ -270,7 +270,8 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Apple-Style Mobile Homepage Refinement V2
 
-- Commit: `058bed0`
+- Commit: `a2c9ac1`
+- Base source commit: `058bed0`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
   - `index.html`
@@ -286,23 +287,24 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Tightened the mobile sticky header by reducing control sizes and spacing while keeping Menu, logo, language, search and language switching intact.
   - Kept the mobile search field at `56px` height and softened the black search button weight.
   - Reduced mobile hero title weight and size; secondary text uses softer gray.
-  - Updated hero primary action text to `View + category` / `查看 + 分类`; destinations remain unchanged.
+  - Kept desktop hero action text unchanged; mobile-only CSS adds `View` / `查看` before the category action label.
   - Reduced the hero viewport height and moved carousel dots to about `30px` above the image bottom.
   - Reduced carousel dot size and softened inactive dot contrast.
   - Preserved the product image and carousel logic while making text and image read as one visual module.
   - Simplified the trust row rhythm with text blocks and fine separators.
   - Reduced the WhatsApp floating button to `50px` with a lighter color and shadow.
-  - Added new static asset cache-busting query strings.
-  - Updated the WordPress theme asset version to `1.0.69-preview`.
+  - Added new static asset cache-busting query strings: `20260809-mobile-apple-home-v3`.
+  - Updated the WordPress theme asset version to `1.0.70-preview`.
 - Verification:
   - Mobile viewport `390 x 844`: passed.
   - Header height: `117px`; search height: `56px`.
   - Language button: `中文` stayed on one line.
   - Hero title `工坊与打样支持`: `31px`, weight `690`.
   - Hero action text: `查看工具`, `获取报价`.
+  - Desktop hero action raw text remained `工具` for the same Tools slide.
   - Carousel dot size: `6px`; dots positioned about `30px` from hero bottom.
   - WhatsApp floating button: `50 x 50`.
   - Category cards remained square, light-gray and static-title on mobile.
   - Static CSS/JS and WordPress theme CSS/JS hash matched.
 - Rollback point:
-  - To return to the previous version, revert commit `058bed0`.
+  - To return to the previous version, revert commits `a2c9ac1` and `058bed0` in that order.
