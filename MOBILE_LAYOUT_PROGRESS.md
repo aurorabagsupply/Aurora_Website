@@ -570,7 +570,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Footer Social Responsive Fix V10.2
 
-- Commit: pending
+- Commit: `76bb818`
 - Base source commit: `bc66f19`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -597,4 +597,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Tested footer at `320`, `375`, `390` and `430` px mobile widths with headless Edge.
   - Result: no page horizontal scroll, no social item overlap, payment badges and legal links wrap correctly, and WhatsApp does not overlap Payment Methods or Copyright.
 - Rollback point:
-  - Pending final commit hash.
+  - To return to the previous version, revert commit `76bb818`.
