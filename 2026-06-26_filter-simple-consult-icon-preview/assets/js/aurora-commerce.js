@@ -2333,7 +2333,7 @@ function renderCatalog() {
   ensureMobileCatalogFilterControls();
   updateFilterOptionStates(document.querySelector("[data-filter-panel]") || document);
   const query = searchQueryFromUrl();
-  document.querySelectorAll(".site-search input").forEach((input) => {
+  document.querySelectorAll('.site-search input[type="search"], .site-search input[name="q"], .site-search input[name="s"]').forEach((input) => {
     input.value = query;
   });
   let products = AURORA_PRODUCTS;
@@ -2532,11 +2532,11 @@ function applyLanguageText() {
   document.querySelectorAll("[data-cat]").forEach((node) => {
     node.textContent = categoryLabel(node.dataset.cat);
   });
-  document.querySelectorAll(".site-search input").forEach((input) => {
+  document.querySelectorAll('.site-search input[type="search"], .site-search input[name="q"], .site-search input[name="s"]').forEach((input) => {
     input.placeholder = t("search");
     if (document.querySelector("[data-catalog-grid]")) input.value = searchQueryFromUrl();
   });
-  document.querySelectorAll(".site-search button").forEach((button) => { button.textContent = t("searchButton"); });
+  document.querySelectorAll('.site-search button[type="submit"], .site-search button:not([type]):not([data-image-search-trigger])').forEach((button) => { button.textContent = t("searchButton"); });
   document.querySelector(".top-strip .container > div:first-child") && (document.querySelector(".top-strip .container > div:first-child").textContent = t("topLine"));
   const topRight = document.querySelector(".top-strip__right");
   if (topRight) {

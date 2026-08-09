@@ -406,3 +406,49 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Bag product media padding measured `0px`; background measured `rgb(245, 245, 247)`; image object-fit measured `cover`.
 - Rollback point:
   - To return to the previous version, revert commit `f720cd3`.
+
+### 2026-08-09 - Search By Image Foundation V7
+
+- Commit: `pending`
+- Base source commit: `9dd7c6d`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/js/aurora-commerce.js`
+  - `assets/js/aurora-image-search.js`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+  - `wordpress-theme/aurora-bag-supply/inc/image-search.php`
+  - `wordpress-theme/aurora-bag-supply/inc/image-search-index.php`
+  - `wordpress-theme/aurora-bag-supply/inc/image-search-rest.php`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-image-search.js`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+- Page area:
+  - Header product search
+  - Search by Image upload modal
+  - WordPress/WooCommerce image similarity backend
+- Changes:
+  - Added a camera/image trigger beside the existing product text search without changing text search behavior.
+  - Added upload modal support for JPG, JPEG, PNG and WEBP, including mobile file picker, desktop upload, drag/drop, preview, loading state and friendly errors.
+  - Added front-end image compression before upload to reduce latency and API cost.
+  - Added WordPress REST endpoint `POST /wp-json/aurora/v1/image-search` for secure server-side image analysis and product result lookup.
+  - Added admin-only `POST /wp-json/aurora/v1/image-search/reindex` for product image embedding indexing, including first-time `all=1` batch support.
+  - Added custom MySQL table `wp_aurora_image_embeddings` for product image vector storage.
+  - Added shape-first vector scoring: shape/structure similarity is weighted at `75%`, color/material similarity at `25%` when the embedding provider returns separate vectors.
+  - Added environment-variable based provider configuration; no API key or secret is committed to the repo.
+  - Fixed `.site-search` translation selectors so hidden WordPress inputs and the new image-search camera button are not overwritten by text-search language sync.
+  - Added new static cache-busting query strings: `20260809-image-search-v7`.
+  - Updated the WordPress theme asset version to `1.0.74-preview`.
+- Required production environment:
+  - `AURORA_IMAGE_EMBEDDING_ENDPOINT`
+  - `AURORA_IMAGE_EMBEDDING_API_KEY` if the provider requires auth
+  - Optional: `AURORA_IMAGE_EMBEDDING_MODEL`, `AURORA_IMAGE_MAX_UPLOAD_MB`, `AURORA_IMAGE_SEARCH_DEBUG`, `AURORA_IMAGE_SEARCH_ALLOWED_ORIGINS`
+- Verification:
+  - JS syntax check passed for `aurora-commerce.js` and `aurora-image-search.js`.
+  - Static CSS/JS and WordPress theme CSS/JS hashes matched after sync.
+  - Mobile viewport `390 x 844`: camera trigger exists, label translated to Chinese, search submit button remains `搜索`, and upload modal opens.
+  - PHP lint could not run because this workstation does not currently have a `php` executable in PATH.
+- Rollback point:
+  - To return to the previous version, revert this V7 commit after it is created.

@@ -3,6 +3,8 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+require_once get_template_directory() . '/inc/image-search.php';
+
 function aurora_setup() {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
@@ -22,16 +24,18 @@ function aurora_setup() {
 add_action('after_setup_theme', 'aurora_setup');
 
 function aurora_assets() {
-    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.73-preview');
-    wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.73-preview');
-    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.73-preview', true);
+    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.74-preview');
+    wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.74-preview');
+    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.74-preview', true);
+    wp_enqueue_script('aurora-image-search', get_template_directory_uri() . '/assets/js/aurora-image-search.js', array('aurora-commerce'), '1.0.0-preview', true);
     wp_add_inline_script('aurora-commerce', 'window.AURORA_THEME_ASSET_BASE = ' . wp_json_encode(get_template_directory_uri() . '/assets') . ';', 'before');
+    wp_add_inline_script('aurora-image-search', 'window.AURORA_IMAGE_SEARCH_ENDPOINT = ' . wp_json_encode(rest_url('aurora/v1/image-search')) . ';', 'before');
 }
 add_action('wp_enqueue_scripts', 'aurora_assets');
 
 function aurora_product_search_form($form) {
     $shop_url = function_exists('wc_get_page_permalink') ? wc_get_page_permalink('shop') : home_url('/');
-    return '<form role="search" method="get" class="site-search" action="' . esc_url($shop_url) . '"><input type="search" name="s" placeholder="Search hardware, leather, buckles, zippers, accessories..." value="' . get_search_query() . '" /><button type="submit">Search</button><input type="hidden" name="post_type" value="product" /></form>';
+    return '<form role="search" method="get" class="site-search" action="' . esc_url($shop_url) . '"><input type="search" name="s" placeholder="Search hardware, leather, buckles, zippers, accessories..." value="' . get_search_query() . '" /><button class="image-search-trigger" type="button" data-image-search-trigger aria-label="' . esc_attr__('Search by image', 'aurora-bag-supply') . '"><span aria-hidden="true">⌕</span></button><button type="submit">Search</button><input type="hidden" name="post_type" value="product" /></form>';
 }
 add_filter('get_product_search_form', 'aurora_product_search_form');
 
