@@ -567,3 +567,34 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Desktop viewport `1366 x 900`: nav remained static and product carousel layout remained desktop-style.
 - Rollback point:
   - To return to the previous version, revert commit `96ff797`.
+
+### 2026-08-09 - Mobile Footer Social Responsive Fix V10.2
+
+- Commit: pending
+- Base source commit: `bc66f19`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile footer social media area
+  - Mobile footer accordions, payment badges, copyright/legal links and WhatsApp safe spacing
+- Changes:
+  - Replaced the cramped mobile footer social row with a two-column grid.
+  - Each social link now renders as an independent tap target with a circular platform icon and centered platform name.
+  - Removed the mobile overlap caused by inheriting desktop circular icon sizing while showing text.
+  - Added safer mobile footer bottom padding so WhatsApp does not cover footer content.
+  - Allowed payment badges and copyright/legal links to wrap naturally on narrow screens.
+  - Added new static cache-busting query strings: `20260809-mobile-footer-v10-2`.
+  - Updated the WordPress theme asset version to `1.0.78-preview`.
+- Verification:
+  - CSS static copy and WordPress theme CSS copy have matching SHA256 hashes.
+  - `git diff --check` passed.
+  - `node --check` passed for `assets/js/aurora-commerce.js` and `assets/js/aurora-image-search.js`.
+  - Tested footer at `320`, `375`, `390` and `430` px mobile widths with headless Edge.
+  - Result: no page horizontal scroll, no social item overlap, payment badges and legal links wrap correctly, and WhatsApp does not overlap Payment Methods or Copyright.
+- Rollback point:
+  - Pending final commit hash.
