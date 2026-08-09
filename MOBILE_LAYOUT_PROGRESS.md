@@ -598,3 +598,41 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Result: no page horizontal scroll, no social item overlap, payment badges and legal links wrap correctly, and WhatsApp does not overlap Payment Methods or Copyright.
 - Rollback point:
   - To return to the previous version, revert commit `76bb818`.
+
+### 2026-08-09 - Mobile Product Grid Responsive Fix V10.3
+
+- Commit: pending
+- Base source commit: `c9dd550`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile Featured Products carousel
+  - Mobile New Arrivals and Best Sellers product grids
+  - Mobile catalog two-column product grid
+  - Mobile WhatsApp product-content collision behavior
+- Changes:
+  - Kept Featured Products as a horizontal scroll-snap carousel with one complete card visible and a partial next-card preview.
+  - Forced New Arrivals, Best Sellers and product catalog grids into stable two-column layouts at mobile widths.
+  - Removed fixed-height and inherited flex-basis behavior that made product image areas too tall and pushed CTAs outside cards.
+  - Standardized mobile product cards around square image stages, flex-column bodies, two-line titles, two-line material text, one-line MOQ and stable Add to Quote / View Details actions.
+  - Added mobile content width control so product grids use clear 20 px side rhythm instead of touching the viewport edge.
+  - Added a mobile WhatsApp guard that temporarily hides the floating button only when it would overlap product text, MOQ, Add to Quote or View Details.
+  - Added new static cache-busting query strings: `20260809-mobile-products-v10-3`.
+  - Updated the WordPress theme asset version to `1.0.79-preview`.
+- Verification:
+  - CSS static copy and WordPress theme CSS copy have matching SHA256 hashes.
+  - `assets/js/aurora-commerce.js` static copy and WordPress theme copy have matching SHA256 hashes.
+  - `node --check` passed for `assets/js/aurora-commerce.js` and `assets/js/aurora-image-search.js`.
+  - `git diff --check` passed.
+  - Tested `320`, `375`, `390` and `430` px mobile widths with headless Edge.
+  - Tested home page and catalog page in both English and Chinese language states.
+  - Result: body horizontal overflow is `0`; Featured Products remains `scroll-snap-type: x mandatory`; New Arrivals, Best Sellers and catalog grids use two-column grid; visible cards stay inside viewport; card content and CTA are not clipped; same-row grid card heights are consistent; WhatsApp does not visibly overlap product text, MOQ, Add to Quote or View Details.
+- Rollback point:
+  - Pending final commit hash.

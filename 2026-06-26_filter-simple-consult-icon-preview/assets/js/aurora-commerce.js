@@ -3891,6 +3891,43 @@ function enhanceMobileFooterAccordions() {
   });
 }
 
+function guardWhatsAppProductOverlap() {
+  const button = document.querySelector(".aurora-whatsapp-button");
+  if (!button || button.dataset.productGuardBound) return;
+  button.dataset.productGuardBound = "true";
+
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    if (!window.matchMedia("(max-width: 760px)").matches) {
+      button.classList.remove("is-over-product-content");
+      return;
+    }
+    const buttonRect = button.getBoundingClientRect();
+    const targets = document.querySelectorAll(".product-card h3, .product-specs, .buying-row, .product-actions, .detail-link");
+    const overlapsCriticalContent = Array.from(targets).some((target) => {
+      const style = window.getComputedStyle(target);
+      if (style.display === "none" || style.visibility === "hidden" || Number.parseFloat(style.opacity || "1") === 0) return false;
+      const rect = target.getBoundingClientRect();
+      if (rect.width <= 0 || rect.height <= 0) return false;
+      if (rect.bottom < 0 || rect.top > window.innerHeight) return false;
+      return !(buttonRect.right <= rect.left || rect.right <= buttonRect.left || buttonRect.bottom <= rect.top || rect.bottom <= buttonRect.top);
+    });
+    button.classList.toggle("is-over-product-content", overlapsCriticalContent);
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate);
+  window.addEventListener("orientationchange", requestUpdate);
+  window.setTimeout(update, 200);
+}
+
 enhanceStaticMegaMenu();
 insertLanguageSwitcher();
 rerenderDynamicContent();
@@ -3900,4 +3937,5 @@ bindActions();
 bindForms();
 bindHeroSwipe();
 enhanceMobileFooterAccordions();
+guardWhatsAppProductOverlap();
 startHeroAutoplay();
