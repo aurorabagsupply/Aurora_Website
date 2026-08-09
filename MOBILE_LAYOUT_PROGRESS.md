@@ -526,7 +526,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Homepage Apple UI System V10
 
-- Commit: `e2aa962`
+- Commit: `96ff797`
 - Base source commit: `fe99c08`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -566,4 +566,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Mobile menu open state verified as fixed glass drawer with `56px` first-level rows and no overflow.
   - Desktop viewport `1366 x 900`: nav remained static and product carousel layout remained desktop-style.
 - Rollback point:
-  - To return to the previous version, revert commit `e2aa962`.
+  - To return to the previous version, revert commit `96ff797`.
