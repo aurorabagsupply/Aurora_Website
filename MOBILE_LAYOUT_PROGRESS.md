@@ -636,3 +636,33 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Result: body horizontal overflow is `0`; Featured Products remains `scroll-snap-type: x mandatory`; New Arrivals, Best Sellers and catalog grids use two-column grid; visible cards stay inside viewport; card content and CTA are not clipped; same-row grid card heights are consistent; WhatsApp does not visibly overlap product text, MOQ, Add to Quote or View Details.
 - Rollback point:
   - To return to the previous version, revert commit `8848ee4`.
+
+### 2026-08-09 - Mobile Cross-Browser Responsive Compatibility Audit V10.4
+
+- Commit: `pending`
+- Base source commit: `416fa7f`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - All static HTML pages in the source folder
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Whole mobile site: Header, search, image search, Hero, Shop by Category, product grids, Featured carousel, mobile menu, filter drawer, quick view, quote drawer, footer and WhatsApp floating button
+- Changes:
+  - Added `viewport-fit=cover` to every static HTML viewport meta tag.
+  - Added static cache-busting query `20260809-mobile-compat-v10-4` to CSS and JS references.
+  - Added a mobile compatibility CSS layer with safe-area variables, `svh` / `dvh` fallbacks, WebKit backdrop fallback and stronger container width guards.
+  - Replaced fragile `100vw` / negative-margin carousel behavior with a contained mobile carousel viewport and scroll-snap track.
+  - Stabilized mobile product grids, category grids, mobile menu, filter drawer, image search modal, quick view and quote drawer against cross-WebView viewport differences.
+  - Updated the WordPress theme asset version to `1.0.80-preview`.
+- Verification:
+  - CSS static copy and WordPress theme CSS copy have matching SHA256 hashes.
+  - `node --check` passed for `assets/js/aurora-commerce.js` and `assets/js/aurora-image-search.js`.
+  - `git diff --check` passed.
+  - Automated mobile compatibility QA covered 72 runs: 6 widths (`320`, `375`, `390`, `393`, `414`, `430`) x 3 WebView-style UA profiles (`in-app`, `wechat-webview`, `ios-chrome-ua`) x 4 pages (`home`, `catalog`, `detail`, `contact`).
+  - Test metrics included `window.innerWidth`, `window.innerHeight`, `document.documentElement.clientWidth`, `window.devicePixelRatio`, current breakpoint and CSS support flags.
+  - Result: no detected horizontal overflow, obvious layout switch, critical clipping, content overlap, menu/modal overflow or broken carousel snap in the automated local test matrix.
+  - Limitation: automated QA used local Edge / Chromium with mobile WebView-style user agents. Real iPhone Safari and WeChat WebView should still be spot-checked after GitHub Pages cache updates.
+- Rollback point:
+  - To return to the previous version, revert commit `pending`.
