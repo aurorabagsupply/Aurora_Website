@@ -409,7 +409,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Search By Image Foundation V7
 
-- Commit: `pending`
+- Commit: `c9f440e`
 - Base source commit: `9dd7c6d`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -451,4 +451,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Mobile viewport `390 x 844`: camera trigger exists, label translated to Chinese, search submit button remains `搜索`, and upload modal opens.
   - PHP lint could not run because this workstation does not currently have a `php` executable in PATH.
 - Rollback point:
-  - To return to the previous version, revert this V7 commit after it is created.
+  - To return to the previous version, revert commit `c9f440e`.
