@@ -1832,6 +1832,47 @@ function renderFilterPanel() {
   panel.dataset.renderedCategory = activeCategory;
 }
 
+function ensureMobileCatalogFilterControls() {
+  const grid = document.querySelector("[data-catalog-grid]");
+  const panel = document.querySelector("[data-filter-panel]");
+  if (!grid || !panel) return;
+  const catalogMain = grid.parentElement;
+  if (!catalogMain) return;
+  let trigger = catalogMain.querySelector("[data-mobile-filter-toggle]");
+  if (!trigger) {
+    trigger = document.createElement("button");
+    trigger.type = "button";
+    trigger.className = "mobile-filter-trigger";
+    trigger.setAttribute("data-mobile-filter-toggle", "");
+    trigger.setAttribute("aria-controls", "aurora-mobile-filters");
+    const sortRow = catalogMain.querySelector(".sort-row");
+    catalogMain.insertBefore(trigger, sortRow || grid);
+  }
+  trigger.textContent = currentLang() === "zh" ? "筛选" : "Filters";
+  panel.id = "aurora-mobile-filters";
+  panel.setAttribute("aria-label", trigger.textContent);
+  let backdrop = document.querySelector("[data-filter-backdrop]");
+  if (!backdrop) {
+    backdrop = document.createElement("button");
+    backdrop.type = "button";
+    backdrop.className = "mobile-filter-backdrop";
+    backdrop.setAttribute("data-filter-backdrop", "");
+    document.body.appendChild(backdrop);
+  }
+  backdrop.setAttribute("aria-label", currentLang() === "zh" ? "关闭筛选" : "Close filters");
+}
+
+function setMobileFilterDrawer(open) {
+  const panel = document.querySelector("[data-filter-panel]");
+  const backdrop = document.querySelector("[data-filter-backdrop]");
+  const trigger = document.querySelector("[data-mobile-filter-toggle]");
+  if (!panel) return;
+  panel.classList.toggle("is-mobile-open", Boolean(open));
+  document.body.classList.toggle("aurora-filter-open", Boolean(open));
+  if (backdrop) backdrop.classList.toggle("is-open", Boolean(open));
+  if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
+}
+
 function updateFilterOptionStates(scope = document) {
   scope.querySelectorAll(".aurora-filter-option").forEach((label) => {
     const input = label.querySelector("input");
@@ -2289,6 +2330,7 @@ function renderCatalog() {
   if (!grid) return;
   grid.classList.add("aurora-products-grid", "is-updating");
   renderFilterPanel();
+  ensureMobileCatalogFilterControls();
   updateFilterOptionStates(document.querySelector("[data-filter-panel]") || document);
   const query = searchQueryFromUrl();
   document.querySelectorAll(".site-search input").forEach((input) => {
@@ -3687,6 +3729,8 @@ function bindActions() {
     const heroPrev = event.target.closest("[data-hero-prev]");
     const heroNext = event.target.closest("[data-hero-next]");
     const heroDot = event.target.closest("[data-hero-dot]");
+    const filterToggle = event.target.closest("[data-mobile-filter-toggle]");
+    const filterBackdrop = event.target.closest("[data-filter-backdrop]");
     if (quick) openQuickView(quick.dataset.quickView);
     if (add) addToQuote(add.dataset.addQuote);
     if (closeModal) document.querySelector(".quick-view")?.classList.remove("is-open");
@@ -3730,6 +3774,15 @@ function bindActions() {
       setHeroSlide(Number(heroDot.dataset.heroDot));
       resetHeroAutoplay();
     }
+    if (filterToggle) {
+      setMobileFilterDrawer(true);
+    }
+    if (filterBackdrop) {
+      setMobileFilterDrawer(false);
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setMobileFilterDrawer(false);
   });
 }
 
@@ -3795,14 +3848,24 @@ function bindHeroSwipe() {
   const carousel = document.querySelector("[data-hero-carousel]");
   if (!carousel) return;
   let startX = 0;
+  let startY = 0;
+  let pointerActive = false;
   carousel.addEventListener("pointerdown", (event) => {
     startX = event.clientX;
+    startY = event.clientY;
+    pointerActive = true;
   });
   carousel.addEventListener("pointerup", (event) => {
-    const diff = event.clientX - startX;
-    if (Math.abs(diff) < 60) return;
-    moveHeroSlide(diff > 0 ? -1 : 1);
+    if (!pointerActive) return;
+    pointerActive = false;
+    const diffX = event.clientX - startX;
+    const diffY = event.clientY - startY;
+    if (Math.abs(diffX) < 44 || Math.abs(diffX) < Math.abs(diffY) * 1.2) return;
+    moveHeroSlide(diffX > 0 ? -1 : 1);
     resetHeroAutoplay();
+  });
+  carousel.addEventListener("pointercancel", () => {
+    pointerActive = false;
   });
 }
 
