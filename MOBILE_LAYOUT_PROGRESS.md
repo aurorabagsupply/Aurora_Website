@@ -452,3 +452,36 @@ Desktop layout should remain unchanged unless explicitly requested.
   - PHP lint could not run because this workstation does not currently have a `php` executable in PATH.
 - Rollback point:
   - To return to the previous version, revert commit `c9f440e`.
+
+### 2026-08-09 - Mobile Trust To Category Rhythm V8
+
+- Commit: `pending`
+- Base source commit: `6c9ee44`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home trust/advantages area after hero
+  - Mobile `Shop by Category` / `按类别采购` section entrance
+- Changes:
+  - Redesigned the three mobile trust items into a compact Apple-style advantages area.
+  - Added a mobile-only pseudo heading: `Why Aurora` / `为什么选择 Aurora`.
+  - Added lightweight line-icon treatments through CSS-only mobile rules.
+  - Removed heavy card/shadow styling from the mobile trust area.
+  - Reduced the empty vertical space before the category section.
+  - Set mobile category heading to `38px` and `600` font weight, with `17px` supporting copy.
+  - Added new static cache-busting query strings: `20260809-mobile-trust-v8`.
+  - Updated the WordPress theme asset version to `1.0.75-preview`.
+- Verification:
+  - Mobile viewport `390 x 844`: passed with system Edge headless.
+  - Trust pseudo heading measured `为什么选择 Aurora`.
+  - Trust area height measured about `407px`, keeping it below half of the mobile viewport.
+  - Category section top padding measured `68px`.
+  - Category heading measured `38px`, weight `600`; subtitle measured `17px`.
+  - Desktop viewport `1366 x 900`: trust row display remained `grid`, and the mobile-only pseudo heading measured `none`.
+- Rollback point:
+  - To return to the previous version, revert this V8 commit after it is created.
