@@ -345,3 +345,37 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Filter panel is hidden by default and opens from the left after tapping `Filters`.
 - Rollback point:
   - To return to the previous version, revert commit `3bd04c0`.
+
+### 2026-08-09 - Mobile Search Focus And Category Image Blend V5
+
+- Commit: `fdd5a36`
+- Base source commit: `7401705`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile sticky header search field
+  - Mobile home category tiles
+  - Mobile hero action label spacing
+- Changes:
+  - Set mobile search input computed font size to `16px` to prevent iPhone Safari automatic focus zoom.
+  - Kept the search field height at `54px` so the layout does not visually grow after the font-size fix.
+  - Removed extra inner padding from mobile category image stages.
+  - Matched the Bag category image stage to `#f5f5f7` and used `object-fit: cover` for the Bag image so its square source background blends with the stage.
+  - Added explicit mobile spacing between the generated `View` prefix and the category name in hero action links.
+  - Added new static cache-busting query strings: `20260809-mobile-focus-image-v5`.
+  - Updated the WordPress theme asset version to `1.0.72-preview`.
+- Verification:
+  - Static CSS and WordPress theme CSS hash matched.
+  - JS syntax check still passed.
+  - Mobile viewport `390 x 844`: passed with system Edge headless.
+  - Focused mobile search input computed font size measured `16px`.
+  - Focused mobile viewport scale measured `1`, confirming no browser zoom in the test environment.
+  - Bag category media padding measured `0px`; media background measured `rgb(245, 245, 247)`; image object-fit measured `cover`.
+  - Hero action generated prefix measured `View` with margin, preventing `ViewBag` text collision.
+- Rollback point:
+  - To return to the previous version, revert commit `fdd5a36`.
