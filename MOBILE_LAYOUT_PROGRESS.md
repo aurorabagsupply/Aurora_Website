@@ -601,7 +601,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Product Grid Responsive Fix V10.3
 
-- Commit: pending
+- Commit: `8848ee4`
 - Base source commit: `c9dd550`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -635,4 +635,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Tested home page and catalog page in both English and Chinese language states.
   - Result: body horizontal overflow is `0`; Featured Products remains `scroll-snap-type: x mandatory`; New Arrivals, Best Sellers and catalog grids use two-column grid; visible cards stay inside viewport; card content and CTA are not clipped; same-row grid card heights are consistent; WhatsApp does not visibly overlap product text, MOQ, Add to Quote or View Details.
 - Rollback point:
-  - Pending final commit hash.
+  - To return to the previous version, revert commit `8848ee4`.
