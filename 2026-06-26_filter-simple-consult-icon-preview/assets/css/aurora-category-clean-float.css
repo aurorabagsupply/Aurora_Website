@@ -1143,6 +1143,14 @@
     font-weight: 600 !important;
   }
 
+  html[lang="zh"] .hero-cover__actions .btn-primary::before {
+    content: "查看";
+  }
+
+  html[lang="en"] .hero-cover__actions .btn-primary::before {
+    content: "View ";
+  }
+
   .hero-cover__actions .btn::after,
   .section-head--split > .btn::after,
   .category-card h3::after,

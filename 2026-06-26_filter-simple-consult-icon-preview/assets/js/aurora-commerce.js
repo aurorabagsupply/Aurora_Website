@@ -2625,7 +2625,6 @@ function renderHeroCarousel() {
   track.innerHTML = HERO_SLIDES.map((slide, index) => {
     const copy = heroSlideCopy(slide);
     const category = categoryLabel(slide.category);
-    const heroViewLabel = currentLang() === "zh" ? `查看${category}` : `View ${category}`;
     const active = index === activeHeroIndex ? " is-active" : "";
     return `
       <article class="hero-cover__slide${active}" data-hero-slide="${index}" aria-hidden="${index === activeHeroIndex ? "false" : "true"}">
@@ -2636,7 +2635,7 @@ function renderHeroCarousel() {
           <p class="hero-cover__subtitle">${copy.subtitle}</p>
           <p>${copy.text}</p>
           <div class="hero-cover__actions">
-            <a class="btn btn-primary" href="${productsUrl}${productsUrl.includes("?") ? "&" : "?"}category=${encodeURIComponent(slide.category)}">${heroViewLabel}</a>
+            <a class="btn btn-primary" href="${productsUrl}${productsUrl.includes("?") ? "&" : "?"}category=${encodeURIComponent(slide.category)}">${category}</a>
             <a class="btn btn-brass" href="${contactUrl}">${t("requestQuote")}</a>
           </div>
         </div>
