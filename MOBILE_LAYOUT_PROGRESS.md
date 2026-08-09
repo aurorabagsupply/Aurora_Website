@@ -639,7 +639,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Cross-Browser Responsive Compatibility Audit V10.4
 
-- Commit: `pending`
+- Commit: `b53e31f`
 - Base source commit: `416fa7f`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -665,4 +665,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Result: no detected horizontal overflow, obvious layout switch, critical clipping, content overlap, menu/modal overflow or broken carousel snap in the automated local test matrix.
   - Limitation: automated QA used local Edge / Chromium with mobile WebView-style user agents. Real iPhone Safari and WeChat WebView should still be spot-checked after GitHub Pages cache updates.
 - Rollback point:
-  - To return to the previous version, revert commit `pending`.
+  - To return to the previous version, revert commit `b53e31f`.
