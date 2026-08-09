@@ -485,3 +485,41 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Desktop viewport `1366 x 900`: trust row display remained `grid`, and the mobile-only pseudo heading measured `none`.
 - Rollback point:
   - To return to the previous version, revert commit `452aebb`.
+
+### 2026-08-09 - Mobile Glass Navigation Drawer V9
+
+- Commit: `pending`
+- Base source commit: `522d8ea`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile expanded main navigation
+  - Mobile category mega-menu drawer
+- Changes:
+  - Redesigned the mobile expanded menu as a fixed glass drawer over page content.
+  - Replaced the heavy black menu background with light glass surfaces: outer `rgba(245,245,247,.62)` and drawer `rgba(255,255,255,.94)`.
+  - Kept the header above the drawer so the menu button can close the navigation.
+  - Reduced first-level row height to `56px`, with `17px` medium-weight text.
+  - Removed the separate right-side arrow column visually; the row-wide toggle now uses a light chevron at the right edge.
+  - Changed submenu panels to transparent inline expansion with smooth max-height/opacity transition.
+  - Set submenu links to `15.5px` and `#6E6E73`, with no dark blocks or heavy cards.
+  - Added spacing for secondary simple links such as New Arrivals, Contact and About without heavy dividers.
+  - Added new static cache-busting query strings: `20260809-mobile-menu-v9`.
+  - Updated the WordPress theme asset version to `1.0.76-preview`.
+- Verification:
+  - Mobile viewport `390 x 844`: passed with system Edge headless.
+  - Open nav measured `position: fixed`, outer background `rgba(245, 245, 247, 0.62)`, backdrop filter `blur(20px) saturate(1.8)`.
+  - Drawer panel measured `rgba(255, 255, 255, 0.94)` with `28px` radius.
+  - First-level row height measured `56px`, text color `rgb(29, 29, 31)`, font size `17px`.
+  - Row toggle covers the full menu row; chevron color measured `rgb(110, 110, 115)`.
+  - Expanded submenu measured `max-height: 720px`, opacity `1`, transparent background.
+  - Submenu links measured `15.5px`, color `rgb(110, 110, 115)`, height `38px`.
+  - Header z-index measured `9100`, nav z-index measured `9000`, confirming the menu button remains accessible.
+  - Desktop viewport `1366 x 900`: nav remained `position: static`, dark background unchanged, opacity `1`.
+- Rollback point:
+  - To return to the previous version, revert this V9 commit after it is created.
