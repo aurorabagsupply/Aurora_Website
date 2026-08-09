@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Aurora Mobile Screenshot Preview</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f5f5f7;
+        --card: #ffffff;
+        --text: #1d1d1f;
+        --muted: #6e6e73;
+        --line: rgba(0, 0, 0, 0.08);
+        --brand: #9a6a55;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        overflow-x: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      }
+
+      body {
+        padding: calc(22px + env(safe-area-inset-top)) 16px calc(34px + env(safe-area-inset-bottom));
+      }
+
+      .page {
+        width: min(100%, 760px);
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        margin: -22px -16px 24px;
+        padding: calc(18px + env(safe-area-inset-top)) 16px 16px;
+        background: rgba(245, 245, 247, 0.86);
+        border-bottom: 1px solid var(--line);
+        -webkit-backdrop-filter: blur(22px);
+        backdrop-filter: blur(22px);
+      }
+
+      header .inner {
+        width: min(100%, 760px);
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(30px, 9vw, 48px);
+        line-height: 1.02;
+        letter-spacing: 0;
+        font-weight: 650;
+      }
+
+      .intro {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 18px 0 0;
+      }
+
+      .meta span,
+      .meta a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.74);
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .shot {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--card);
+      }
+
+      .shot__media {
+        display: block;
+        max-height: 720px;
+        overflow: hidden;
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .shot__media img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .shot__body {
+        display: grid;
+        gap: 8px;
+        padding: 14px 16px 16px;
+      }
+
+      .shot h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.22;
+        font-weight: 650;
+      }
+
+      .shot p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+      }
+
+      .shot__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 4px;
+      }
+
+      .shot__actions a {
+        color: var(--brand);
+        font-size: 14px;
+        font-weight: 650;
+        text-decoration: none;
+      }
+
+      footer {
+        margin-top: 34px;
+        padding: 20px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      @media (min-width: 680px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Aurora Mobile Screenshots</h1>
+        <p class="intro">390 x 844 mobile full-page screenshot set. Tap any preview to open the complete JPG.</p>
+        <div class="meta">
+          <span>30 JPG</span>
+          <span>Mobile QA</span>
+          <span>Tap to open full image</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="page">
+      <section class="grid" aria-label="Mobile screenshot gallery">
+        <article class="shot"><a class="shot__media" href="01-home.jpg"><img src="01-home.jpg" alt="Home full-page mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>01 Home</h2><p>Homepage full-page screenshot.</p><div class="shot__actions"><a href="01-home.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="02-mobile-menu-open.jpg"><img src="02-mobile-menu-open.jpg" alt="Mobile menu open screenshot" loading="lazy" /></a><div class="shot__body"><h2>02 Mobile Menu</h2><p>Open mobile navigation state.</p><div class="shot__actions"><a href="02-mobile-menu-open.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="03-catalog.jpg"><img src="03-catalog.jpg" alt="Product catalog full-page mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>03 Catalog</h2><p>All products catalog page.</p><div class="shot__actions"><a href="03-catalog.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="04-category-bag.jpg"><img src="04-category-bag.jpg" alt="Bag category mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>04 Bag Category</h2><p>Bag product category page.</p><div class="shot__actions"><a href="04-category-bag.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="05-category-hardware.jpg"><img src="05-category-hardware.jpg" alt="Hardware category mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>05 Hardware Category</h2><p>Hardware product category page.</p><div class="shot__actions"><a href="05-category-hardware.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="06-category-leather.jpg"><img src="06-category-leather.jpg" alt="Leather category mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>06 Leather Category</h2><p>Leather product category page.</p><div class="shot__actions"><a href="06-category-leather.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="07-category-zipper.jpg"><img src="07-category-zipper.jpg" alt="Zipper category mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>07 Zipper Category</h2><p>Zipper product category page.</p><div class="shot__actions"><a href="07-category-zipper.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="08-category-accessories.jpg"><img src="08-category-accessories.jpg" alt="Accessories category mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>08 Accessories Category</h2><p>Accessories product category page.</p><div class="shot__actions"><a href="08-category-accessories.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="09-category-tools.jpg"><img src="09-category-tools.jpg" alt="Tools category mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>09 Tools Category</h2><p>Tools product category page.</p><div class="shot__actions"><a href="09-category-tools.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="10-search-results-zipper.jpg"><img src="10-search-results-zipper.jpg" alt="Zipper search results mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>10 Search: Zipper</h2><p>Search results for zipper.</p><div class="shot__actions"><a href="10-search-results-zipper.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="11-search-results-hardware.jpg"><img src="11-search-results-hardware.jpg" alt="Hardware search results mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>11 Search: Hardware</h2><p>Search results for hardware.</p><div class="shot__actions"><a href="11-search-results-hardware.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="12-image-search-modal.jpg"><img src="12-image-search-modal.jpg" alt="Image search modal mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>12 Image Search Modal</h2><p>Image search upload modal state.</p><div class="shot__actions"><a href="12-image-search-modal.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="13-quote-contact-prefill.jpg"><img src="13-quote-contact-prefill.jpg" alt="Quote contact prefill mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>13 Quote Contact</h2><p>Contact / Request Quote state with SKU.</p><div class="shot__actions"><a href="13-quote-contact-prefill.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="14-quote-list-cart.jpg"><img src="14-quote-list-cart.jpg" alt="Quote list cart mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>14 Quote List / Cart</h2><p>Quote list and cart page.</p><div class="shot__actions"><a href="14-quote-list-cart.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="15-checkout-inquiry.jpg"><img src="15-checkout-inquiry.jpg" alt="Checkout inquiry mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>15 Checkout / Inquiry</h2><p>Inquiry checkout form.</p><div class="shot__actions"><a href="15-checkout-inquiry.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="product-bag-example.jpg"><img src="product-bag-example.jpg" alt="Bag product detail mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Product: Bag</h2><p>Representative Bag product detail page.</p><div class="shot__actions"><a href="product-bag-example.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="product-hardware-example.jpg"><img src="product-hardware-example.jpg" alt="Hardware product detail mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Product: Hardware</h2><p>Representative Hardware product detail page.</p><div class="shot__actions"><a href="product-hardware-example.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="product-leather-example.jpg"><img src="product-leather-example.jpg" alt="Leather product detail mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Product: Leather</h2><p>Representative Leather product detail page.</p><div class="shot__actions"><a href="product-leather-example.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="product-zipper-example.jpg"><img src="product-zipper-example.jpg" alt="Zipper product detail mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Product: Zipper</h2><p>Representative Zipper product detail page.</p><div class="shot__actions"><a href="product-zipper-example.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="product-accessories-example.jpg"><img src="product-accessories-example.jpg" alt="Accessories product detail mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Product: Accessories</h2><p>Representative Accessories product detail page.</p><div class="shot__actions"><a href="product-accessories-example.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="product-tools-example.jpg"><img src="product-tools-example.jpg" alt="Tools product detail mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Product: Tools</h2><p>Representative Tools product detail page.</p><div class="shot__actions"><a href="product-tools-example.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="about.jpg"><img src="about.jpg" alt="About mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>About</h2><p>About Us page.</p><div class="shot__actions"><a href="about.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="contact.jpg"><img src="contact.jpg" alt="Contact mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Contact</h2><p>Contact Us page.</p><div class="shot__actions"><a href="contact.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="account.jpg"><img src="account.jpg" alt="Account mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Account</h2><p>Account page.</p><div class="shot__actions"><a href="account.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="blog.jpg"><img src="blog.jpg" alt="Blog mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Blog</h2><p>Blog page.</p><div class="shot__actions"><a href="blog.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="faq.jpg"><img src="faq.jpg" alt="FAQ mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>FAQ</h2><p>FAQ page.</p><div class="shot__actions"><a href="faq.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="shipping.jpg"><img src="shipping.jpg" alt="Shipping mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Shipping</h2><p>Shipping page.</p><div class="shot__actions"><a href="shipping.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="returns.jpg"><img src="returns.jpg" alt="Returns mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Returns</h2><p>Returns page.</p><div class="shot__actions"><a href="returns.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="privacy-policy.jpg"><img src="privacy-policy.jpg" alt="Privacy Policy mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Privacy Policy</h2><p>Privacy Policy page.</p><div class="shot__actions"><a href="privacy-policy.jpg">Open full JPG ›</a></div></div></article>
+        <article class="shot"><a class="shot__media" href="terms-of-service.jpg"><img src="terms-of-service.jpg" alt="Terms of Service mobile screenshot" loading="lazy" /></a><div class="shot__body"><h2>Terms of Service</h2><p>Terms of Service page.</p><div class="shot__actions"><a href="terms-of-service.jpg">Open full JPG ›</a></div></div></article>
+      </section>
+
+      <footer>
+        Preview page generated for mobile review. Source screenshots are JPG exports from Playwright full-page PNG captures.
+      </footer>
+    </main>
+  </body>
+</html>
