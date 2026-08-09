@@ -2621,3 +2621,42 @@
     font-weight: 650 !important;
   }
 }
+
+/* Mobile v5: prevent iOS focus zoom and blend square category images. */
+@media (max-width: 760px) {
+  .site-search input,
+  .site-search input:focus {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+  }
+
+  .category-card__media {
+    padding: 0 !important;
+  }
+
+  .category-card__media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .category-card[href*="Bag"] .category-card__media {
+    background: #f5f5f7 !important;
+  }
+
+  .category-card[href*="Bag"] .category-card__media img {
+    object-fit: cover !important;
+  }
+
+  .hero-cover__actions .btn-primary::before {
+    margin-right: 0.25em !important;
+  }
+
+  html[lang="en"] .hero-cover__actions .btn-primary::before {
+    content: "View" !important;
+  }
+
+  html[lang="zh"] .hero-cover__actions .btn-primary::before {
+    content: "查看" !important;
+  }
+}
