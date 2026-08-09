@@ -379,3 +379,30 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Hero action generated prefix measured `View` with margin, preventing `ViewBag` text collision.
 - Rollback point:
   - To return to the previous version, revert commit `fdd5a36`.
+
+### 2026-08-09 - Mobile Bag Product Image Blend V6
+
+- Commit: `pending`
+- Base source commit: `5b054b1`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile product catalog Bag product cards
+- Changes:
+  - Matched Bag product image stages to the same light-gray treatment used by the Bag category tile.
+  - Removed extra mobile padding from Bag catalog product image stages.
+  - Used `object-fit: cover` for Bag catalog product images so their built-in square backgrounds fill the card stage.
+  - Added selectors for the static catalog SKU links and WordPress/WooCommerce Bag product classes.
+  - Added new static cache-busting query strings: `20260809-mobile-bag-blend-v6`.
+  - Updated the WordPress theme asset version to `1.0.73-preview`.
+- Verification:
+  - Static CSS and WordPress theme CSS hash matched.
+  - Mobile Bag catalog viewport `390 x 844`: passed with system Edge headless.
+  - Bag product media padding measured `0px`; background measured `rgb(245, 245, 247)`; image object-fit measured `cover`.
+- Rollback point:
+  - Replace `pending` with the final commit id after commit; revert that commit to return to the previous version.

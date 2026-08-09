@@ -2660,3 +2660,23 @@
     content: "查看" !important;
   }
 }
+
+/* Mobile v6: blend Bag product images in catalog grids. */
+@media (max-width: 760px) {
+  [data-catalog-grid] .product-card__image[href*="ABS-BAG"],
+  .product-grid[data-products] .product-card__image[href*="ABS-BAG"],
+  .product-card.product_cat-bag .product-card__image,
+  .product-card.product-category-bag .product-card__image {
+    padding: 0 !important;
+    background: #f5f5f7 !important;
+  }
+
+  [data-catalog-grid] .product-card__image[href*="ABS-BAG"] img,
+  .product-grid[data-products] .product-card__image[href*="ABS-BAG"] img,
+  .product-card.product_cat-bag .product-card__image img,
+  .product-card.product-category-bag .product-card__image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+}
