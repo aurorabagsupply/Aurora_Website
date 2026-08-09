@@ -455,7 +455,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Trust To Category Rhythm V8
 
-- Commit: `pending`
+- Commit: `452aebb`
 - Base source commit: `6c9ee44`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -484,4 +484,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Category heading measured `38px`, weight `600`; subtitle measured `17px`.
   - Desktop viewport `1366 x 900`: trust row display remained `grid`, and the mobile-only pseudo heading measured `none`.
 - Rollback point:
-  - To return to the previous version, revert this V8 commit after it is created.
+  - To return to the previous version, revert commit `452aebb`.
