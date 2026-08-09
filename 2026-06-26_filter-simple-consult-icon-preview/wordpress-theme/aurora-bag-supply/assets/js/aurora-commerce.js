@@ -3869,6 +3869,28 @@ function bindHeroSwipe() {
   });
 }
 
+function enhanceMobileFooterAccordions() {
+  document.querySelectorAll(".site-footer .footer-grid > div:not(.footer-contact):not(.footer-side)").forEach((group) => {
+    if (group.dataset.footerAccordionBound) return;
+    const heading = group.querySelector("h3");
+    if (!heading) return;
+    group.dataset.footerAccordionBound = "true";
+    heading.setAttribute("role", "button");
+    heading.setAttribute("tabindex", "0");
+    heading.setAttribute("aria-expanded", "false");
+    const toggle = () => {
+      const isOpen = group.classList.toggle("is-open");
+      heading.setAttribute("aria-expanded", String(isOpen));
+    };
+    heading.addEventListener("click", toggle);
+    heading.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      toggle();
+    });
+  });
+}
+
 enhanceStaticMegaMenu();
 insertLanguageSwitcher();
 rerenderDynamicContent();
@@ -3877,5 +3899,5 @@ bindTabs();
 bindActions();
 bindForms();
 bindHeroSwipe();
+enhanceMobileFooterAccordions();
 startHeroAutoplay();
-

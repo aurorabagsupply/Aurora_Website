@@ -523,3 +523,47 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Desktop viewport `1366 x 900`: nav remained `position: static`, dark background unchanged, opacity `1`.
 - Rollback point:
   - To return to the previous version, revert commit `b122cdb`.
+
+### 2026-08-09 - Mobile Homepage Apple UI System V10
+
+- Commit: `e2aa962`
+- Base source commit: `fe99c08`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `index.html`
+  - `products.html`
+  - `assets/css/aurora-category-clean-float.css`
+  - `assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile homepage full visual system
+  - Header, hero, trust area, category section, procurement strip, product modules, story/services/newsletter/footer
+- Changes:
+  - Added a mobile-only V10 design layer using `#FFFFFF`, `#F5F5F7`, `#1D1D1F`, `#6E6E73` and restrained Aurora brown accents.
+  - Reworked mobile header into a lighter sticky glass layout with compact logo/menu/language row and a lighter second-row search area.
+  - Kept text search and image search functionality intact while reducing the visual weight of the camera and submit controls.
+  - Refined the mobile hero into a cleaner product-led visual with lighter text-link CTAs and softer carousel dots.
+  - Rebuilt the trust area as a compact `Why Aurora` advantage section with line icons, short copy and controlled height.
+  - Rebuilt `Shop by Category` as a two-column square-image category grid with direct category names and arrows.
+  - Converted the procurement strip into a shorter dark B2B selling-points section.
+  - Differentiated product modules: Featured remains horizontal, New Arrivals becomes a two-column grid, Best Sellers becomes a compact vertical list.
+  - Reduced product-card information density and hid repeated meta/action elements on mobile, keeping product name, material line, MOQ/price and detail link.
+  - Restyled brand story, service, newsletter and footer areas for a more consistent Apple-style rhythm.
+  - Added mobile footer accordion behavior while leaving desktop footer display unchanged.
+  - Reduced the WhatsApp floating button to `50px` with safe-area-aware placement.
+  - Added prefers-reduced-motion support for the new mobile motion layer.
+- Verification:
+  - JS syntax check passed for static and WordPress theme `aurora-commerce.js`.
+  - Static CSS/JS and WordPress theme CSS/JS hashes matched after sync.
+  - Mobile viewports `320 x 844`, `375 x 844`, `390 x 844`, `430 x 932`: no horizontal overflow.
+  - Mobile product modules measured as intended: Featured horizontal track, New Arrivals two-column grid, Best Sellers one-column compact list.
+  - Mobile category grid measured as two columns with square product imagery.
+  - Mobile footer groups measured collapsed by default.
+  - Mobile WhatsApp button measured `50px` wide/high with `18px` right/bottom spacing.
+  - Chinese state `?lang=zh` verified for hero title, search placeholder, category title and trust heading.
+  - Mobile menu open state verified as fixed glass drawer with `56px` first-level rows and no overflow.
+  - Desktop viewport `1366 x 900`: nav remained static and product carousel layout remained desktop-style.
+- Rollback point:
+  - To return to the previous version, revert commit `e2aa962`.
