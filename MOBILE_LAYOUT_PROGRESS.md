@@ -488,7 +488,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-09 - Mobile Glass Navigation Drawer V9
 
-- Commit: `pending`
+- Commit: `b122cdb`
 - Base source commit: `522d8ea`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
@@ -522,4 +522,4 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Header z-index measured `9100`, nav z-index measured `9000`, confirming the menu button remains accessible.
   - Desktop viewport `1366 x 900`: nav remained `position: static`, dark background unchanged, opacity `1`.
 - Rollback point:
-  - To return to the previous version, revert this V9 commit after it is created.
+  - To return to the previous version, revert commit `b122cdb`.
