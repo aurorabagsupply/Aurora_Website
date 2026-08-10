@@ -666,3 +666,38 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Limitation: automated QA used local Edge / Chromium with mobile WebView-style user agents. Real iPhone Safari and WeChat WebView should still be spot-checked after GitHub Pages cache updates.
 - Rollback point:
   - To return to the previous version, revert commit `b53e31f`.
+
+### 2026-08-10 - Full Mobile UI Consistency & Visual QA Pass V10.5
+
+- Commit: pending
+- Base source commit: `5066a80`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - All static HTML pages in the source folder
+  - `assets/css/aurora-category-clean-float.css`
+  - `assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-category-clean-float.css`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+  - `mobile-ui-audit.md`
+  - `tools/mobile-ui-v10-5-qa.mjs`
+- Page area:
+  - Whole mobile site: Home, Product Catalog, category pages, product detail pages, Search by Image modal, Cart, Checkout, Account, About, Contact, Blog, FAQ, Shipping, Returns, Privacy Policy, Terms of Service, Footer and WhatsApp floating button.
+- Changes:
+  - Added a final mobile-only v10.5 design-system layer to unify colors, spacing, typography, radii, card depth, forms and shared components across all mobile pages.
+  - Standardized mobile header layout across pages, including injected mobile menu support for pages that previously lacked the menu button.
+  - Added Search by Image script loading to every static page so the camera/image-search entry is available site-wide.
+  - Restyled inner page heroes, catalog controls, filters, product cards, product detail gallery/summary, tabs, forms, Search by Image modal and content pages under one restrained Apple-style mobile system.
+  - Preserved product data, text search, image search UI flow, quote actions, language switcher, catalog filters, product detail links and desktop layout.
+  - Added a MutationObserver to the WhatsApp overlap guard so dynamically rendered product cards can trigger safe hiding when the floating button would cover critical content.
+  - Updated static cache-busting query strings to `20260810-mobile-ui-v10-5`.
+  - Updated the WordPress theme asset version to `1.0.81-preview`.
+- Verification:
+  - Generated 28 mobile full-page screenshots at `390 x 844` in `screenshots/mobile-ui-v10-5/`.
+  - Automated responsive QA covered 60 runs: 6 widths (`320`, `375`, `390`, `393`, `414`, `430`) x 10 representative pages.
+  - Result: `0` hard issues in the final automated QA matrix.
+  - Checks covered body horizontal overflow, clipped product cards, camera/image-search trigger presence, mobile menu trigger presence, featured carousel snap behavior, footer social items and WhatsApp overlap.
+  - `mobile-ui-audit.md` was generated with page-by-page Fixed / Remaining Issues / Shared Component Problems.
+  - Limitation: automated QA used local Edge / Chromium with an iPhone Safari user agent. Real iPhone Safari and WeChat WebView should still be spot-checked after GitHub Pages cache refresh.
+- Rollback point:
+  - To return to the previous version after commit, revert the v10.5 commit.

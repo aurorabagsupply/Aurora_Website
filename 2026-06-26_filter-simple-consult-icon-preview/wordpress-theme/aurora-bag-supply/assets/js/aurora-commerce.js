@@ -3891,6 +3891,24 @@ function enhanceMobileFooterAccordions() {
   });
 }
 
+function ensureSharedMobileHeader() {
+  const headerContainer = document.querySelector(".main-header .container");
+  if (!headerContainer) return;
+  if (!headerContainer.querySelector("[data-mobile-menu]")) {
+    const button = document.createElement("button");
+    button.className = "mobile-menu";
+    button.type = "button";
+    button.dataset.mobileMenu = "";
+    button.setAttribute("aria-label", "Open menu");
+    button.textContent = "Menu";
+    headerContainer.prepend(button);
+  }
+  const search = headerContainer.querySelector(".site-search");
+  const brand = headerContainer.querySelector(".brand");
+  if (search && !search.id) search.id = "aurora-site-search";
+  if (brand) brand.setAttribute("aria-label", "Aurora Bag Supply home");
+}
+
 function guardWhatsAppProductOverlap() {
   const button = document.querySelector(".aurora-whatsapp-button");
   if (!button || button.dataset.productGuardBound) return;
@@ -3925,10 +3943,14 @@ function guardWhatsAppProductOverlap() {
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate);
   window.addEventListener("orientationchange", requestUpdate);
+  const observer = new MutationObserver(requestUpdate);
+  observer.observe(document.body, { childList: true, subtree: true });
   window.setTimeout(update, 200);
+  window.setTimeout(update, 900);
 }
 
 enhanceStaticMegaMenu();
+ensureSharedMobileHeader();
 insertLanguageSwitcher();
 rerenderDynamicContent();
 bindMegaMenuBackdrop();
