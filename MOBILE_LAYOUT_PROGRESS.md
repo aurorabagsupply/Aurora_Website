@@ -774,3 +774,30 @@ Desktop layout should remain unchanged unless explicitly requested.
   - `mobile-premium-refinement-audit.md` records the automated QA matrix.
 - Limitation:
   - Automated QA used local Edge / Chromium with mobile viewport simulation. Real iPhone Safari, WeChat WebView and ChatGPT in-app browser should still be spot-checked after GitHub Pages cache refresh.
+
+### 2026-08-11 - Mobile New Arrivals Carousel Width Fix
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static HTML cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `screenshots/mobile-premium-refinement/new-arrivals-carousel-fix-390.jpg`
+- Page area:
+  - Mobile homepage `New Arrivals` product carousel only. Desktop layout and product/search/quote/language logic were not changed.
+- Changes:
+  - Fixed the carousel width calculation that made the second product card appear as hard-cut content in iPhone-style mobile viewports.
+  - Removed right padding from the carousel track so flex percentage widths are calculated from the real viewport container width.
+  - Changed New Arrivals mobile cards to a stable single-card carousel: current card is complete, next card only peeks as a narrow edge.
+  - Kept scroll-snap behavior and preserved the existing product data and `View Details` links.
+  - Updated static cache-busting query strings to `20260810-premium-home-v2`.
+  - Updated the WordPress theme asset version to `1.0.84-preview`.
+- Verification:
+  - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
+  - Result: no body horizontal overflow, no New Arrivals section overflow, current card is fully inside the viewport, title and `View Details` stay inside the card.
+  - Right-side next-card peek is constrained to about `10px` across tested widths, avoiding cut-off second-card text.
+  - `tools/mobile-home-premium-qa.mjs` completed successfully.
+  - Generated `screenshots/mobile-premium-refinement/new-arrivals-carousel-fix-390.jpg` for review.
+- Limitation:
+  - Automated QA used local Edge / Chromium mobile viewport simulation. Real iPhone Safari should still be refreshed and spot-checked after GitHub Pages cache updates.
