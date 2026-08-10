@@ -740,3 +740,37 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Automated QA used local Edge / Chromium with an iPhone Safari user agent. Real iPhone Safari, WeChat WebView and ChatGPT in-app browser should still be spot-checked after GitHub Pages cache refresh.
 - Rollback point:
   - To return to the previous version, revert the Mobile Design System V2 commit.
+
+### 2026-08-10 - Mobile Homepage Premium Visual Refinement
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static HTML cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `tools/mobile-home-premium-qa.mjs`
+  - `mobile-premium-refinement-audit.md`
+  - `screenshots/mobile-premium-refinement/`
+- Page area:
+  - Mobile homepage only. Desktop layout and product/search/quote/language logic were not changed.
+- Changes:
+  - Added a mobile-only premium refinement layer after V2 to strengthen the homepage visual hierarchy without restructuring the page.
+  - Refined mobile header sizing, keeping `Aurora Bag Supply` visible across `320` to `430` px widths while preserving the two-row header/search structure.
+  - Reworked the hero into a stronger product-first brand module with larger headline, lighter secondary copy, one primary CTA and one text-link CTA.
+  - Converted the trust row into a lighter `Why Aurora` value block with restrained spacing and subtle dividers.
+  - Enlarged and simplified category cards, fixed the category arrow rendering, unified image backgrounds and made the full card feel like a product entry.
+  - Refined the dark procurement/capabilities section so capability titles carry the visual weight instead of boxed list styling.
+  - Separated homepage product presentation patterns: Featured uses a larger horizontal showcase, New Arrivals uses a compact carousel, Best Sellers uses a 2-column simplified grid.
+  - Reduced repeated brown CTA weight on homepage product cards; New/Best now use lighter `View Details` actions while Featured keeps a single primary quote action.
+  - Lightened the brand story, production help, newsletter and footer-home transitions with fewer borders, shadows and heavy cards.
+  - Updated static cache-busting query strings to `20260810-premium-home-v1`.
+  - Updated the WordPress theme asset version to `1.0.83-preview`.
+- Verification:
+  - `node --check` passed for `assets/js/aurora-commerce.js`.
+  - Automated homepage responsive QA covered widths `320`, `375`, `390`, `393`, `414`, `430`.
+  - Result: no body horizontal overflow, no ordinary product-grid overflow, no header brand clipping.
+  - Generated before/after and 390px mobile screenshots in `screenshots/mobile-premium-refinement/`.
+  - `mobile-premium-refinement-audit.md` records the automated QA matrix.
+- Limitation:
+  - Automated QA used local Edge / Chromium with mobile viewport simulation. Real iPhone Safari, WeChat WebView and ChatGPT in-app browser should still be spot-checked after GitHub Pages cache refresh.
