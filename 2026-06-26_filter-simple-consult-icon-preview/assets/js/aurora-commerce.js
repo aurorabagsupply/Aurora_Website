@@ -1914,7 +1914,7 @@ const PAGE_TEXT = {
     shippingAddress: "Shipping Address",
     placeOrder: "Place Order",
     orderSummary: "Order Summary",
-    orderSummaryText: "Live WooCommerce order items, quantities and totals will appear here on WordPress.",
+    orderSummaryText: "Review the products and quantities in your quote list before sending the inquiry.",
   },
   zh: {
     accountKicker: "账户入口",
@@ -1949,7 +1949,7 @@ const PAGE_TEXT = {
     shippingAddress: "收货地址",
     placeOrder: "提交订单",
     orderSummary: "订单摘要",
-    orderSummaryText: "正式 WordPress 环境会在这里显示 WooCommerce 订单商品、数量和金额。",
+    orderSummaryText: "提交询价前，请确认报价清单中的产品和数量。",
   },
 };
 
@@ -2023,27 +2023,29 @@ function productBySku(sku) {
   return enrichProduct(AURORA_PRODUCTS.find((item) => item.sku === sku) || AURORA_PRODUCTS[0]);
 }
 
-function productCard(productInput) {
+function compactProductMeta(product) {
+  const material = product.material.replace(/\s*\/\s*/g, " / ");
+  const size = product.size.replace(/\s*\/\s*/g, " / ");
+  return `${material} · ${size}`;
+}
+
+function productCard(productInput, options = {}) {
   const product = enrichProduct(productInput);
+  const variant = options.variant ? ` product-card--${options.variant}` : "";
   return `
-    <article class="product-card">
+    <article class="product-card${variant}">
       <a class="product-card__image" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">
         <img src="${encodeURI(product.image)}" alt="${product.name}" loading="lazy" />
       </a>
       <div class="product-card__body">
         <div class="product-card__meta"><span>${product.sku}</span><span>${categoryLabel(product.category)}</span></div>
         <h3>${product.name}</h3>
-        <div class="product-specs">
-          <span><strong>${t("material")}:</strong> ${product.material}</span>
-          <span><strong>${t("finish")}:</strong> ${product.finish}</span>
-          <span><strong>${t("use")}:</strong> ${product.application}</span>
-        </div>
-        <div class="buying-row"><span>${t("moq")} ${product.moq}</span><strong>${product.price}</strong></div>
+        <p class="product-card__summary">${compactProductMeta(product)}</p>
+        <div class="buying-row"><span>${t("moq")} ${product.moq}</span></div>
         <div class="product-actions">
-          <button class="btn" type="button" data-quick-view="${product.sku}">${t("quickView")}</button>
-          <button class="btn btn-primary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>
+          <a class="detail-link" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">${t("details")} <span aria-hidden="true">&rsaquo;</span></a>
+          <button class="btn btn-secondary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>
         </div>
-        <a class="detail-link" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">${t("details")}</a>
       </div>
     </article>
   `;
@@ -2137,17 +2139,31 @@ function bindProductCarousel(target) {
 function renderProductGrids() {
   document.querySelectorAll("[data-products]").forEach((target) => {
     stopProductCarousel(target);
-    const products = filteredProducts(target.dataset.products).slice(0, 10);
-    target.classList.add("product-carousel");
-    target.innerHTML = `
-      <div class="product-carousel__viewport" tabindex="0" aria-label="${t(target.dataset.products || "products")}">
-        <div class="product-carousel__track">
-          ${products.map(productCard).join("")}
+    const mode = target.dataset.products;
+    const products = filteredProducts(mode).slice(0, mode === "featured" ? 2 : mode === "best" ? 4 : 10);
+    target.className = "product-grid";
+    if (mode === "featured") {
+      target.classList.add("product-featured-layout");
+      target.innerHTML = products.map((item, index) => productCard(item, { variant: index === 0 ? "hero" : "featured" })).join("");
+      animateProductCards(target);
+      return;
+    }
+    if (mode === "new") {
+      target.classList.add("product-carousel", "product-carousel--new");
+      target.innerHTML = `
+        <div class="product-carousel__viewport" tabindex="0" aria-label="${t("new")}">
+          <div class="product-carousel__track">
+            ${products.map((item) => productCard(item, { variant: "carousel" })).join("")}
+          </div>
         </div>
-      </div>
-    `;
-    bindProductCarousel(target);
-    window.requestAnimationFrame(() => startProductCarousel(target));
+      `;
+      bindProductCarousel(target);
+      window.requestAnimationFrame(() => startProductCarousel(target));
+      return;
+    }
+    target.classList.add("product-grid--best");
+    target.innerHTML = products.map((item) => productCard(item, { variant: "compact" })).join("");
+    animateProductCards(target);
   });
 }
 
@@ -2364,19 +2380,19 @@ function renderDetail() {
         <p class="kicker">${categoryLabel(product.category)}</p>
         <h1>${product.name}</h1>
         <p class="sku">SKU: ${product.sku}</p>
+        <p class="detail-lead">${product.description}</p>
         <dl class="detail-specs">
           <dt>${t("material")}</dt><dd>${product.material}</dd>
           <dt>${t("finish")}</dt><dd>${product.finish}</dd>
           <dt>${t("size")}</dt><dd>${product.size}</dd>
           <dt>${t("use")}</dt><dd>${product.application}</dd>
           <dt>${t("moq")}</dt><dd>${product.moq}</dd>
-          <dt>${t("price")}</dt><dd>${product.price}</dd>
         </dl>
         <div class="qty-row"><label for="qty">${t("quantity")}</label><input id="qty" type="number" min="1" value="${product.moqNumber}" /></div>
         <div class="hero-actions">
           <button class="btn btn-primary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>
-          <a class="btn btn-brass" href="contact.html?sku=${encodeURIComponent(product.sku)}">${t("requestQuote")}</a>
-          <a class="btn" href="account.html">${t("wishlist")}</a>
+          <a class="btn btn-secondary" href="contact.html?sku=${encodeURIComponent(product.sku)}">${t("requestQuote")}</a>
+          <a class="detail-wishlist" href="account.html">${t("wishlist")} <span aria-hidden="true">&rsaquo;</span></a>
         </div>
       </aside>
     </div>
@@ -3694,6 +3710,7 @@ function rerenderDynamicContent() {
   renderCatalog();
   renderDetail();
   updateQuoteCount();
+  window.requestAnimationFrame(applyMobileDesignSystemV2);
 }
 
 function bindActions() {
@@ -3894,19 +3911,178 @@ function enhanceMobileFooterAccordions() {
 function ensureSharedMobileHeader() {
   const headerContainer = document.querySelector(".main-header .container");
   if (!headerContainer) return;
-  if (!headerContainer.querySelector("[data-mobile-menu]")) {
+  let menuButton = headerContainer.querySelector("[data-mobile-menu]");
+  if (!menuButton) {
     const button = document.createElement("button");
     button.className = "mobile-menu";
     button.type = "button";
     button.dataset.mobileMenu = "";
     button.setAttribute("aria-label", "Open menu");
     button.textContent = "Menu";
-    headerContainer.prepend(button);
+    menuButton = button;
   }
   const search = headerContainer.querySelector(".site-search");
   const brand = headerContainer.querySelector(".brand");
+  if (menuButton && menuButton.parentElement !== headerContainer) headerContainer.prepend(menuButton);
+  if (menuButton) headerContainer.prepend(menuButton);
+  if (brand && menuButton) menuButton.insertAdjacentElement("afterend", brand);
+  const actions = headerContainer.querySelector(".header-actions");
+  if (actions) actions.hidden = true;
   if (search && !search.id) search.id = "aurora-site-search";
+  if (search) headerContainer.append(search);
   if (brand) brand.setAttribute("aria-label", "Aurora Bag Supply home");
+}
+
+function enhanceMobileAccountTabs() {
+  const accountGrid = document.querySelector(".account-grid");
+  if (!accountGrid || accountGrid.dataset.v2TabsReady) return;
+  accountGrid.dataset.v2TabsReady = "true";
+  const panels = Array.from(accountGrid.querySelectorAll(":scope > form.panel"));
+  if (panels.length < 2) return;
+  accountGrid.classList.add("account-grid--tabs");
+  const nav = document.createElement("div");
+  nav.className = "account-tabs";
+  nav.setAttribute("role", "tablist");
+  const labels = [pageText().signInTitle, pageText().createAccountTitle];
+  nav.innerHTML = labels.map((label, index) => `<button type="button" role="tab" aria-selected="${index === 0 ? "true" : "false"}" data-account-tab="${index}">${label}</button>`).join("");
+  accountGrid.prepend(nav);
+  const setActive = (index) => {
+    panels.forEach((panel, panelIndex) => {
+      panel.classList.toggle("is-account-active", panelIndex === index);
+      panel.hidden = panelIndex !== index;
+    });
+    nav.querySelectorAll("[data-account-tab]").forEach((button, buttonIndex) => {
+      button.classList.toggle("is-active", buttonIndex === index);
+      button.setAttribute("aria-selected", buttonIndex === index ? "true" : "false");
+    });
+  };
+  nav.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-account-tab]");
+    if (!button) return;
+    setActive(Number(button.dataset.accountTab));
+  });
+  setActive(0);
+}
+
+function enhanceBusinessCertificateUpload() {
+  document.querySelectorAll('input[type="file"][name="business_certificate"]').forEach((input) => {
+    if (input.dataset.v2UploadReady) return;
+    input.dataset.v2UploadReady = "true";
+    const field = input.closest(".field");
+    if (!field) return;
+    const label = field.querySelector("label")?.textContent || pageText().businessCertificate;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "file-upload-control";
+    button.innerHTML = `<span>${label}</span><small>${currentLang() === "zh" ? "上传营业执照或公司资料" : "Upload business license or company profile"}</small>`;
+    input.classList.add("sr-only-file");
+    input.insertAdjacentElement("afterend", button);
+    button.addEventListener("click", () => input.click());
+    input.addEventListener("change", () => {
+      const name = input.files?.[0]?.name;
+      button.querySelector("small").textContent = name || (currentLang() === "zh" ? "上传营业执照或公司资料" : "Upload business license or company profile");
+    });
+  });
+}
+
+function enhanceCheckoutOptions() {
+  document.querySelectorAll(".checkout-grid .option-row label").forEach((label) => {
+    if (label.dataset.v2RadioReady) return;
+    label.dataset.v2RadioReady = "true";
+    label.classList.add("checkout-option");
+    const input = label.querySelector('input[type="radio"]');
+    if (!input) return;
+    const update = () => {
+      document.querySelectorAll(`input[name="${input.name}"]`).forEach((item) => {
+        item.closest("label")?.classList.toggle("is-selected", item.checked);
+      });
+    };
+    input.addEventListener("change", update);
+    update();
+  });
+}
+
+function enhanceContactFormGroups() {
+  const form = document.querySelector(".contact-grid form.form-grid");
+  if (!form || form.dataset.v2Grouped) return;
+  form.dataset.v2Grouped = "true";
+  const groups = [
+    [currentLang() === "zh" ? "联系信息" : "Contact Information", 0, 6],
+    [currentLang() === "zh" ? "产品需求" : "Product Requirements", 6, 10],
+    [currentLang() === "zh" ? "定制与项目备注" : "Customization & Project Notes", 10, 12],
+  ];
+  const fields = Array.from(form.children).filter((node) => node.classList?.contains("field"));
+  const fragment = document.createDocumentFragment();
+  groups.forEach(([title, start, end]) => {
+    const group = document.createElement("section");
+    group.className = "form-section";
+    group.innerHTML = `<h2>${title}</h2>`;
+    fields.slice(start, end).forEach((field) => group.append(field));
+    fragment.append(group);
+  });
+  const submit = fields[12];
+  form.innerHTML = "";
+  form.append(fragment);
+  if (submit) form.append(submit);
+}
+
+function enhanceFaqAccordions() {
+  if (document.body.dataset.infoPage !== "faq") return;
+  document.querySelectorAll(".aurora-support-card").forEach((card, index) => {
+    if (card.dataset.faqReady) return;
+    card.dataset.faqReady = "true";
+    card.classList.add("faq-item");
+    const title = card.querySelector("h2");
+    const body = card.querySelector("p");
+    if (!title || !body) return;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "faq-question";
+    button.setAttribute("aria-expanded", index === 0 ? "true" : "false");
+    button.innerHTML = `<span>${title.textContent}</span><span aria-hidden="true">⌄</span>`;
+    const answer = document.createElement("div");
+    answer.className = "faq-answer";
+    answer.innerHTML = `<p>${body.textContent}</p>`;
+    answer.hidden = index !== 0;
+    card.innerHTML = "";
+    card.append(button, answer);
+    card.classList.toggle("is-open", index === 0);
+    button.addEventListener("click", () => {
+      const open = !card.classList.contains("is-open");
+      card.classList.toggle("is-open", open);
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      answer.hidden = !open;
+    });
+  });
+}
+
+function compactFooterCopy() {
+  document.querySelectorAll(".footer-callout span").forEach((node) => {
+    node.textContent = currentLang() === "zh" ? "箱包五金、皮革、拉链与配件采购支持。" : "B2B sourcing support for bags, hardware, leather, zippers and tools.";
+  });
+}
+
+function tuneWhatsAppForFooter() {
+  const button = document.querySelector(".aurora-whatsapp-button");
+  const footer = document.querySelector(".site-footer");
+  if (!button || !footer || button.dataset.v2FooterGuard) return;
+  button.dataset.v2FooterGuard = "true";
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.some((entry) => entry.isIntersecting);
+    button.classList.toggle("is-near-footer", visible);
+  }, { threshold: 0.08 });
+  observer.observe(footer);
+}
+
+function applyMobileDesignSystemV2() {
+  enhanceMobileAccountTabs();
+  enhanceBusinessCertificateUpload();
+  enhanceCheckoutOptions();
+  enhanceContactFormGroups();
+  enhanceFaqAccordions();
+  compactFooterCopy();
+  tuneWhatsAppForFooter();
+  document.body.classList.add("aurora-mobile-v2");
 }
 
 function guardWhatsAppProductOverlap() {
@@ -3960,4 +4136,5 @@ bindForms();
 bindHeroSwipe();
 enhanceMobileFooterAccordions();
 guardWhatsAppProductOverlap();
+applyMobileDesignSystemV2();
 startHeroAutoplay();

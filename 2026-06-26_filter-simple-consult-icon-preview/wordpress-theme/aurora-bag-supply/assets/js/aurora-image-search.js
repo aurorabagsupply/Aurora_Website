@@ -39,7 +39,7 @@
       change: "更换图片",
       loading: "正在查找相似产品...",
       empty: "没有找到相似产品。",
-      notConfigured: "图片搜索后端还没有配置。",
+      notConfigured: "图片搜索后端暂未配置完成。",
       badType: "请上传 JPG、PNG 或 WEBP 图片。",
       tooLarge: "图片太大，请换一张更小的图片。",
       uploadFirst: "请先选择一张图片。",
@@ -51,8 +51,7 @@
       material: "材质",
       size: "尺寸",
       moq: "起订量",
-    },
-  };
+    },  };
 
   let selectedBlob = null;
   let selectedName = "aurora-search-image.jpg";
@@ -105,7 +104,7 @@
     modal.dataset.imageSearchModal = "";
     modal.innerHTML = `
       <div class="image-search-modal__panel" role="dialog" aria-modal="true" aria-labelledby="aurora-image-search-title">
-        <button class="image-search-modal__close" type="button" data-image-search-close aria-label="Close">×</button>
+        <button class="image-search-modal__close" type="button" data-image-search-close aria-label="Close">&times;</button>
         <div class="image-search-modal__head">
           <h2 id="aurora-image-search-title">${text("title")}</h2>
           <p>${text("intro")}</p>
@@ -280,7 +279,7 @@
               <p>${escapeHtml(product.moq || "")}</p>
               <div class="image-search-result__actions">
                 <a href="${escapeHtml(product.quoteUrl)}">${text("quote")}</a>
-                <a href="${escapeHtml(product.permalink)}">${text("view")} <span aria-hidden="true">›</span></a>
+                <a href="${escapeHtml(product.permalink)}">${text("view")} <span aria-hidden="true">&rsaquo;</span></a>
               </div>
               ${product.similarity ? `<small class="image-search-debug">Similarity ${escapeHtml(product.similarity)}</small>` : ""}
             </div>

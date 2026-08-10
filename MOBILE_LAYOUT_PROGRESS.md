@@ -701,3 +701,42 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Limitation: automated QA used local Edge / Chromium with an iPhone Safari user agent. Real iPhone Safari and WeChat WebView should still be spot-checked after GitHub Pages cache refresh.
 - Rollback point:
   - To return to the previous version after commit, revert the v10.5 commit.
+
+### 2026-08-10 - Mobile Design System V2 Full-Site Refinement
+
+- Commit: Mobile Design System V2 commit in git history
+- Base source commit: `65037dc`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - All static HTML pages in the source folder
+  - `assets/css/aurora-commerce.css`
+  - `assets/css/aurora-category-clean-float.css`
+  - `assets/css/aurora-mobile-v2-final.css`
+  - `assets/js/aurora-commerce.js`
+  - `assets/js/aurora-image-search.js`
+  - Matching WordPress theme assets and `wordpress-theme/aurora-bag-supply/functions.php`
+  - `tools/mobile-ui-v2-qa.mjs`
+  - `mobile-v2-audit.md`
+  - `screenshots/mobile-v2/`
+- Page area:
+  - Full mobile site: Home, mobile menu, Product Catalog, all category pages, representative product details for Bag / Hardware / Leather / Zipper / Accessories / Tools, Search by Image modal, Cart, Checkout, Account, About, Contact, Blog, FAQ, Shipping, Returns, Privacy Policy and Terms of Service.
+- Changes:
+  - Added a final mobile-only V2 CSS layer loaded after legacy mobile CSS to stabilize the shared design system without changing desktop layout.
+  - Fixed the mobile header brand truncation issue so `Aurora Bag Supply` stays readable across `320` to `430` px widths.
+  - Standardized the mobile header row, second-row search, image-search trigger, typography, product grids, product cards, category cards, product detail layout, account tabs, forms, footer and WhatsApp spacing.
+  - Reduced product-card density by making product imagery primary and changing repeated quote actions into lighter `View Details` / compact quote actions.
+  - Updated Search by Image modal and result state styling while preserving existing upload/search flow and endpoint behavior.
+  - Reworked Account mobile behavior into `Sign In | Create Account` tabs and replaced the native file input with a branded upload control.
+  - Added cache-busting with `aurora-mobile-v2-final.css?v=20260810-mobile-design-v2` for static pages and WordPress theme version `1.0.82-preview`.
+- Verification:
+  - `node --check` passed for `assets/js/aurora-commerce.js` and `assets/js/aurora-image-search.js`.
+  - Generated 30 mobile full-page screenshots at `390 x 844` in `screenshots/mobile-v2/`.
+  - Automated responsive QA covered 60 runs: 6 widths (`320`, `375`, `390`, `393`, `414`, `430`) x 10 representative pages.
+  - Result: `0` hard issues in the final automated QA matrix.
+  - Checks covered body horizontal overflow, clipped product cards, header brand clipping, camera/image-search trigger presence, mobile menu trigger presence, footer social layout and WhatsApp overlap.
+  - `mobile-v2-audit.md` was generated with page-by-page Fixed / Remaining Issues / Shared Component Problems.
+  - `aurora-mobile-v2-screenshots.zip` was generated for local review.
+- Limitation:
+  - Automated QA used local Edge / Chromium with an iPhone Safari user agent. Real iPhone Safari, WeChat WebView and ChatGPT in-app browser should still be spot-checked after GitHub Pages cache refresh.
+- Rollback point:
+  - To return to the previous version, revert the Mobile Design System V2 commit.
