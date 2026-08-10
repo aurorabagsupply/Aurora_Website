@@ -669,7 +669,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-10 - Full Mobile UI Consistency & Visual QA Pass V10.5
 
-- Commit: pending
+- Commit: `65037dc`
 - Base source commit: `5066a80`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
