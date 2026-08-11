@@ -801,3 +801,27 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Generated `screenshots/mobile-premium-refinement/new-arrivals-carousel-fix-390.jpg` for review.
 - Limitation:
   - Automated QA used local Edge / Chromium mobile viewport simulation. Real iPhone Safari should still be refreshed and spot-checked after GitHub Pages cache updates.
+
+### 2026-08-11 - Mobile Category Grid Scale Increase
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static HTML cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `screenshots/mobile-premium-refinement/category-grid-scale-390.jpg`
+- Page area:
+  - Mobile homepage `Shop by Category` six-category grid only. Desktop layout and product/category link logic were not changed.
+- Changes:
+  - Increased the visual screen share of the six category entries by expanding the mobile category grid width within the viewport.
+  - Reduced column gap and category image internal padding so Bag / Hardware / Leather / Zipper / Accessories / Tools images read larger.
+  - Preserved the existing two-column layout, category names, arrows and click targets.
+  - Updated static cache-busting query strings to `20260811-category-scale-v1`.
+  - Updated the WordPress theme asset version to `1.0.85-preview`.
+- Verification:
+  - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
+  - Result: no body horizontal overflow and no category-grid overflow.
+  - At `390px`, category image boxes increased to about `169px` wide.
+  - `tools/mobile-home-premium-qa.mjs` completed successfully.
+  - Generated `screenshots/mobile-premium-refinement/category-grid-scale-390.jpg` for review.
