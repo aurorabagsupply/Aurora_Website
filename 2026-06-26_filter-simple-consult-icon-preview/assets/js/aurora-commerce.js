@@ -2033,6 +2033,7 @@ function compactProductMeta(product) {
 function productCard(productInput, options = {}) {
   const product = enrichProduct(productInput);
   const variant = options.variant ? ` product-card--${options.variant}` : "";
+  const hideQuote = options.hideQuote === true;
   return `
     <article class="product-card${variant}">
       <a class="product-card__image" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">
@@ -2045,7 +2046,7 @@ function productCard(productInput, options = {}) {
         <div class="buying-row"><span>${t("moq")} ${product.moq}</span></div>
         <div class="product-actions">
           <a class="detail-link" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">${t("details")} <span aria-hidden="true">&rsaquo;</span></a>
-          <button class="btn btn-secondary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>
+          ${hideQuote ? "" : `<button class="btn btn-secondary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>`}
         </div>
       </div>
     </article>
@@ -2278,7 +2279,7 @@ function renderProductGrids() {
       return;
     }
     target.classList.add("product-grid--best");
-    target.innerHTML = products.map((item) => productCard(item, { variant: "compact" })).join("");
+    target.innerHTML = products.map((item) => productCard(item, { variant: "compact best", hideQuote: true })).join("");
     animateProductCards(target);
   });
 }

@@ -897,3 +897,47 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Result: no body horizontal overflow; Best Sellers cards stay within the viewport.
   - At `390px`, first card is about `146px x 268px`, image area is about `163px` high, and image share is about `61%`.
   - Generated `screenshots/mobile-premium-refinement/best-sellers-card-scale-390.jpg` for review.
+
+### 2026-08-11 - Mobile Best Sellers Premium Card Redesign
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static homepage cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `screenshots/mobile-premium-refinement/best-sellers-redesign-390.jpg`
+- Page area:
+  - Mobile homepage `Best Sellers` / `热销产品` block only. Desktop layout and product/detail/quote/search/language logic were not changed.
+- Changes:
+  - Reworked Best Sellers from separated image/text pieces into complete unified product cards.
+  - Added a cleaner white card body under a soft neutral image area.
+  - Reduced visual fragmentation by removing transparent card bodies and restoring one coherent rounded card surface.
+  - Kept the two-column layout, product names, MOQ and `View Details` links.
+  - Added extra mobile bottom safe spacing for this section so browser bars and floating buttons are less likely to cover the final row.
+  - Updated static cache-busting query strings to `20260811-best-seller-premium-v1`.
+  - Updated the WordPress theme asset version to `1.0.93-preview`.
+- Verification:
+  - Ran a 390px mobile layout check with Edge DevTools protocol.
+  - Result: no body horizontal overflow; Best Sellers cards stay within the viewport.
+  - At the tested viewport, the grid kept two equal columns and four visible product cards.
+
+### 2026-08-11 - Mobile Best Sellers Premium Card Redesign v2
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - `assets/js/aurora-commerce.js`
+  - Matching WordPress theme CSS/JS under `wordpress-theme/aurora-bag-supply/assets/`
+  - Static homepage cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+- Page area:
+  - Mobile homepage `Best Sellers` / `热销产品` block only. Desktop layout and shared product data were not changed.
+- Changes:
+  - Removed the homepage `Add to Quote` button from Best Sellers cards so this area reads as a curated product showcase instead of a dense catalog.
+  - Changed Best Sellers into integrated premium tiles with one continuous card surface, larger product imagery, softer neutral image background, and lighter text hierarchy.
+  - Hid SKU/category chips and long material summaries in this homepage block; retained product name, MOQ, and `View Details`.
+  - Increased section breathing room and updated cache-busting to `20260811-best-seller-premium-v2`.
+  - Updated the WordPress theme asset version to `1.0.94-preview`.
+- Verification:
+  - `node --check` passed for both static and WordPress theme `aurora-commerce.js`.
