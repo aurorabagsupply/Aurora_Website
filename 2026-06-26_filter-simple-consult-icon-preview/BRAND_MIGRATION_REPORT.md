@@ -70,6 +70,7 @@ Admin/plugin visible labels and documentation:
 - `wordpress-plugin/aurora-admin-dashboard/includes/class-aurora-admin-dashboard.php`
 - `wordpress-plugin/aurora-admin-dashboard/README.md`
 - `ADMIN_DASHBOARD_PHASE1_PROGRESS.md`
+- `screenshots/admin-preview/aurora-admin-preview.html`
 
 Root redirect:
 
