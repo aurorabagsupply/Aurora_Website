@@ -889,6 +889,24 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Hid the black `Search` submit button on mobile; text search still submits from the keyboard, and the image-search camera remains visible.
   - Updated static cache-busting query strings to `20260811-mobile-header-minimal-v1`.
   - Updated the WordPress theme asset version to `1.0.95-preview`.
+
+### 2026-08-11 - Mobile Header Apple Minimal Refinement v2
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static homepage cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+- Page area:
+  - Mobile global header only. Desktop layout and search/image-search behavior were not changed.
+- Changes:
+  - Tightened the first-row icon rhythm and reduced menu/logo/language visual weight.
+  - Added a subtle magnifying-glass cue inside the search field.
+  - Softened the search surface, reduced camera icon opacity, and improved focus state.
+  - Adjusted small-screen rules so `Aurora Bag Supply` remains readable from 320px to 430px.
+  - Updated static cache-busting query strings to `20260811-mobile-header-minimal-v2`.
+  - Updated the WordPress theme asset version to `1.0.96-preview`.
   - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
   - At `390px`, active card center delta is `0`, side peeks are `56px / 56px`, card width is `242px`, and body horizontal overflow is `false`.
   - Generated `screenshots/mobile-premium-refinement/featured-loop-carousel-390.jpg` for review.
