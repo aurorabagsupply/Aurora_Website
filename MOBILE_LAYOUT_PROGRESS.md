@@ -873,3 +873,27 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
   - At `390px`, active card center delta is `0`, side peeks are `56px / 56px`, card width is `242px`, and body horizontal overflow is `false`.
   - Generated `screenshots/mobile-premium-refinement/featured-loop-carousel-390.jpg` for review.
+
+### 2026-08-11 - Mobile Best Sellers Product Card Scale
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static HTML cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `screenshots/mobile-premium-refinement/best-sellers-card-scale-390.jpg`
+- Page area:
+  - Mobile homepage `Best Sellers` product grid only. Desktop layout and product/detail/quote/search/language logic were not changed.
+- Changes:
+  - Increased Best Sellers product image area and reduced image padding so products read larger.
+  - Hid the long material summary in this homepage block to reduce card height and visual density.
+  - Removed inherited flex stretching from Best Sellers cards so `View Details` follows the MOQ instead of being pushed to the bottom.
+  - Kept the two-column grid and existing `View Details` links.
+  - Updated static cache-busting query strings to `20260811-best-card-scale-v4`.
+  - Updated the WordPress theme asset version to `1.0.92-preview`.
+- Verification:
+  - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
+  - Result: no body horizontal overflow; Best Sellers cards stay within the viewport.
+  - At `390px`, first card is about `146px x 268px`, image area is about `163px` high, and image share is about `61%`.
+  - Generated `screenshots/mobile-premium-refinement/best-sellers-card-scale-390.jpg` for review.
