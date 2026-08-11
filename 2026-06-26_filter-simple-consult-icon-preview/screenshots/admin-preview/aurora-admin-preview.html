@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AOLOLA Admin Preview</title>
+  <link rel="stylesheet" href="../../wordpress-plugin/aurora-admin-dashboard/assets/admin.css">
+  <style>
+    body { margin: 0; background: #f3f4f6; }
+    .aurora-admin { min-height: 900px; }
+    .aurora-actions button, .aurora-actions a { pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="aurora-admin" id="aurora-admin-root">
+    <aside class="aurora-admin__sidebar">
+      <div class="aurora-admin__brand">
+        <span>AB</span>
+        <div>
+          <strong>AOLOLA Admin</strong>
+          <small>Merchant operations</small>
+        </div>
+      </div>
+      <button class="is-active">Dashboard</button>
+      <button>Products</button>
+      <button>Categories</button>
+      <button>Quotes</button>
+      <button>Customers</button>
+      <button>Audit Logs</button>
+    </aside>
+    <main class="aurora-admin__main">
+      <header class="aurora-admin__topbar">
+        <div>
+          <h1>AOLOLA Merchant Dashboard</h1>
+          <p>Products, sourcing leads, customers and operational controls.</p>
+        </div>
+        <button class="aurora-admin__refresh">Refresh</button>
+      </header>
+
+      <section class="aurora-admin__content">
+        <div class="aurora-grid">
+          <div class="aurora-card aurora-stat"><strong>126</strong><span>Published products</span></div>
+          <div class="aurora-card aurora-stat"><strong>8</strong><span>Draft products</span></div>
+          <div class="aurora-card aurora-stat"><strong>14</strong><span>New quotes</span></div>
+          <div class="aurora-card aurora-stat"><strong>312</strong><span>Total quotes</span></div>
+          <div class="aurora-card aurora-stat"><strong>86</strong><span>Registered users</span></div>
+        </div>
+
+        <div class="aurora-card">
+          <h2>Quote Pipeline</h2>
+          <div style="overflow:auto">
+            <table class="aurora-table">
+              <thead><tr><th>Status</th><th>Total</th><th>Priority</th><th>Next Action</th></tr></thead>
+              <tbody>
+                <tr><td>New</td><td>14</td><td>High</td><td>Assign to Sales</td></tr>
+                <tr><td>Contacted</td><td>38</td><td>Medium</td><td>Follow up</td></tr>
+                <tr><td>Quoted</td><td>29</td><td>Medium</td><td>Check response</td></tr>
+                <tr><td>Won</td><td>47</td><td>Closed</td><td>Order support</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="aurora-card">
+          <h2>Recent Products</h2>
+          <div style="overflow:auto">
+            <table class="aurora-table">
+              <thead><tr><th>Product</th><th>SKU</th><th>Status</th><th>MOQ</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Finished Bags 01</strong></td>
+                  <td>ABS-BAG-001</td>
+                  <td>publish</td>
+                  <td>100 pcs</td>
+                  <td><div class="aurora-actions"><button>Quick Edit</button><button>Duplicate</button><button>Trash</button><a>View</a></div></td>
+                </tr>
+                <tr>
+                  <td><strong>Hardware Product 04</strong></td>
+                  <td>ABS-HDW-004</td>
+                  <td>publish</td>
+                  <td>500 pcs</td>
+                  <td><div class="aurora-actions"><button>Quick Edit</button><button>Duplicate</button><button>Trash</button><a>View</a></div></td>
+                </tr>
+                <tr>
+                  <td><strong>Leather Materials 01</strong></td>
+                  <td>ABS-LEA-001</td>
+                  <td>draft</td>
+                  <td>50 pcs</td>
+                  <td><div class="aurora-actions"><button>Quick Edit</button><button>Duplicate</button><button>Trash</button><a>View</a></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="aurora-card">
+          <h2>Quick Product Create</h2>
+          <form class="aurora-form">
+            <label>Name <input value="Hardware Product 08"></label>
+            <label>SKU <input value="ABS-HDW-008"></label>
+            <label>Status <select><option>Draft</option><option>Published</option></select></label>
+            <label>MOQ <input value="500 pcs"></label>
+            <label class="is-wide">Short Description <textarea>Core hardware component for B2B sourcing projects.</textarea></label>
+            <button class="button-primary" type="button">Create Product</button>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

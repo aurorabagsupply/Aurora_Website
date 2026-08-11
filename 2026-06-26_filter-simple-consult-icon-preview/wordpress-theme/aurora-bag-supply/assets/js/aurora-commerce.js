@@ -114,7 +114,7 @@ let heroAutoplayTimer = null;
 
 const I18N = {
   en: {
-    topLine: "Aurora Bag Supply | Professional Accessories, Bags, Hardware, Leather, Tools & Zippers",
+    topLine: "AOLOLA | Professional Accessories, Bags, Hardware, Leather, Tools & Zippers",
     globalSupport: "Global B2B sourcing support",
     emailLabel: "Email",
     phoneLabel: "Tel",
@@ -265,13 +265,13 @@ const I18N = {
     footerHoursNote: "Sample and quotation support",
     footerCalloutTitle: "B2B Supply Partner",
     footerCalloutText: "Factory sourcing support for bags, hardware, leather, zippers, accessories and tools.",
-    footerCopyright: "© 2026 Aurora Bag Supply.",
+    footerCopyright: "© 2026 AOLOLA.",
     footerMeta: "Wholesale catalog | Sample support | Export packing",
     footerProducts: "Products",
     footerSupport: "Support",
     footerCompany: "Company",
     contactKicker: "Request a quote",
-    contactTitle: "Contact Aurora Bag Supply",
+    contactTitle: "Contact AOLOLA",
     contactIntro: "Send product SKU, quantity, finish, destination and customization details. We will reply with price, MOQ, sample option and production suggestion.",
     contactName: "Name",
     contactEmail: "Email",
@@ -322,7 +322,7 @@ const I18N = {
     chat: "Chat",
   },
   zh: {
-    topLine: "Aurora Bag Supply | 配件、包、五金、皮革、工具、拉链专业供应",
+    topLine: "AOLOLA | 配件、包、五金、皮革、工具、拉链专业供应",
     globalSupport: "全球 B2B 采购支持",
     emailLabel: "邮箱",
     phoneLabel: "电话",
@@ -473,13 +473,13 @@ const I18N = {
     footerHoursNote: "样品、报价和采购支持",
     footerCalloutTitle: "B2B 供应合作伙伴",
     footerCalloutText: "为箱包、五金、皮革、拉链、配件和工具提供工厂采购支持。",
-    footerCopyright: "© 2026 Aurora Bag Supply。",
+    footerCopyright: "© 2026 AOLOLA。",
     footerMeta: "批发目录 | 样品支持 | 出口包装",
     footerProducts: "产品",
     footerSupport: "支持",
     footerCompany: "公司",
     contactKicker: "获取报价",
-    contactTitle: "联系 Aurora Bag Supply",
+    contactTitle: "联系 AOLOLA",
     contactIntro: "请发送产品 SKU、数量、表面处理、目的地和定制需求。我们会回复价格、起订量、样品选项和生产建议。",
     contactName: "姓名",
     contactEmail: "邮箱",
@@ -530,7 +530,7 @@ const I18N = {
     chat: "在线咨询",
   },
   ru: {
-    topLine: "Aurora Bag Supply | Аксессуары, сумки, фурнитура, кожа, инструменты и молнии",
+    topLine: "AOLOLA | Аксессуары, сумки, фурнитура, кожа, инструменты и молнии",
     globalSupport: "Поддержка B2B закупок по всему миру",
     emailLabel: "Эл. почта",
     contactTop: "WhatsApp / WeChat / Контакты",
@@ -593,7 +593,7 @@ const I18N = {
     noResults: "Нет товаров по выбранным фильтрам.",
   },
   es: {
-    topLine: "Aurora Bag Supply | Accesorios, bolsos, herrajes, cuero, herramientas y cremalleras",
+    topLine: "AOLOLA | Accesorios, bolsos, herrajes, cuero, herramientas y cremalleras",
     globalSupport: "Soporte global de compras B2B",
     emailLabel: "Correo",
     contactTop: "WhatsApp / WeChat / Contacto",
@@ -656,7 +656,7 @@ const I18N = {
     noResults: "No hay productos para estos filtros.",
   },
   fr: {
-    topLine: "Aurora Bag Supply | Accessoires, sacs, quincaillerie, cuir, outils et fermetures",
+    topLine: "AOLOLA | Accessoires, sacs, quincaillerie, cuir, outils et fermetures",
     globalSupport: "Support achat B2B mondial",
     emailLabel: "E-mail",
     contactTop: "WhatsApp / WeChat / Contact",
@@ -719,7 +719,7 @@ const I18N = {
     noResults: "Aucun produit ne correspond aux filtres.",
   },
   de: {
-    topLine: "Aurora Bag Supply | Accessoires, Taschen, Hardware, Leder, Werkzeuge und Reissverschlusse",
+    topLine: "AOLOLA | Accessoires, Taschen, Hardware, Leder, Werkzeuge und Reissverschlusse",
     globalSupport: "Globale B2B-Beschaffung",
     emailLabel: "E-Mail",
     contactTop: "WhatsApp / WeChat / Kontakt",
@@ -782,7 +782,7 @@ const I18N = {
     noResults: "Keine Produkte passen zu den Filtern.",
   },
   it: {
-    topLine: "Aurora Bag Supply | Accessori, borse, hardware, pelle, strumenti e cerniere",
+    topLine: "AOLOLA | Accessori, borse, hardware, pelle, strumenti e cerniere",
     globalSupport: "Supporto acquisti B2B globale",
     emailLabel: "E-mail",
     contactTop: "WhatsApp / WeChat / Contatto",
@@ -845,7 +845,7 @@ const I18N = {
     noResults: "Nessun prodotto corrisponde ai filtri.",
   },
   ar: {
-    topLine: "Aurora Bag Supply | اكسسوارات وحقائب ومعدات وجلود وادوات وسحابات",
+    topLine: "AOLOLA | اكسسوارات وحقائب ومعدات وجلود وادوات وسحابات",
     globalSupport: "دعم مشتريات B2B عالمي",
     emailLabel: "البريد",
     contactTop: "WhatsApp / WeChat / تواصل معنا",
@@ -2484,7 +2484,7 @@ function renderDetail() {
   if (!detail) return;
   const params = new URLSearchParams(window.location.search);
   const product = productBySku(params.get("sku"));
-  document.title = `${product.name} | Aurora Bag Supply`;
+  document.title = `${product.name} | AOLOLA`;
   const category = CATEGORY_CONFIG.find((item) => item.name === product.category);
   const thumbs = [product.image, imagePath(product.category, Math.min(2, category.count)), imagePath(product.category, Math.min(3, category.count)), imagePath(product.category, Math.min(4, category.count))];
   detail.innerHTML = `
@@ -2713,7 +2713,7 @@ function pageText() {
 function translateAccountPage() {
   if (!document.querySelector(".account-grid")) return;
   const copy = pageText();
-  document.title = `${copy.accountTitle} | Aurora Bag Supply`;
+  document.title = `${copy.accountTitle} | AOLOLA`;
   setText(".page-title .kicker", copy.accountKicker);
   setText(".page-title h1", copy.accountTitle);
   setText(".page-title p:not(.kicker)", copy.accountIntro);
@@ -2751,7 +2751,7 @@ function translateAccountPage() {
 function translateCheckoutPage() {
   if (!document.querySelector(".checkout-grid")) return;
   const copy = pageText();
-  document.title = `${copy.checkoutTitle} | Aurora Bag Supply`;
+  document.title = `${copy.checkoutTitle} | AOLOLA`;
   setText(".page-title .kicker", copy.checkoutKicker);
   setText(".page-title h1", copy.checkoutTitle);
   setText(".page-title p:not(.kicker)", copy.checkoutIntro);
@@ -3134,7 +3134,7 @@ function translateContactPage() {
   }
 }
 
-const WHATSAPP_URL = "https://wa.me/8613500014739?text=Hello%20Aurora%20Bag%20Supply%2C%20I%E2%80%99m%20interested%20in%20your%20bag%20hardware%20%2F%20leather%20%2F%20zipper%20products.%20I%20would%20like%20to%20ask%20for%20more%20details.";
+const WHATSAPP_URL = "https://wa.me/8613500014739?text=Hello%20AOLOLA%2C%20I%E2%80%99m%20interested%20in%20your%20bag%20hardware%20%2F%20leather%20%2F%20zipper%20products.%20I%20would%20like%20to%20ask%20for%20more%20details.";
 
 const MEGA_MENU_CONFIG = {
   Bag: {
@@ -3187,7 +3187,7 @@ const INFO_PAGE_COPY = {
     shipping: {
       label: "Support",
       title: "Shipping & Delivery Support",
-      subtitle: "Aurora Bag Supply supports sample shipments, bulk order delivery and export coordination for international B2B customers.",
+      subtitle: "AOLOLA supports sample shipments, bulk order delivery and export coordination for international B2B customers.",
       intro: "We help customers arrange sample shipments, bulk order packing and export delivery support based on order type, destination and product requirements. Shipping methods, lead time and packing details are confirmed during quotation and order processing.",
       cards: [
         ["Sample Orders", ["Samples can usually be arranged after confirming item details, quantity and destination.", "Small sample shipments are commonly sent by express courier.", "Sample timing depends on stock availability or sample preparation needs."]],
@@ -3259,8 +3259,8 @@ const INFO_PAGE_COPY = {
     privacy: {
       label: "Company Policy",
       title: "Privacy Policy",
-      subtitle: "How Aurora Bag Supply collects and uses information submitted through this website.",
-      intro: "This policy explains how inquiry and communication information may be handled when customers contact Aurora Bag Supply for product quotation, sourcing support or order discussion.",
+      subtitle: "How AOLOLA collects and uses information submitted through this website.",
+      intro: "This policy explains how inquiry and communication information may be handled when customers contact AOLOLA for product quotation, sourcing support or order discussion.",
       policy: [
         ["Information We Collect", "We may collect contact name, company name, email address, phone number, country, inquiry details, product requirements and related communication information submitted through forms, email or direct contact."],
         ["How We Use Information", "Information may be used to respond to inquiries, prepare quotations, confirm product details, arrange sample or order communication and improve service support."],
@@ -3269,12 +3269,12 @@ const INFO_PAGE_COPY = {
         ["Cookies", "Basic cookies may be used for site functionality, analytics or user experience improvement."],
         ["Contact", "For privacy-related questions, please contact aurorabagsupply@gmail.com."],
       ],
-      cta: ["Questions about privacy?", "Contact Aurora Bag Supply if you need clarification about how inquiry information is used.", "Contact Us", "Request a Quote"],
+      cta: ["Questions about privacy?", "Contact AOLOLA if you need clarification about how inquiry information is used.", "Contact Us", "Request a Quote"],
     },
     terms: {
       label: "Company Policy",
       title: "Terms of Service",
-      subtitle: "Basic terms for using the Aurora Bag Supply website and requesting product quotations or supply support.",
+      subtitle: "Basic terms for using the AOLOLA website and requesting product quotations or supply support.",
       intro: "These terms outline how website information, quotations, custom orders and B2B order communication are handled before final order confirmation.",
       policy: [
         ["Website Information", "Product descriptions, images, specifications and product references on this website are provided for general information and sourcing reference."],
@@ -3291,7 +3291,7 @@ const INFO_PAGE_COPY = {
     shipping: {
       label: "支持服务",
       title: "运输与交付支持",
-      subtitle: "Aurora Bag Supply 为国际 B2B 客户提供样品寄送、大货运输和出口交付协助。",
+      subtitle: "AOLOLA 为国际 B2B 客户提供样品寄送、大货运输和出口交付协助。",
       intro: "我们会根据订单类型、目的地和产品要求协助客户安排样品寄送、大货包装和出口运输支持。运输方式、交期和包装细节会在报价与订单处理过程中确认。",
       cards: [
         ["样品订单", ["确认产品细节、数量和目的地后，通常可安排样品。", "小批量样品通常通过国际快递寄送。", "样品时间取决于库存情况或样品准备需求。"]],
@@ -3359,8 +3359,8 @@ const INFO_PAGE_COPY = {
     privacy: {
       label: "公司政策",
       title: "隐私政策",
-      subtitle: "Aurora Bag Supply 如何收集和使用通过网站提交的信息。",
-      intro: "本政策说明客户为了产品报价、采购支持或订单沟通联系 Aurora Bag Supply 时，询盘和沟通信息可能如何被处理。",
+      subtitle: "AOLOLA 如何收集和使用通过网站提交的信息。",
+      intro: "本政策说明客户为了产品报价、采购支持或订单沟通联系 AOLOLA 时，询盘和沟通信息可能如何被处理。",
       policy: [
         ["我们收集的信息", "我们可能收集联系人姓名、公司名称、邮箱地址、电话号码、国家、询盘内容、产品需求，以及通过表单、邮件或直接联系提交的相关沟通信息。"],
         ["信息用途", "信息可能用于回复询盘、准备报价、确认产品细节、安排样品或订单沟通，以及改进服务支持。"],
@@ -3369,12 +3369,12 @@ const INFO_PAGE_COPY = {
         ["Cookies", "网站可能使用基础 cookies 用于站点功能、分析或用户体验改善。"],
         ["联系我们", "隐私相关问题请联系 aurorabagsupply@gmail.com。"],
       ],
-      cta: ["关于隐私还有问题？", "如需了解询盘信息如何使用，请联系 Aurora Bag Supply。", "联系我们", "获取报价"],
+      cta: ["关于隐私还有问题？", "如需了解询盘信息如何使用，请联系 AOLOLA。", "联系我们", "获取报价"],
     },
     terms: {
       label: "公司政策",
       title: "服务条款",
-      subtitle: "使用 Aurora Bag Supply 网站以及申请产品报价或供应支持的基本条款。",
+      subtitle: "使用 AOLOLA 网站以及申请产品报价或供应支持的基本条款。",
       intro: "这些条款说明网站信息、报价、定制订单和 B2B 订单沟通在最终确认前的处理方式。",
       policy: [
         ["网站信息", "本网站的产品描述、图片、规格和产品参考用于一般信息和采购参考。"],
@@ -3391,7 +3391,7 @@ const INFO_PAGE_COPY = {
 
 const INFO_PAGE_GENERIC = {
   ru: {
-    intro: "Информационная страница Aurora Bag Supply для покупателей B2B.",
+    intro: "Информационная страница AOLOLA для покупателей B2B.",
     overview: "Обзор",
     overviewText: "Здесь собрана базовая информация по закупке, образцам, доставке, возвратам, политике и условиям сервиса.",
     action: "Что делать дальше",
@@ -3400,7 +3400,7 @@ const INFO_PAGE_GENERIC = {
     contactText: "По вопросам свяжитесь с aurorabagsupply@gmail.com.",
   },
   es: {
-    intro: "Pagina informativa de Aurora Bag Supply para compradores B2B.",
+    intro: "Pagina informativa de AOLOLA para compradores B2B.",
     overview: "Resumen",
     overviewText: "Aqui reunimos informacion basica sobre compra, muestras, envio, devoluciones, privacidad y condiciones de servicio.",
     action: "Siguiente paso",
@@ -3409,7 +3409,7 @@ const INFO_PAGE_GENERIC = {
     contactText: "Para preguntas, contacte aurorabagsupply@gmail.com.",
   },
   fr: {
-    intro: "Page d'information Aurora Bag Supply pour acheteurs B2B.",
+    intro: "Page d'information AOLOLA pour acheteurs B2B.",
     overview: "Apercu",
     overviewText: "Cette page regroupe les informations de base sur achat, echantillons, livraison, retours, confidentialite et conditions.",
     action: "Prochaine etape",
@@ -3418,7 +3418,7 @@ const INFO_PAGE_GENERIC = {
     contactText: "Pour toute question, contactez aurorabagsupply@gmail.com.",
   },
   de: {
-    intro: "Informationsseite von Aurora Bag Supply fuer B2B-Kaeufer.",
+    intro: "Informationsseite von AOLOLA fuer B2B-Kaeufer.",
     overview: "Ueberblick",
     overviewText: "Hier stehen Basisinformationen zu Einkauf, Mustern, Versand, Rueckgaben, Datenschutz und Servicebedingungen.",
     action: "Naechster Schritt",
@@ -3427,7 +3427,7 @@ const INFO_PAGE_GENERIC = {
     contactText: "Bei Fragen kontaktieren Sie aurorabagsupply@gmail.com.",
   },
   it: {
-    intro: "Pagina informativa Aurora Bag Supply per buyer B2B.",
+    intro: "Pagina informativa AOLOLA per buyer B2B.",
     overview: "Panoramica",
     overviewText: "Qui raccogliamo informazioni di base su acquisto, campioni, spedizione, resi, privacy e termini di servizio.",
     action: "Passo successivo",
@@ -3436,7 +3436,7 @@ const INFO_PAGE_GENERIC = {
     contactText: "Per domande, contatta aurorabagsupply@gmail.com.",
   },
   ar: {
-    intro: "صفحة معلومات من Aurora Bag Supply لمشتري B2B.",
+    intro: "صفحة معلومات من AOLOLA لمشتري B2B.",
     overview: "نظرة عامة",
     overviewText: "تجمع هذه الصفحة معلومات اساسية عن الشراء والعينات والشحن والمرتجعات والخصوصية وشروط الخدمة.",
     action: "الخطوة التالية",
@@ -3570,7 +3570,7 @@ function translateInfoPage() {
   const target = document.querySelector("[data-info-content]");
   if (!page || !target) return;
   const copy = infoPageCopy(page);
-  document.title = `${copy.title} | Aurora Bag Supply`;
+  document.title = `${copy.title} | AOLOLA`;
   setText("[data-info-title] .kicker", copy.label || t("footerCompany"));
   setText("[data-info-title] h1", copy.title);
   const titleParagraphs = document.querySelectorAll("[data-info-title] p:not(.kicker)");
@@ -4050,7 +4050,7 @@ function ensureSharedMobileHeader() {
   if (actions) actions.hidden = true;
   if (search && !search.id) search.id = "aurora-site-search";
   if (search) headerContainer.append(search);
-  if (brand) brand.setAttribute("aria-label", "Aurora Bag Supply home");
+  if (brand) brand.setAttribute("aria-label", "AOLOLA home");
 }
 
 function enhanceMobileAccountTabs() {

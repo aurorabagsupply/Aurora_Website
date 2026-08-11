@@ -4898,7 +4898,7 @@
   }
 
   .trust-row::before {
-    content: "Why Aurora" !important;
+    content: "Why AOLOLA" !important;
     display: block !important;
     max-width: 342px !important;
     margin: 0 auto 30px !important;
@@ -4910,7 +4910,7 @@
   }
 
   html[lang="zh"] .trust-row::before {
-    content: "涓轰粈涔堥€夋嫨 Aurora" !important;
+    content: "涓轰粈涔堥€夋嫨 AOLOLA" !important;
   }
 
   .trust-item {
@@ -5645,7 +5645,7 @@
   }
 
   .trust-row::before {
-    content: "Why Aurora" !important;
+    content: "Why AOLOLA" !important;
     display: block !important;
     max-width: 360px !important;
     margin: 0 auto 28px !important;
@@ -5658,7 +5658,7 @@
   }
 
   html[lang="zh"] .trust-row::before {
-    content: "\4e3a\4ec0\4e48\9009\62e9 Aurora" !important;
+    content: "\4e3a\4ec0\4e48\9009\62e9 AOLOLA" !important;
   }
 
   .trust-item {
@@ -6311,7 +6311,7 @@
   }
 
   .footer-contact h3::before {
-    content: "Aurora Bag Supply";
+    content: "AOLOLA";
     display: block;
     margin-bottom: 10px;
     color: #ffffff;

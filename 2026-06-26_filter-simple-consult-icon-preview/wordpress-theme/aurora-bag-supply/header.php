@@ -10,7 +10,7 @@
 <?php wp_body_open(); ?>
 <div class="top-strip">
   <div class="container">
-    <div><?php esc_html_e('Aurora Bag Supply | Accessories, Bag, Hardware, Leather, Tools and Zipper Supplier', 'aurora-bag-supply'); ?></div>
+    <div><?php esc_html_e('AOLOLA | Accessories, Bag, Hardware, Leather, Tools and Zipper Supplier', 'aurora-bag-supply'); ?></div>
     <div class="top-strip__right">
       <span><?php esc_html_e('Global B2B sourcing support', 'aurora-bag-supply'); ?></span>
       <span>Tel: (86)13500014739</span><span>Email: aurorabagsupply@gmail.com</span>
@@ -24,8 +24,8 @@
   <div class="container">
     <button class="mobile-menu" data-mobile-menu aria-label="Menu">Menu</button>
     <a class="brand" href="<?php echo esc_url(home_url('/')); ?>">
-      <img class="brand__mark" src="<?php echo esc_url(get_template_directory_uri() . '/assets/logo/aurora-ab-logo.jpg'); ?>" alt="Aurora Bag Supply logo" />
-      <span><span class="brand__name">Aurora Bag Supply</span><span class="brand__tagline">Hardware | Leather | Custom Supply</span></span>
+      <img class="brand__mark" src="<?php echo esc_url(get_template_directory_uri() . '/assets/logo/aurora-ab-logo.jpg'); ?>" alt="AOLOLA logo" />
+      <span><span class="brand__name">AOLOLA</span><span class="brand__tagline">Hardware | Leather | Custom Supply</span></span>
     </a>
     <?php get_product_search_form(); ?>
     <div class="header-actions">

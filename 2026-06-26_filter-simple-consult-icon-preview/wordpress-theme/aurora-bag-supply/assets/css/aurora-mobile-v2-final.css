@@ -1,4 +1,4 @@
-/* Aurora Mobile Design System V2 final layer.
+/* AOLOLA Mobile Design System V2 final layer.
    Loaded after legacy mobile CSS. Mobile-only; desktop remains untouched. */
 @media (max-width: 760px) {
   :root {
@@ -783,7 +783,7 @@
   }
 
   .trust-row::before {
-    content: "Why Aurora";
+    content: "Why AOLOLA";
     margin-bottom: 10px;
     color: var(--v2-muted);
     font-size: 13px;
@@ -1729,7 +1729,7 @@
 }
 
 /* Mobile Header Apple Minimal v1.
-   Final mobile-only layer for a lighter Aurora top bar. */
+   Final mobile-only layer for a lighter AOLOLA top bar. */
 @media (max-width: 760px) {
   .main-header {
     position: sticky !important;

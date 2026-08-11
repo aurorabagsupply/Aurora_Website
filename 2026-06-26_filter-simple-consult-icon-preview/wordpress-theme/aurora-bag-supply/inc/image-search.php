@@ -60,8 +60,8 @@ function aurora_image_search_allowed_origins() {
     $origins = array_filter(array_map('trim', explode(',', $configured)));
     $defaults = array(
         home_url(),
-        'https://aurorabagsupply.com',
-        'https://aurorabagsupply.github.io',
+        'https://aolola.com',
+        'https://aolola.com',
     );
     return array_unique(array_merge($defaults, $origins));
 }

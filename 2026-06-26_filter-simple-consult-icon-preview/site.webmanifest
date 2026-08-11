@@ -1,0 +1,17 @@
+{
+  "name": "AOLOLA",
+  "short_name": "AOLOLA",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "AOLOLA supplies bag hardware, leather materials, zippers, accessories, tools and finished bag sourcing support for international B2B buyers.",
+  "icons": [
+    {
+      "src": "assets/logo/aurora-ab-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    }
+  ]
+}

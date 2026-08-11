@@ -1,10 +1,10 @@
 <?php
 add_filter('pre_get_document_title', function () {
-    return 'Production Standards & Bag Component Supplier Capabilities | Aurora Bag Supply';
+    return 'Production Standards & Bag Component Supplier Capabilities | AOLOLA';
 });
 
 add_action('wp_head', function () {
-    echo '<meta name="description" content="Learn about Aurora Bag Supply&#039;s quality control, material sourcing, custom order process and B2B supplier capabilities for bag hardware, leather, zippers and accessories." />' . "\n";
+    echo '<meta name="description" content="Learn about AOLOLA&#039;s quality control, material sourcing, custom order process and B2B supplier capabilities for bag hardware, leather, zippers and accessories." />' . "\n";
 }, 1);
 
 get_header();
@@ -16,7 +16,7 @@ get_header();
         <p class="kicker">B2B Supply Standards</p>
         <h1>Production Standards & Supplier Capabilities</h1>
         <p class="aurora-standards-hero__subtitle">Reliable bag hardware, leather materials, zippers and custom components for brands, factories and importers.</p>
-        <p>Aurora Bag Supply supports bag manufacturers, leather workshops, designers, wholesalers and importers with carefully selected materials, stable quality control and flexible sourcing solutions. From sample development to bulk order coordination, we help customers prepare the right components for bags, leather goods and accessories.</p>
+        <p>AOLOLA supports bag manufacturers, leather workshops, designers, wholesalers and importers with carefully selected materials, stable quality control and flexible sourcing solutions. From sample development to bulk order coordination, we help customers prepare the right components for bags, leather goods and accessories.</p>
         <div class="hero-actions"><a class="btn btn-brass" href="<?php echo esc_url(home_url('/contact/')); ?>">Request a Quote</a><a class="btn" href="<?php echo esc_url(home_url('/contact/')); ?>">Contact Us</a></div>
       </div>
       <aside class="aurora-standards-hero__media" aria-label="Factory and quality control reference image">
@@ -108,7 +108,7 @@ get_header();
 
   <section class="aurora-standards-section aurora-standards-section--warm">
     <div class="container">
-      <div class="aurora-standards-head"><p class="kicker">Procurement Value</p><h2>Why Work With Aurora Bag Supply</h2></div>
+      <div class="aurora-standards-head"><p class="kicker">Procurement Value</p><h2>Why Work With AOLOLA</h2></div>
       <div class="aurora-standards-grid aurora-standards-grid--three">
         <article class="aurora-standards-card"><h3>Wide Product Range</h3><p>Hardware, leather, zippers, accessories and tools can be sourced together for bag projects.</p></article>
         <article class="aurora-standards-card"><h3>Flexible MOQ</h3><p>Support sample orders, small batch projects and bulk purchasing depending on product type.</p></article>
@@ -123,7 +123,7 @@ get_header();
   <section class="aurora-standards-cta">
     <div class="container aurora-standards-cta__inner">
       <div><p class="kicker">Start a Project</p><h2>Need bag components for your next project?</h2><p>Send us your product photos, drawings, quantity and material requirements. Our team will help you prepare a quotation or sourcing plan.</p></div>
-      <div class="hero-actions"><a class="btn btn-brass" href="<?php echo esc_url(home_url('/contact/')); ?>">Request a Quote</a><a class="btn" href="<?php echo esc_url(home_url('/contact/')); ?>">Contact Aurora Bag Supply</a></div>
+      <div class="hero-actions"><a class="btn btn-brass" href="<?php echo esc_url(home_url('/contact/')); ?>">Request a Quote</a><a class="btn" href="<?php echo esc_url(home_url('/contact/')); ?>">Contact AOLOLA</a></div>
     </div>
   </section>
 </main>

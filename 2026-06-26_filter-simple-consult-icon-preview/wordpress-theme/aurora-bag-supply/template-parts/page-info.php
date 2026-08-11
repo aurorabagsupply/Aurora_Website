@@ -10,15 +10,15 @@ $fallback_titles = array(
     'terms' => 'Terms of Service',
 );
 $fallback_subtitles = array(
-    'shipping' => 'Aurora Bag Supply supports sample shipments, bulk order delivery and export coordination for international B2B customers.',
+    'shipping' => 'AOLOLA supports sample shipments, bulk order delivery and export coordination for international B2B customers.',
     'returns' => 'We handle return and claim requests based on order details, product condition and actual case review.',
     'faq' => 'Common questions about sourcing, samples, MOQ, quotation and production support.',
     'blog' => 'Product guides, sourcing tips and material insights for bag manufacturers, designers and importers.',
-    'privacy' => 'How Aurora Bag Supply collects and uses information submitted through this website.',
-    'terms' => 'Basic terms for using the Aurora Bag Supply website and requesting product quotations or supply support.',
+    'privacy' => 'How AOLOLA collects and uses information submitted through this website.',
+    'terms' => 'Basic terms for using the AOLOLA website and requesting product quotations or supply support.',
 );
 $fallback_title = isset($fallback_titles[$page_key]) ? $fallback_titles[$page_key] : 'Information';
-$fallback_subtitle = isset($fallback_subtitles[$page_key]) ? $fallback_subtitles[$page_key] : 'Aurora Bag Supply information page.';
+$fallback_subtitle = isset($fallback_subtitles[$page_key]) ? $fallback_subtitles[$page_key] : 'AOLOLA information page.';
 ?>
 <?php get_header(); ?>
 <main class="aurora-support-page" data-info-page="<?php echo esc_attr($page_key); ?>">

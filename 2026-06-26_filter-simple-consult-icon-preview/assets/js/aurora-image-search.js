@@ -1,5 +1,5 @@
 (function () {
-  const DEFAULT_ENDPOINT = "https://aurorabagsupply.com/wp-json/aurora/v1/image-search";
+  const DEFAULT_ENDPOINT = "https://aolola.com/wp-json/aurora/v1/image-search";
   const MAX_UPLOAD_BYTES = 6 * 1024 * 1024;
   const MAX_DIMENSION = 1600;
   const JPEG_QUALITY = 0.86;
@@ -51,10 +51,11 @@
       material: "材质",
       size: "尺寸",
       moq: "起订量",
-    },  };
+    },
+  };
 
   let selectedBlob = null;
-  let selectedName = "aurora-search-image.jpg";
+  let selectedName = "aolola-search-image.jpg";
   let previewUrl = "";
 
   function lang() {
