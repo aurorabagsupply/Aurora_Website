@@ -14,7 +14,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-11 - Image Search Language Sync
 
-- Commit: `928199b`
+- Commit: `50b5400`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
   - `assets/js/aurora-commerce.js`
