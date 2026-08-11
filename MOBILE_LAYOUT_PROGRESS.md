@@ -12,6 +12,27 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ## Versions
 
+### 2026-08-11 - Featured Products Compact Mobile Cards
+
+- Commit: `pending`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - `index.html`
+  - `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile home Featured Products carousel
+- Changes:
+  - Matched Featured Products card rhythm to New Arrivals: large square image, short text body, MOQ, and `View Details`.
+  - Removed the large mobile `Add to Quote` button from Featured cards to reduce card height.
+  - Standardized Featured carousel width so the active card is complete and the next card only peeks.
+  - Bumped static and WordPress asset versions for cache refresh.
+- Verification:
+  - Playwright with local Edge at `320`, `375`, `390`, and `430` px: no horizontal overflow.
+  - Featured `Add to Quote` button display: `none`.
+  - At `390 x 844`, Featured card image and New Arrivals card image both render at `282px`.
+
 ### 2026-08-11 - Image Search Language Sync
 
 - Commit: `50b5400`
