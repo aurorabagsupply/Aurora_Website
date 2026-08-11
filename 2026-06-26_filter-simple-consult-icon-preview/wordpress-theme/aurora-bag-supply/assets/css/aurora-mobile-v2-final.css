@@ -1024,24 +1024,59 @@
   }
 
   .product-grid[data-products].product-featured-layout {
-    display: flex !important;
-    gap: 16px !important;
+    display: block !important;
+    width: calc(100% + 48px) !important;
+    max-width: calc(100% + 48px) !important;
+    margin-inline: -24px !important;
+    padding-inline: 0 !important;
     padding-bottom: 10px !important;
+    overflow: visible !important;
+  }
+
+  .product-grid[data-products].product-featured-layout .product-carousel__viewport {
+    width: 100% !important;
+    max-width: 100% !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
+    padding-inline: 15% !important;
+    scroll-padding-inline: 15% !important;
     scroll-snap-type: x mandatory !important;
+    overscroll-behavior-x: contain !important;
+    scrollbar-width: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .product-grid[data-products].product-featured-layout .product-carousel__viewport::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .product-grid[data-products].product-featured-layout .product-carousel__viewport.is-loop-normalizing {
+    scroll-snap-type: none !important;
+  }
+
+  .product-grid[data-products].product-featured-layout .product-carousel__track {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 16px !important;
+    width: max-content !important;
+    min-width: 100% !important;
+    max-width: none !important;
   }
 
   .product-grid[data-products].product-featured-layout .product-card {
-    flex-basis: 88% !important;
-    max-width: 88% !important;
+    flex: 0 0 62vw !important;
+    width: 62vw !important;
+    max-width: 280px !important;
+    min-width: 0 !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
     border-radius: 26px !important;
     background: #fff !important;
   }
 
   .product-grid[data-products].product-featured-layout .product-card--hero {
-    flex-basis: 92% !important;
-    max-width: 92% !important;
+    flex-basis: 62vw !important;
+    max-width: 280px !important;
   }
 
   .product-featured-layout .product-card__image {

@@ -847,3 +847,29 @@ Desktop layout should remain unchanged unless explicitly requested.
   - At `390px`, measured gaps are `18px / 18px / 18px` for left / center / right.
   - Result: no body horizontal overflow.
   - Generated `screenshots/mobile-premium-refinement/category-grid-spacing-390.jpg` for review.
+
+### 2026-08-11 - Mobile Featured Products Center Loop Carousel
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/js/aurora-commerce.js`
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme JS/CSS under `wordpress-theme/aurora-bag-supply/assets/`
+  - Static HTML cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `screenshots/mobile-premium-refinement/featured-loop-carousel-390.jpg`
+- Page area:
+  - Mobile homepage `Featured Products` carousel only. Desktop layout and product/search/quote/language logic were not changed.
+- Changes:
+  - Rebuilt the mobile Featured Products area as a centered carousel with the active product in the middle.
+  - Added a looping product sequence so users can keep swiping left or right without reaching an empty end.
+  - Adjusted mobile card width to `62vw` with `max-width: 280px`, so adjacent product cards are visible on both sides.
+  - Removed inherited carousel padding that previously reduced the real viewport and caused a hard-cut look.
+  - Added loop-normalization handling that temporarily disables scroll snap while jumping between repeated product sets.
+  - Updated static cache-busting query strings to `20260811-featured-loop-v2`.
+  - Updated the WordPress theme asset version to `1.0.88-preview`.
+- Verification:
+  - `node --check` passed for both static and WordPress theme `aurora-commerce.js`.
+  - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
+  - At `390px`, active card center delta is `0`, side peeks are `56px / 56px`, card width is `242px`, and body horizontal overflow is `false`.
+  - Generated `screenshots/mobile-premium-refinement/featured-loop-carousel-390.jpg` for review.

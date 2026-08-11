@@ -108,6 +108,7 @@ const HERO_SLIDES = [
 const HERO_AUTOPLAY_MS = 5000;
 const PRODUCT_CAROUSEL_MS = 3600;
 const productCarouselTimers = new WeakMap();
+const productCarouselScrollTimers = new WeakMap();
 let activeHeroIndex = 0;
 let heroAutoplayTimer = null;
 
@@ -2102,10 +2103,98 @@ function stopProductCarousel(target) {
   productCarouselTimers.delete(target);
 }
 
+function carouselCardCenterLeft(viewport, card) {
+  if (!viewport || !card) return 0;
+  return card.offsetLeft - (viewport.clientWidth - card.offsetWidth) / 2;
+}
+
+function nearestCarouselCardIndex(viewport) {
+  const cards = Array.from(viewport?.querySelectorAll(".product-card") || []);
+  if (!viewport || !cards.length) return 0;
+  const viewportRect = viewport.getBoundingClientRect();
+  const viewportCenter = viewportRect.left + viewportRect.width / 2;
+  let nearest = 0;
+  let nearestDistance = Infinity;
+  cards.forEach((card, index) => {
+    const rect = card.getBoundingClientRect();
+    const distance = Math.abs((rect.left + rect.width / 2) - viewportCenter);
+    if (distance < nearestDistance) {
+      nearest = index;
+      nearestDistance = distance;
+    }
+  });
+  return nearest;
+}
+
+function scrollCarouselCardIntoCenter(viewport, index, behavior = "auto") {
+  const cards = Array.from(viewport?.querySelectorAll(".product-card") || []);
+  const card = cards[index];
+  if (!viewport || !card) return;
+  const viewportRect = viewport.getBoundingClientRect();
+  const cardRect = card.getBoundingClientRect();
+  const delta = (cardRect.left + cardRect.width / 2) - (viewportRect.left + viewportRect.width / 2);
+  viewport.scrollTo({
+    left: viewport.scrollLeft + delta,
+    behavior,
+  });
+}
+
+function normalizeLoopingProductCarousel(viewport) {
+  if (!viewport || viewport.dataset.loopCarousel !== "true") return;
+  const cards = Array.from(viewport.querySelectorAll(".product-card"));
+  if (cards.length < 4 || viewport.dataset.loopNormalizing === "true") return;
+  const index = nearestCarouselCardIndex(viewport);
+  const lastIndex = cards.length - 1;
+  const loopCount = Number.parseInt(viewport.dataset.loopCount || "0", 10);
+  let targetIndex = null;
+  if (loopCount > 0 && cards.length >= loopCount * 3) {
+    if (index < loopCount) targetIndex = index + loopCount;
+    if (index >= loopCount * 2) targetIndex = index - loopCount;
+  } else {
+    if (index === 0) targetIndex = lastIndex - 1;
+    if (index === lastIndex) targetIndex = 1;
+  }
+  if (targetIndex === null) return;
+  viewport.dataset.loopNormalizing = "true";
+  viewport.classList.add("is-loop-normalizing");
+  viewport.scrollLeft = carouselCardCenterLeft(viewport, cards[targetIndex]);
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      viewport.classList.remove("is-loop-normalizing");
+      delete viewport.dataset.loopNormalizing;
+    });
+  });
+}
+
+function scheduleLoopingCarouselNormalize(viewport) {
+  if (!viewport || viewport.dataset.loopCarousel !== "true") return;
+  const existing = productCarouselScrollTimers.get(viewport);
+  if (existing) window.clearTimeout(existing);
+  const timer = window.setTimeout(() => {
+    productCarouselScrollTimers.delete(viewport);
+    normalizeLoopingProductCarousel(viewport);
+  }, 120);
+  productCarouselScrollTimers.set(viewport, timer);
+}
+
+function loopingCarouselStartIndex(viewport) {
+  const cards = Array.from(viewport?.querySelectorAll(".product-card") || []);
+  const requested = Number.parseInt(viewport?.dataset.loopStart || "1", 10);
+  if (!Number.isFinite(requested)) return 1;
+  return Math.max(1, Math.min(requested, Math.max(1, cards.length - 2)));
+}
+
 function productCarouselStep(viewport) {
   const track = viewport.querySelector(".product-carousel__track");
   const card = track?.querySelector(".product-card");
   if (!track || !card) return;
+  if (viewport.dataset.loopCarousel === "true") {
+    const cards = Array.from(track.querySelectorAll(".product-card"));
+    if (cards.length < 2) return;
+    scrollCarouselCardIntoCenter(viewport, nearestCarouselCardIndex(viewport) + 1, "smooth");
+    scheduleLoopingCarouselNormalize(viewport);
+    return;
+  }
   const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || "0");
   const step = card.getBoundingClientRect().width + gap;
   const maxScroll = viewport.scrollWidth - viewport.clientWidth;
@@ -2121,6 +2210,10 @@ function startProductCarousel(target) {
   stopProductCarousel(target);
   const viewport = target.querySelector(".product-carousel__viewport");
   if (!viewport || viewport.scrollWidth <= viewport.clientWidth + 2) return;
+  if (viewport.dataset.loopCarousel === "true" && !viewport.dataset.loopReady) {
+    viewport.dataset.loopReady = "true";
+    window.requestAnimationFrame(() => scrollCarouselCardIntoCenter(viewport, loopingCarouselStartIndex(viewport), "auto"));
+  }
   const timer = window.setInterval(() => productCarouselStep(viewport), PRODUCT_CAROUSEL_MS);
   productCarouselTimers.set(target, timer);
 }
@@ -2134,18 +2227,41 @@ function bindProductCarousel(target) {
   target.addEventListener("pointerup", () => startProductCarousel(target));
   target.addEventListener("focusin", () => stopProductCarousel(target));
   target.addEventListener("focusout", () => startProductCarousel(target));
+  const viewport = target.querySelector(".product-carousel__viewport");
+  if (viewport?.dataset.loopCarousel === "true") {
+    viewport.addEventListener("scroll", () => scheduleLoopingCarouselNormalize(viewport), { passive: true });
+    viewport.addEventListener("scrollend", () => normalizeLoopingProductCarousel(viewport), { passive: true });
+    viewport.addEventListener("pointerup", () => scheduleLoopingCarouselNormalize(viewport), { passive: true });
+    viewport.addEventListener("touchend", () => scheduleLoopingCarouselNormalize(viewport), { passive: true });
+    window.requestAnimationFrame(() => scrollCarouselCardIntoCenter(viewport, loopingCarouselStartIndex(viewport), "auto"));
+  }
 }
 
 function renderProductGrids() {
   document.querySelectorAll("[data-products]").forEach((target) => {
     stopProductCarousel(target);
     const mode = target.dataset.products;
-    const products = filteredProducts(mode).slice(0, mode === "featured" ? 2 : mode === "best" ? 4 : 10);
+    const products = filteredProducts(mode).slice(0, mode === "featured" ? 6 : mode === "best" ? 4 : 10);
     target.className = "product-grid";
     if (mode === "featured") {
+      const mobileCarousel = window.matchMedia("(max-width: 760px)").matches && products.length > 2;
       target.classList.add("product-featured-layout");
-      target.innerHTML = products.map((item, index) => productCard(item, { variant: index === 0 ? "hero" : "featured" })).join("");
-      animateProductCards(target);
+      if (mobileCarousel) {
+        const loopProducts = [...products, ...products, ...products];
+        target.classList.add("product-carousel", "product-carousel--featured");
+        target.innerHTML = `
+          <div class="product-carousel__viewport" tabindex="0" aria-label="${t("featured")}" data-loop-carousel="true" data-loop-start="${products.length}" data-loop-count="${products.length}">
+            <div class="product-carousel__track">
+              ${loopProducts.map((item, index) => productCard(item, { variant: index < products.length || index >= products.length * 2 ? "featured is-carousel-clone" : "featured" })).join("")}
+            </div>
+          </div>
+        `;
+        bindProductCarousel(target);
+        window.requestAnimationFrame(() => startProductCarousel(target));
+      } else {
+        target.innerHTML = products.slice(0, 2).map((item, index) => productCard(item, { variant: index === 0 ? "hero" : "featured" })).join("");
+        animateProductCards(target);
+      }
       return;
     }
     if (mode === "new") {
