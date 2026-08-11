@@ -14,7 +14,7 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ### 2026-08-11 - Featured Products Compact Mobile Cards
 
-- Commit: `pending`
+- Commit: `c5e60dd`
 - Source folder: `2026-06-26_filter-simple-consult-icon-preview`
 - Files changed:
   - `assets/css/aurora-mobile-v2-final.css`
