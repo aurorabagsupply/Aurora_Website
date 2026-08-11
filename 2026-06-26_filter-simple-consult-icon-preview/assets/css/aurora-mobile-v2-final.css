@@ -851,10 +851,10 @@
   }
 
   .category-grid[data-category-grid] {
-    width: calc(100% + 44px) !important;
-    max-width: calc(100% + 44px) !important;
-    margin-inline: -22px !important;
-    gap: 32px 12px !important;
+    width: calc(100% + 48px) !important;
+    max-width: calc(100% + 48px) !important;
+    margin-inline: -24px !important;
+    gap: 32px 18px !important;
     box-sizing: border-box !important;
   }
 

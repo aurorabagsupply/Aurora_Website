@@ -825,3 +825,25 @@ Desktop layout should remain unchanged unless explicitly requested.
   - At `390px`, category image boxes increased to about `169px` wide.
   - `tools/mobile-home-premium-qa.mjs` completed successfully.
   - Generated `screenshots/mobile-premium-refinement/category-grid-scale-390.jpg` for review.
+
+### 2026-08-11 - Mobile Category Grid Spacing Alignment
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static HTML cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+  - `screenshots/mobile-premium-refinement/category-grid-spacing-390.jpg`
+- Page area:
+  - Mobile homepage `Shop by Category` six-category grid only. Desktop layout and category link logic were not changed.
+- Changes:
+  - Aligned the left, center and right horizontal gaps in the two-column category grid.
+  - Kept the enlarged card scale from the previous pass while increasing the center column gap to match the side gutters visually.
+  - Updated static cache-busting query strings to `20260811-category-spacing-v1`.
+  - Updated the WordPress theme asset version to `1.0.86-preview`.
+- Verification:
+  - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
+  - At `390px`, measured gaps are `18px / 18px / 18px` for left / center / right.
+  - Result: no body horizontal overflow.
+  - Generated `screenshots/mobile-premium-refinement/category-grid-spacing-390.jpg` for review.
