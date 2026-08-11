@@ -870,6 +870,25 @@ Desktop layout should remain unchanged unless explicitly requested.
   - Updated the WordPress theme asset version to `1.0.88-preview`.
 - Verification:
   - `node --check` passed for both static and WordPress theme `aurora-commerce.js`.
+
+### 2026-08-11 - Mobile Header Apple Minimal Refinement
+
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/css/aurora-mobile-v2-final.css`
+  - Matching WordPress theme CSS: `wordpress-theme/aurora-bag-supply/assets/css/aurora-mobile-v2-final.css`
+  - Static homepage cache-busting query strings
+  - WordPress theme asset version in `functions.php`
+- Page area:
+  - Mobile global header only. Desktop header, product data, language switching, image search modal and text search route were not changed.
+- Changes:
+  - Reworked the mobile top bar toward an Apple-style minimal system header.
+  - Removed heavy bordered menu/language boxes; menu is now a clean icon button and language is lightweight text.
+  - Reduced logo mark and brand row height while keeping `Aurora Bag Supply` readable.
+  - Converted the mobile search row to a lighter 43px search field with subtle neutral background.
+  - Hid the black `Search` submit button on mobile; text search still submits from the keyboard, and the image-search camera remains visible.
+  - Updated static cache-busting query strings to `20260811-mobile-header-minimal-v1`.
+  - Updated the WordPress theme asset version to `1.0.95-preview`.
   - Tested rendered widths `320`, `375`, `390`, `393`, `414`, `430`.
   - At `390px`, active card center delta is `0`, side peeks are `56px / 56px`, card width is `242px`, and body horizontal overflow is `false`.
   - Generated `screenshots/mobile-premium-refinement/featured-loop-carousel-390.jpg` for review.
