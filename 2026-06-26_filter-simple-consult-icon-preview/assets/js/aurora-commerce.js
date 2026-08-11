@@ -3877,10 +3877,13 @@ function bindActions() {
       select.classList.toggle("is-open");
     }
     if (lang) {
-      localStorage.setItem("auroraLang", lang.dataset.lang);
+      const nextLang = lang.dataset.lang;
+      localStorage.setItem("auroraLang", nextLang);
       const url = new URL(window.location.href);
-      url.searchParams.set("lang", lang.dataset.lang);
+      url.searchParams.set("lang", nextLang);
       window.history.replaceState({}, "", url);
+      document.documentElement.lang = nextLang;
+      window.dispatchEvent(new CustomEvent("aurora:languagechange", { detail: { lang: nextLang } }));
       syncLanguageSwitcherLabel();
       document.querySelectorAll(".language-select.is-open").forEach((item) => item.classList.remove("is-open"));
       rerenderDynamicContent();

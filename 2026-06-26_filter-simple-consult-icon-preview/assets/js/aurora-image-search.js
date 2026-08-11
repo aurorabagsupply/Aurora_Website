@@ -59,8 +59,11 @@
 
   function lang() {
     const param = new URLSearchParams(window.location.search).get("lang");
+    if (copy[param]) return param;
+    const stored = localStorage.getItem("auroraLang");
+    if (copy[stored]) return stored;
     const htmlLang = document.documentElement.lang;
-    return param === "zh" || htmlLang === "zh" || htmlLang?.startsWith("zh") ? "zh" : "en";
+    return htmlLang === "zh" || htmlLang?.startsWith("zh") ? "zh" : "en";
   }
 
   function text(key) {
@@ -98,7 +101,10 @@
 
   function ensureModal() {
     let modal = document.querySelector("[data-image-search-modal]");
-    if (modal) return modal;
+    if (modal) {
+      refreshModalCopy(modal);
+      return modal;
+    }
     modal = document.createElement("div");
     modal.className = "image-search-modal";
     modal.dataset.imageSearchModal = "";
@@ -127,11 +133,33 @@
     `;
     document.body.append(modal);
     bindModal(modal);
+    refreshModalCopy(modal);
     return modal;
+  }
+
+  function refreshModalCopy(modal) {
+    if (!modal) return;
+    const title = modal.querySelector("#aurora-image-search-title");
+    const intro = modal.querySelector(".image-search-modal__head p");
+    const choose = modal.querySelector("[data-image-dropzone] strong");
+    const drop = modal.querySelector("[data-image-dropzone] small");
+    const change = modal.querySelector("[data-image-change]");
+    const submit = modal.querySelector("[data-image-search-submit]");
+    const loading = modal.querySelector("[data-image-search-loading]");
+    const close = modal.querySelector("[data-image-search-close]");
+    if (title) title.textContent = text("title");
+    if (intro) intro.textContent = text("intro");
+    if (choose) choose.textContent = text("choose");
+    if (drop) drop.textContent = text("drop");
+    if (change) change.textContent = text("change");
+    if (submit) submit.textContent = text("search");
+    if (loading) loading.textContent = text("loading");
+    if (close) close.setAttribute("aria-label", lang() === "zh" ? "关闭" : "Close");
   }
 
   function openModal() {
     const modal = ensureModal();
+    refreshModalCopy(modal);
     modal.classList.add("is-open");
     document.body.classList.add("image-search-open");
   }
@@ -324,6 +352,15 @@
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeModal();
+  });
+  window.addEventListener("aurora:languagechange", () => {
+    ensureTriggers();
+    refreshModalCopy(document.querySelector("[data-image-search-modal]"));
+  });
+  window.addEventListener("storage", (event) => {
+    if (event.key !== "auroraLang") return;
+    ensureTriggers();
+    refreshModalCopy(document.querySelector("[data-image-search-modal]"));
   });
   document.addEventListener("DOMContentLoaded", ensureTriggers);
   ensureTriggers();

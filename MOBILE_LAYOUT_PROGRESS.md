@@ -12,6 +12,29 @@ Desktop layout should remain unchanged unless explicitly requested.
 
 ## Versions
 
+### 2026-08-11 - Image Search Language Sync
+
+- Commit: `928199b`
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview`
+- Files changed:
+  - `assets/js/aurora-commerce.js`
+  - `assets/js/aurora-image-search.js`
+  - `index.html`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-commerce.js`
+  - `wordpress-theme/aurora-bag-supply/assets/js/aurora-image-search.js`
+  - `wordpress-theme/aurora-bag-supply/functions.php`
+- Page area:
+  - Mobile language switcher
+  - Search by Image modal
+- Changes:
+  - Image search now reads the shared `auroraLang` setting before falling back to the document language.
+  - Language switching now dispatches an `aurora:languagechange` event.
+  - Existing image search modal copy refreshes immediately after language changes.
+  - Static and WordPress asset versions were bumped to prevent stale mobile browser cache.
+- Verification:
+  - `node --check` passed for static and WordPress copies of `aurora-commerce.js` and `aurora-image-search.js`.
+  - Playwright with local Edge at `390 x 844`: Chinese modal title `图片搜产品`, then after switching to EN modal title `Search by Image` and upload label `Choose Image`.
+
 ### 2026-08-08 - Mobile Homepage First Screen
 
 - Commit: `c165d65`
