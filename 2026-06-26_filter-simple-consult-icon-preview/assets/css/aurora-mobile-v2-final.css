@@ -2131,16 +2131,20 @@
     height: 44px !important;
     display: inline-flex !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: center !important;
     gap: 0 !important;
     transform: none !important;
   }
 
   .brand__mark {
-    width: 34px !important;
-    height: 34px !important;
-    flex: 0 0 34px !important;
-    border-radius: 8px !important;
+    width: 40px !important;
+    height: 40px !important;
+    flex: 0 0 40px !important;
+    border-radius: 0 !important;
+    background: transparent url("../logo/aolola-ab-mark-black.svg") center / contain no-repeat !important;
+    content: url("../logo/aolola-ab-mark-black.svg") !important;
+    object-fit: contain !important;
+    opacity: .96 !important;
   }
 
   .brand > span,
@@ -2158,16 +2162,17 @@
     justify-self: end !important;
     display: inline-flex !important;
     align-items: center !important;
+    height: 44px !important;
     gap: 27px !important;
     color: #1d1d1f !important;
   }
 
   .mobile-header-icon,
   .mobile-header-actions .mobile-menu {
-    width: 34px !important;
-    min-width: 34px !important;
-    height: 34px !important;
-    min-height: 34px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 44px !important;
+    min-height: 44px !important;
     display: inline-grid !important;
     place-items: center !important;
     padding: 0 !important;
@@ -2196,13 +2201,14 @@
   .mobile-header-icon--quote svg {
     width: 30px !important;
     height: 30px !important;
+    transform: translateY(1px) !important;
   }
 
   .mobile-header-actions .mobile-menu::before,
   .mobile-header-actions .mobile-menu::after {
     content: "" !important;
     position: absolute !important;
-    left: 4px !important;
+    left: 5px !important;
     width: 26px !important;
     height: 1.9px !important;
     border-radius: 999px !important;
@@ -2211,11 +2217,11 @@
   }
 
   .mobile-header-actions .mobile-menu::before {
-    top: 11px !important;
+    top: 14px !important;
   }
 
   .mobile-header-actions .mobile-menu::after {
-    bottom: 11px !important;
+    bottom: 14px !important;
   }
 
   .site-search {
@@ -2275,9 +2281,9 @@
   }
 
   .brand__mark {
-    width: 32px !important;
-    height: 32px !important;
-    flex-basis: 32px !important;
+    width: 38px !important;
+    height: 38px !important;
+    flex-basis: 38px !important;
   }
 }
 
