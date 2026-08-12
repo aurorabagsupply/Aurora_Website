@@ -2098,6 +2098,175 @@
   }
 }
 
+/* Mobile v11.2: Apple-like first-row header, brand mark left and simple actions right. */
+@media (max-width: 760px) {
+  .main-header {
+    background: rgba(255, 255, 255, .92) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, .055) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(22px) !important;
+    backdrop-filter: saturate(180%) blur(22px) !important;
+  }
+
+  .main-header .container {
+    display: grid !important;
+    grid-template-columns: 44px minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "brand . actions"
+      "search search search" !important;
+    align-items: center !important;
+    gap: 13px 14px !important;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 24px 10px !important;
+    min-height: 0 !important;
+  }
+
+  .brand {
+    grid-area: brand !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    transform: none !important;
+  }
+
+  .brand__mark {
+    width: 34px !important;
+    height: 34px !important;
+    flex: 0 0 34px !important;
+    border-radius: 8px !important;
+  }
+
+  .brand > span,
+  .brand__name,
+  .brand__tagline {
+    display: none !important;
+  }
+
+  .language-select--mobile {
+    display: none !important;
+  }
+
+  .mobile-header-actions {
+    grid-area: actions !important;
+    justify-self: end !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 27px !important;
+    color: #1d1d1f !important;
+  }
+
+  .mobile-header-icon,
+  .mobile-header-actions .mobile-menu {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    display: inline-grid !important;
+    place-items: center !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    box-shadow: none !important;
+    opacity: .92 !important;
+    text-indent: 0 !important;
+    font-size: 0 !important;
+    line-height: 1 !important;
+    text-decoration: none !important;
+  }
+
+  .mobile-header-icon svg {
+    width: 31px !important;
+    height: 31px !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.85 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+
+  .mobile-header-icon--quote svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .mobile-header-actions .mobile-menu::before,
+  .mobile-header-actions .mobile-menu::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 4px !important;
+    width: 26px !important;
+    height: 1.9px !important;
+    border-radius: 999px !important;
+    background: currentColor !important;
+    transform: none !important;
+  }
+
+  .mobile-header-actions .mobile-menu::before {
+    top: 11px !important;
+  }
+
+  .mobile-header-actions .mobile-menu::after {
+    bottom: 11px !important;
+  }
+
+  .site-search {
+    grid-area: search !important;
+    height: 41px !important;
+    grid-template-columns: minmax(0, 1fr) 39px !important;
+    border-radius: 12px !important;
+    background: rgba(245, 245, 247, .82) !important;
+  }
+}
+
+@media (max-width: 340px) {
+  .main-header .container {
+    padding-inline: 18px !important;
+  }
+
+  .mobile-header-actions {
+    gap: 21px !important;
+  }
+
+  .brand {
+    width: 40px !important;
+    min-width: 40px !important;
+  }
+
+  .brand__mark {
+    width: 32px !important;
+    height: 32px !important;
+    flex-basis: 32px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .main-header .container .site-search {
+    height: 41px !important;
+    min-height: 41px !important;
+    grid-template-columns: minmax(0, 1fr) 39px !important;
+    border-radius: 12px !important;
+  }
+
+  .main-header .container .site-search input,
+  .main-header .container .site-search input:focus {
+    height: 41px !important;
+    min-height: 41px !important;
+    padding-left: 42px !important;
+    font-size: 15.5px !important;
+  }
+
+  .main-header .container .site-search .image-search-trigger {
+    width: 39px !important;
+    min-width: 39px !important;
+    height: 41px !important;
+    min-height: 41px !important;
+  }
+}
+
 /* Mobile v11.1: make Featured Products use the same short, product-first card rhythm as New Arrivals. */
 @media (max-width: 760px) {
   .product-grid[data-products="featured"].product-featured-layout {

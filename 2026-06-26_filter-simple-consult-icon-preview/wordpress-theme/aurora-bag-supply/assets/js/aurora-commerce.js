@@ -4051,6 +4051,31 @@ function ensureSharedMobileHeader() {
   if (search && !search.id) search.id = "aurora-site-search";
   if (search) headerContainer.append(search);
   if (brand) brand.setAttribute("aria-label", "AOLOLA home");
+
+  let mobileActions = headerContainer.querySelector(".mobile-header-actions");
+  if (!mobileActions) {
+    mobileActions = document.createElement("div");
+    mobileActions.className = "mobile-header-actions";
+    mobileActions.innerHTML = `
+      <button class="mobile-header-icon mobile-header-icon--search" type="button" data-mobile-search-focus aria-label="Search products">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg>
+      </button>
+      <a class="mobile-header-icon mobile-header-icon--quote" href="cart.html" aria-label="Quote list">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 8.5h9l1.1 11H6.4l1.1-11Z"></path><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"></path></svg>
+      </a>
+    `;
+    headerContainer.append(mobileActions);
+  }
+  if (menuButton && mobileActions && menuButton.parentElement === headerContainer) mobileActions.append(menuButton);
+  const searchFocus = mobileActions.querySelector("[data-mobile-search-focus]");
+  if (searchFocus && !searchFocus.dataset.bound) {
+    searchFocus.dataset.bound = "true";
+    searchFocus.addEventListener("click", () => {
+      const input = headerContainer.querySelector('.site-search input[type="search"], .site-search input[name="q"], .site-search input[name="s"]');
+      input?.focus();
+      input?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    });
+  }
 }
 
 function enhanceMobileAccountTabs() {
