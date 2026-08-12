@@ -124,6 +124,12 @@ const I18N = {
     wishlist: "Wishlist",
     cart: "Cart",
     search: "Search products...",
+    searchTitle: "Search",
+    quickLinks: "Quick Links",
+    searchHardware: "Hardware",
+    searchBags: "Finished Bags",
+    searchLeather: "Leather Materials",
+    searchZippers: "Zippers",
     searchButton: "Search",
     searchAll: "View all results",
     home: "Home",
@@ -332,6 +338,12 @@ const I18N = {
     wishlist: "收藏",
     cart: "询价清单",
     search: "搜索产品...",
+    searchTitle: "搜索",
+    quickLinks: "快捷入口",
+    searchHardware: "五金",
+    searchBags: "成品包",
+    searchLeather: "皮革材料",
+    searchZippers: "拉链",
     searchButton: "搜索",
     searchAll: "查看全部搜索结果",
     home: "首页",
@@ -4052,6 +4064,87 @@ function ensureSharedMobileHeader() {
   if (search) headerContainer.append(search);
   if (brand) brand.setAttribute("aria-label", "AOLOLA home");
 
+  let overlay = document.querySelector(".mobile-search-overlay");
+  if (!overlay) {
+    overlay = document.createElement("div");
+    overlay.className = "mobile-search-overlay";
+    overlay.id = "mobile-search-overlay";
+    overlay.setAttribute("aria-hidden", "true");
+    overlay.innerHTML = `
+      <div class="mobile-search-overlay__panel" role="dialog" aria-modal="true" aria-label="Search">
+        <button class="mobile-search-overlay__close" type="button" data-mobile-search-close aria-label="Close search">×</button>
+        <form class="mobile-search-overlay__form" action="products.html">
+          <label class="mobile-search-overlay__field">
+            <span class="mobile-search-overlay__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg>
+            </span>
+            <input name="q" type="search" placeholder="Search" autocomplete="off" />
+          </label>
+          <button class="mobile-search-overlay__image" type="button" data-image-search-trigger aria-label="Search by image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 8.5A2.5 2.5 0 0 1 7 6h1.6l1-1.4h4.8l1 1.4H17a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 17 18H7a2.5 2.5 0 0 1-2.5-2.5v-7Z"></path><circle cx="12" cy="12" r="3.2"></circle></svg>
+          </button>
+        </form>
+        <div class="mobile-search-overlay__quick">
+          <p data-mobile-search-quick-title>${t("quickLinks") || "Quick Links"}</p>
+          <a href="products.html?category=Hardware" data-mobile-search-link="searchHardware">${t("searchHardware") || "Hardware"}</a>
+          <a href="products.html?category=Bag" data-mobile-search-link="searchBags">${t("searchBags") || "Finished Bags"}</a>
+          <a href="products.html?category=Leather" data-mobile-search-link="searchLeather">${t("searchLeather") || "Leather Materials"}</a>
+          <a href="products.html?category=Zipper" data-mobile-search-link="searchZippers">${t("searchZippers") || "Zippers"}</a>
+          <a href="contact.html" data-mobile-search-link="requestQuote">${t("requestQuote") || "Request a Quote"}</a>
+        </div>
+      </div>
+    `;
+    document.body.append(overlay);
+  }
+
+  const overlayInput = overlay.querySelector('input[type="search"]');
+  const overlayForm = overlay.querySelector("form");
+  const overlayClose = overlay.querySelector("[data-mobile-search-close]");
+  const openOverlay = () => {
+    overlay.querySelector(".mobile-search-overlay__field input")?.setAttribute("placeholder", t("searchTitle") || "Search");
+    const quickTitle = overlay.querySelector("[data-mobile-search-quick-title]");
+    if (quickTitle) quickTitle.textContent = t("quickLinks") || "Quick Links";
+    overlay.querySelectorAll("[data-mobile-search-link]").forEach((link) => {
+      link.textContent = t(link.dataset.mobileSearchLink) || link.textContent;
+    });
+    overlay.classList.add("is-open");
+    overlay.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("mobile-search-is-open");
+    document.body.classList.add("mobile-search-is-open");
+    const sourceInput = headerContainer.querySelector('.site-search input[type="search"], .site-search input[name="q"], .site-search input[name="s"]');
+    if (overlayInput && sourceInput) overlayInput.value = sourceInput.value || "";
+    window.setTimeout(() => overlayInput?.focus(), 160);
+  };
+  const closeOverlay = () => {
+    overlay.classList.remove("is-open");
+    overlay.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("mobile-search-is-open");
+    document.body.classList.remove("mobile-search-is-open");
+    document.querySelector("[data-mobile-search-focus]")?.setAttribute("aria-expanded", "false");
+  };
+  if (overlayClose && !overlayClose.dataset.bound) {
+    overlayClose.dataset.bound = "true";
+    overlayClose.addEventListener("click", closeOverlay);
+  }
+  if (overlayForm && !overlayForm.dataset.bound) {
+    overlayForm.dataset.bound = "true";
+    overlayForm.addEventListener("submit", (event) => {
+      const query = overlayInput?.value.trim() || "";
+      if (!query) return;
+      event.preventDefault();
+      const url = new URL("products.html", window.location.href);
+      url.searchParams.set("q", query);
+      url.searchParams.set("lang", currentLang());
+      window.location.href = `${url.pathname.split("/").pop()}${url.search}`;
+    });
+  }
+  if (!overlay.dataset.escapeBound) {
+    overlay.dataset.escapeBound = "true";
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && overlay.classList.contains("is-open")) closeOverlay();
+    });
+  }
+
   let mobileActions = headerContainer.querySelector(".mobile-header-actions");
   if (!mobileActions) {
     mobileActions = document.createElement("div");
@@ -4070,15 +4163,11 @@ function ensureSharedMobileHeader() {
   const searchFocus = mobileActions.querySelector("[data-mobile-search-focus]");
   if (searchFocus && !searchFocus.dataset.bound) {
     searchFocus.dataset.bound = "true";
-    searchFocus.setAttribute("aria-controls", "aurora-site-search");
+    searchFocus.setAttribute("aria-controls", "mobile-search-overlay");
     searchFocus.setAttribute("aria-expanded", "false");
     searchFocus.addEventListener("click", () => {
-      const input = headerContainer.querySelector('.site-search input[type="search"], .site-search input[name="q"], .site-search input[name="s"]');
-      const isOpen = headerContainer.classList.toggle("is-search-open");
-      searchFocus.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      if (isOpen) {
-        window.setTimeout(() => input?.focus(), 120);
-      }
+      openOverlay();
+      searchFocus.setAttribute("aria-expanded", "true");
     });
   }
 }
