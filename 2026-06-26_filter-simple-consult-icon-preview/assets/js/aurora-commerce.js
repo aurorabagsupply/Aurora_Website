@@ -4070,10 +4070,15 @@ function ensureSharedMobileHeader() {
   const searchFocus = mobileActions.querySelector("[data-mobile-search-focus]");
   if (searchFocus && !searchFocus.dataset.bound) {
     searchFocus.dataset.bound = "true";
+    searchFocus.setAttribute("aria-controls", "aurora-site-search");
+    searchFocus.setAttribute("aria-expanded", "false");
     searchFocus.addEventListener("click", () => {
       const input = headerContainer.querySelector('.site-search input[type="search"], .site-search input[name="q"], .site-search input[name="s"]');
-      input?.focus();
-      input?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      const isOpen = headerContainer.classList.toggle("is-search-open");
+      searchFocus.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      if (isOpen) {
+        window.setTimeout(() => input?.focus(), 120);
+      }
     });
   }
 }
