@@ -40,7 +40,6 @@ Static site:
 
 SEO/static metadata:
 
-- root `../CNAME`
 - `sitemap.xml`
 - `robots.txt`
 - `site.webmanifest`
@@ -118,7 +117,7 @@ Root redirect:
 - `sitemap.xml` was generated with `https://aolola.com` URLs.
 - `robots.txt` references `https://aolola.com/sitemap.xml`.
 - `site.webmanifest` name and short name are `AOLOLA`.
-- Root `CNAME` is set to `aolola.com` for GitHub Pages custom-domain configuration.
+- Root `CNAME` is intentionally not enabled yet, so the GitHub Pages preview URL remains reachable until `aolola.com` DNS is configured.
 
 ## Preserved Technical Names
 
