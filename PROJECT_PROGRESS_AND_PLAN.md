@@ -331,3 +331,20 @@ WooCommerce 正式导入前需要处理图片：
   - all 6 category media backgrounds compute to `rgb(255, 255, 255)`
   - all 6 category image backgrounds compute to `rgb(255, 255, 255)`
   - no horizontal overflow
+
+## 2026-08-12 AOLOLA mobile product grid airy UI refinement
+
+- User issue: mobile two-column product cards looked heavy and template-like compared with the simpler reference layout.
+- Backup tag created before this change: `pre-mobile-product-card-airy-ui-20260812`.
+- Updated mobile-only product grid CSS in both static preview and WordPress theme CSS.
+- Kept existing product data, links, View Details, and Add to Quote function intact.
+- Visual changes:
+  - removed heavy card shell, borders, and shadows from ordinary mobile product grids
+  - made product card and image containers transparent so products sit on the section surface
+  - hid large Add to Quote buttons in these compact grids
+  - kept lightweight `View Details >` action
+  - reduced product title/link visual weight
+- Verified with Playwright at 320, 390, and 430 px:
+  - no horizontal overflow
+  - product cards compute transparent backgrounds
+  - Add to Quote buttons are hidden in the compact mobile grid
