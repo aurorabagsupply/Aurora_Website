@@ -2114,7 +2114,7 @@
 
   .main-header .container {
     display: grid !important;
-    grid-template-columns: 44px minmax(0, 1fr) auto !important;
+    grid-template-columns: 56px minmax(0, 1fr) auto !important;
     grid-template-areas:
       "brand . actions"
       "search search search" !important;
@@ -2126,8 +2126,8 @@
 
   .brand {
     grid-area: brand !important;
-    width: 44px !important;
-    min-width: 44px !important;
+    width: 56px !important;
+    min-width: 56px !important;
     height: 44px !important;
     display: inline-flex !important;
     align-items: center !important;
@@ -2137,12 +2137,12 @@
   }
 
   .brand__mark {
-    width: 40px !important;
-    height: 40px !important;
-    flex: 0 0 40px !important;
+    width: 54px !important;
+    height: 30px !important;
+    flex: 0 0 54px !important;
     border-radius: 0 !important;
-    background: transparent url("../logo/aolola-ab-mark-black.svg") center / contain no-repeat !important;
-    content: url("../logo/aolola-ab-mark-black.svg") !important;
+    background: transparent url("../logo/aolola-infinity-mark-black.svg") center / contain no-repeat !important;
+    content: url("../logo/aolola-infinity-mark-black.svg") !important;
     object-fit: contain !important;
     opacity: .96 !important;
   }
@@ -2276,14 +2276,14 @@
   }
 
   .brand {
-    width: 40px !important;
-    min-width: 40px !important;
+    width: 52px !important;
+    min-width: 52px !important;
   }
 
   .brand__mark {
-    width: 38px !important;
-    height: 38px !important;
-    flex-basis: 38px !important;
+    width: 50px !important;
+    height: 28px !important;
+    flex-basis: 50px !important;
   }
 }
 
