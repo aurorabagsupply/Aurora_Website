@@ -348,3 +348,19 @@ WooCommerce 正式导入前需要处理图片：
   - no horizontal overflow
   - product cards compute transparent backgrounds
   - Add to Quote buttons are hidden in the compact mobile grid
+
+## 2026-08-12 AOLOLA WordPress theme package v1.0.64-preview
+
+- User request: package the latest WordPress theme for upload to WordPress.
+- Source folder: `2026-06-26_filter-simple-consult-icon-preview/wordpress-theme/aurora-bag-supply`.
+- Updated theme version in `style.css` to `1.0.64-preview`.
+- Generated upload package:
+  - `2026-06-26_filter-simple-consult-icon-preview/aurora-bag-supply-v1.0.64-preview.zip`
+- ZIP structure verified:
+  - `aurora-bag-supply/style.css`
+  - `aurora-bag-supply/functions.php`
+  - `aurora-bag-supply/header.php`
+  - `aurora-bag-supply/front-page.php`
+- JS syntax check passed with Node `--check`.
+- PHP syntax lint was not run because the local `php` command is not installed on this workstation.
+- ZIP SHA256: `9BFC8C9787A3872571A28E8D38FECE65306F89A1F6723B094EC7027F21518BE6`.
