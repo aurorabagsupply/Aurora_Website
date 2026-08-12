@@ -2371,12 +2371,15 @@
     grid-template-columns: 38px minmax(0, 1fr) !important;
     align-items: center !important;
     min-width: 0 !important;
+    height: 48px !important;
   }
 
   .mobile-search-overlay__icon {
     display: grid !important;
     place-items: center !important;
     color: rgba(29, 29, 31, .58) !important;
+    width: 38px !important;
+    height: 48px !important;
   }
 
   .mobile-search-overlay__icon svg {
@@ -2387,20 +2390,21 @@
     stroke-width: 1.7 !important;
     stroke-linecap: round !important;
     stroke-linejoin: round !important;
+    transform: translateY(-2px) !important;
   }
 
   .mobile-search-overlay__field input,
   .mobile-search-overlay__field input:focus {
     width: 100% !important;
     min-width: 0 !important;
-    height: 54px !important;
+    height: 48px !important;
     border: 0 !important;
     outline: 0 !important;
     background: transparent !important;
     color: #1d1d1f !important;
     font-size: clamp(34px, 10.2vw, 42px) !important;
     font-weight: 650 !important;
-    line-height: 1.05 !important;
+    line-height: 48px !important;
     letter-spacing: -.035em !important;
   }
 
