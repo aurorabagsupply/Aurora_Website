@@ -289,3 +289,21 @@ WooCommerce 正式导入前需要处理图片：
 - 多语言现在主要由前端 JS 处理，正式多语言 SEO 如需独立 URL，需要后续接 WPML / Polylang / TranslatePress 等方案。
 - Contact 页当前 WordPress 模板使用 `mailto:`，正式站建议换成 Contact Form 7 / WPForms / Fluent Forms。
 - `edge-profile-*` 目录体积大且无上传价值，打包时必须排除。
+
+---
+
+## 2026-08-12 AOLOLA mobile header logo correction
+
+- User issue: the mobile header logo did not match the provided wide infinity-style logo reference.
+- Backup tag created before this change: `pre-mobile-exact-logo-20260812`.
+- Added extracted transparent PNG logo asset from the user-provided reference:
+  - `2026-06-26_filter-simple-consult-icon-preview/assets/logo/aolola-infinity-mark-original.png`
+  - `2026-06-26_filter-simple-consult-icon-preview/wordpress-theme/aurora-bag-supply/assets/logo/aolola-infinity-mark-original.png`
+- Updated mobile header CSS in both static preview and WordPress theme CSS to use the original PNG asset instead of the approximate SVG.
+- Adjusted mobile logo box to preserve the original wide aspect ratio:
+  - standard mobile: 50 x 22
+  - narrow mobile: 46 x 20
+- Verified with Playwright at 320, 390, and 430 px mobile widths:
+  - no horizontal overflow
+  - logo remains visible
+  - logo keeps the wide original ratio
