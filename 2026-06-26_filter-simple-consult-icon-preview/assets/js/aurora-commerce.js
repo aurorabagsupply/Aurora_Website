@@ -1988,6 +1988,10 @@ function imagePath(category, index) {
   return `${auroraAssetBase()}/catalog/${category}/${category} (${index}).jpg`;
 }
 
+function categoryThumbnailPath(category) {
+  return `${auroraAssetBase()}/catalog/category-thumbnails/${category}.png`;
+}
+
 const AURORA_PRODUCTS = CATEGORY_CONFIG.flatMap((category) =>
   Array.from({ length: category.count }, (_, itemIndex) => {
     const number = itemIndex + 1;
@@ -2088,7 +2092,7 @@ function renderCategories() {
     return `
       <a class="category-card" href="products.html?category=${encodeURIComponent(category.name)}">
         <div class="category-card__media">
-          <img src="${encodeURI(imagePath(category.name, 1))}" alt="${categoryLabel(category.name)}" loading="lazy" />
+          <img src="${encodeURI(categoryThumbnailPath(category.name))}" alt="${categoryLabel(category.name)}" loading="lazy" />
         </div>
         <div class="category-card__body">
           <h3>${categoryLabel(category.name)}</h3>

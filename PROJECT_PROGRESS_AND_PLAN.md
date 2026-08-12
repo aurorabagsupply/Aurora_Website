@@ -318,3 +318,16 @@ WooCommerce 正式导入前需要处理图片：
   - no horizontal overflow
   - logo and action icons remain aligned
   - search remains hidden until opened
+
+## 2026-08-12 AOLOLA mobile category white background refinement
+
+- User issue: mobile Shop by Category product tiles still showed a light gray image background.
+- Backup tag created before this change: `pre-mobile-category-white-bg-20260812`.
+- Added dedicated category thumbnail assets with pure white backgrounds for Bag, Hardware, Leather, Zipper, Accessories, and Tools.
+- Updated the homepage category renderer to use `assets/catalog/category-thumbnails/` for category entry images.
+- Added mobile CSS overrides so category media and image backgrounds resolve to pure white, including legacy Bag-specific rules.
+- Mirrored the same asset, CSS, and JS changes into the WordPress theme folder.
+- Verified with Playwright at 390 px:
+  - all 6 category media backgrounds compute to `rgb(255, 255, 255)`
+  - all 6 category image backgrounds compute to `rgb(255, 255, 255)`
+  - no horizontal overflow
