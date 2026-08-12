@@ -2345,9 +2345,9 @@
   .mobile-search-overlay__close {
     position: absolute !important;
     top: calc(20px + env(safe-area-inset-top, 0px)) !important;
-    right: 20px !important;
-    width: 38px !important;
-    height: 38px !important;
+    right: 24px !important;
+    width: 48px !important;
+    height: 48px !important;
     border: 0 !important;
     background: transparent !important;
     color: rgba(29, 29, 31, .76) !important;
