@@ -1685,19 +1685,42 @@ function productMatchesSearch(productInput, query) {
   return normalized.split(/\s+/).every((term) => productSearchHaystack(productInput).includes(term));
 }
 
+function siteUrl(key, fallback) {
+  const urls = window.AURORA_WP_URLS || {};
+  return urls[key] || fallback;
+}
+
 function searchResultsHref(query) {
-  const url = new URL("products.html", window.location.href);
+  const url = new URL(siteUrl("products", "products.html"), window.location.href);
   const normalized = String(query || "").trim();
   if (normalized) url.searchParams.set("q", normalized);
   url.searchParams.set("lang", currentLang());
-  return `${url.pathname.split("/").pop()}${url.search}`;
+  return url.href;
 }
 
 function productDetailHref(product) {
-  const url = new URL("product-detail.html", window.location.href);
+  const url = new URL(siteUrl("productDetail", "product-detail.html"), window.location.href);
   url.searchParams.set("sku", product.sku);
   url.searchParams.set("lang", currentLang());
-  return `${url.pathname.split("/").pop()}${url.search}`;
+  return url.href;
+}
+
+function contactHref(params = {}) {
+  const url = new URL(siteUrl("contact", "contact.html"), window.location.href);
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && String(value) !== "") url.searchParams.set(key, value);
+  });
+  return url.href;
+}
+
+function accountHref(hash = "") {
+  const url = new URL(siteUrl("account", "account.html"), window.location.href);
+  if (hash) url.hash = hash.replace(/^#/, "");
+  return url.href;
+}
+
+function cartHref() {
+  return new URL(siteUrl("cart", "cart.html"), window.location.href).href;
 }
 
 function renderSearchSuggestions(form) {
@@ -2052,7 +2075,7 @@ function productCard(productInput, options = {}) {
   const hideQuote = options.hideQuote === true;
   return `
     <article class="product-card${variant}">
-      <a class="product-card__image" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">
+      <a class="product-card__image" href="${productDetailHref(product)}">
         <img src="${encodeURI(product.image)}" alt="${product.name}" loading="lazy" />
       </a>
       <div class="product-card__body">
@@ -2061,7 +2084,7 @@ function productCard(productInput, options = {}) {
         <p class="product-card__summary">${compactProductMeta(product)}</p>
         <div class="buying-row"><span>${t("moq")} ${product.moq}</span></div>
         <div class="product-actions">
-          <a class="detail-link" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">${t("details")} <span aria-hidden="true">&rsaquo;</span></a>
+          <a class="detail-link" href="${productDetailHref(product)}">${t("details")} <span aria-hidden="true">&rsaquo;</span></a>
           ${hideQuote ? "" : `<button class="btn btn-secondary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>`}
         </div>
       </div>
@@ -2524,8 +2547,8 @@ function renderDetail() {
         <div class="qty-row"><label for="qty">${t("quantity")}</label><input id="qty" type="number" min="1" value="${product.moqNumber}" /></div>
         <div class="hero-actions">
           <button class="btn btn-primary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>
-          <a class="btn btn-secondary" href="contact.html?sku=${encodeURIComponent(product.sku)}">${t("requestQuote")}</a>
-          <a class="detail-wishlist" href="account.html">${t("wishlist")} <span aria-hidden="true">&rsaquo;</span></a>
+          <a class="btn btn-secondary" href="${contactHref({ sku: product.sku })}">${t("requestQuote")}</a>
+          <a class="detail-wishlist" href="${accountHref()}">${t("wishlist")} <span aria-hidden="true">&rsaquo;</span></a>
         </div>
       </aside>
     </div>
@@ -2587,7 +2610,7 @@ function openQuickView(sku) {
           <dt>${t("moq")}</dt><dd>${product.moq}</dd>
         </div>
         <div class="hero-actions">
-          <a class="btn" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">${t("details")}</a>
+          <a class="btn" href="${productDetailHref(product)}">${t("details")}</a>
           <button class="btn btn-primary" type="button" data-add-quote="${product.sku}">${t("quote")}</button>
         </div>
       </div>

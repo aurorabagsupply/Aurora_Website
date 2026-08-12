@@ -52,3 +52,16 @@ After uploading and activating this package in WordPress:
 3. Clear WordPress / Hostinger / LiteSpeed cache.
 4. Open the live site in a private browser window.
 
+## Product Detail Route Fix - v1.0.67-sync
+
+- Package: `aurora-bag-supply-v1.0.67-sync.zip`
+- Theme version: `1.0.67-sync`
+- Asset cache version: `1.0.101-sync`
+- Added `page-product-detail.php`.
+- Added a WordPress product detail route:
+  - `/?aurora_product_detail=1&sku=...`
+  - `/product-detail/`
+  - `/product-detail.html`
+- Updated `assets/js/aurora-commerce.js` so product cards, search suggestions and quick view detail links use the WordPress product detail route when the theme is installed.
+- This fixes the issue where clicking a static-preview product card in WordPress opened an empty product page.
+
