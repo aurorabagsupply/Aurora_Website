@@ -24,24 +24,143 @@ function aurora_setup() {
 add_action('after_setup_theme', 'aurora_setup');
 
 function aurora_assets() {
-    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.98-preview');
-    wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.98-preview');
-    wp_enqueue_style('aurora-mobile-v2-final', get_template_directory_uri() . '/assets/css/aurora-mobile-v2-final.css', array('aurora-category-clean-float'), '1.0.98-preview');
-    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.98-preview', true);
-    wp_enqueue_script('aurora-image-search', get_template_directory_uri() . '/assets/js/aurora-image-search.js', array('aurora-commerce'), '1.0.98-preview', true);
+    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.99-preview');
+    wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.99-preview');
+    wp_enqueue_style('aurora-mobile-v2-final', get_template_directory_uri() . '/assets/css/aurora-mobile-v2-final.css', array('aurora-category-clean-float'), '1.0.99-preview');
+    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.99-preview', true);
+    wp_enqueue_script('aurora-image-search', get_template_directory_uri() . '/assets/js/aurora-image-search.js', array('aurora-commerce'), '1.0.99-preview', true);
     wp_add_inline_script('aurora-commerce', 'window.AURORA_THEME_ASSET_BASE = ' . wp_json_encode(get_template_directory_uri() . '/assets') . ';', 'before');
     wp_add_inline_script('aurora-image-search', 'window.AURORA_IMAGE_SEARCH_ENDPOINT = ' . wp_json_encode(rest_url('aurora/v1/image-search')) . ';', 'before');
 }
 add_action('wp_enqueue_scripts', 'aurora_assets');
 
+function aurora_wc_page_url($page, $fallback_path = '/') {
+    if (function_exists('wc_get_page_permalink')) {
+        $url = wc_get_page_permalink($page);
+        if ($url) {
+            return $url;
+        }
+    }
+    return home_url($fallback_path);
+}
+
+function aurora_cart_url() {
+    if (function_exists('wc_get_cart_url')) {
+        $url = wc_get_cart_url();
+        if ($url) {
+            return $url;
+        }
+    }
+    return home_url('/cart/');
+}
+
+function aurora_cart_count() {
+    if (function_exists('WC')) {
+        $woocommerce = WC();
+        if ($woocommerce && isset($woocommerce->cart) && $woocommerce->cart) {
+            return (int) $woocommerce->cart->get_cart_contents_count();
+        }
+    }
+    return 0;
+}
+
 function aurora_product_search_form($form) {
-    $shop_url = function_exists('wc_get_page_permalink') ? wc_get_page_permalink('shop') : home_url('/');
+    $shop_url = aurora_wc_page_url('shop', '/shop/');
     return '<form role="search" method="get" class="site-search" action="' . esc_url($shop_url) . '"><input type="search" name="s" placeholder="Search hardware, leather, buckles, zippers, accessories..." value="' . get_search_query() . '" /><button class="image-search-trigger" type="button" data-image-search-trigger aria-label="' . esc_attr__('Search by image', 'aurora-bag-supply') . '"><span aria-hidden="true">?</span></button><button type="submit">Search</button><input type="hidden" name="post_type" value="product" /></form>';
 }
 add_filter('get_product_search_form', 'aurora_product_search_form');
 
+function aurora_render_product_search_form() {
+    if (function_exists('get_product_search_form')) {
+        get_product_search_form();
+        return;
+    }
+    echo aurora_product_search_form('');
+}
+
+function aurora_static_categories() {
+    return array(
+        array('name' => 'Bag', 'url' => home_url('/product-category/bag/'), 'image' => 'Bag.png'),
+        array('name' => 'Hardware', 'url' => home_url('/product-category/hardware/'), 'image' => 'Hardware.png'),
+        array('name' => 'Leather', 'url' => home_url('/product-category/leather/'), 'image' => 'Leather.png'),
+        array('name' => 'Zipper', 'url' => home_url('/product-category/zipper/'), 'image' => 'Zipper.png'),
+        array('name' => 'Accessories', 'url' => home_url('/product-category/accessories/'), 'image' => 'Accessories.png'),
+        array('name' => 'Tools', 'url' => home_url('/product-category/tools/'), 'image' => 'Tools.png'),
+    );
+}
+
+function aurora_render_fallback_categories() {
+    echo '<div class="aurora-fallback-categories">';
+    foreach (aurora_static_categories() as $category) {
+        $image = get_template_directory_uri() . '/assets/catalog/category-thumbnails/' . $category['image'];
+        echo '<a class="category-card" href="' . esc_url($category['url']) . '">';
+        echo '<div class="category-card__media"><img src="' . esc_url($image) . '" alt="' . esc_attr($category['name']) . '" loading="lazy" /></div>';
+        echo '<div class="category-card__body"><h3>' . esc_html($category['name']) . ' <span aria-hidden="true">›</span></h3></div>';
+        echo '</a>';
+    }
+    echo '</div>';
+}
+
+function aurora_fallback_products($mode = 'featured', $limit = 8) {
+    $sets = array(
+        'featured' => array(
+            array('Finished Bags 01', 'Bag', 'Bag (1).jpg', 'Leather / PU options', 'MOQ 100 pcs'),
+            array('Hardware Product 01', 'Hardware', 'Hardware (1).jpg', 'Zinc alloy / brass', 'MOQ 500 pcs'),
+            array('Leather Materials 01', 'Leather', 'Leather (1).jpg', 'Leather sheets', 'MOQ 50 pcs'),
+            array('Zipper Product 01', 'Zipper', 'Zipper (1).jpg', 'Nylon / metal zipper', 'MOQ 1000 pcs'),
+        ),
+        'new' => array(
+            array('Finished Bags 05', 'Bag', 'Bag (5).jpg', 'Custom size options', 'MOQ 100 pcs'),
+            array('Hardware Product 07', 'Hardware', 'Hardware (7).jpg', 'Shape-first hardware', 'MOQ 500 pcs'),
+            array('Leather Materials 03', 'Leather', 'Leather (3).jpg', 'Texture options', 'MOQ 50 pcs'),
+            array('Accessories Product 04', 'Accessories', 'Accessories (4).jpg', 'Bag accessories', 'MOQ 300 pcs'),
+        ),
+        'best' => array(
+            array('Finished Bags 08', 'Bag', 'Bag (8).jpg', 'Repeat order style', 'MOQ 100 pcs'),
+            array('Finished Bags 09', 'Bag', 'Bag (9).jpg', 'Wholesale bag style', 'MOQ 100 pcs'),
+            array('Hardware Product 08', 'Hardware', 'Hardware (8).jpg', 'Repeat hardware item', 'MOQ 500 pcs'),
+            array('Tools Product 02', 'Tools', 'Tools (2).jpg', 'Workshop tools', 'MOQ 50 pcs'),
+        ),
+    );
+    $products = isset($sets[$mode]) ? $sets[$mode] : $sets['featured'];
+    return array_slice($products, 0, $limit);
+}
+
+function aurora_render_fallback_products($mode = 'featured', $limit = 8) {
+    echo '<div class="woocommerce columns-4"><ul class="products columns-4 aurora-fallback-products">';
+    foreach (aurora_fallback_products($mode, $limit) as $product) {
+        list($name, $category, $image_name, $meta, $moq) = $product;
+        $image = get_template_directory_uri() . '/assets/catalog/' . rawurlencode($category) . '/' . rawurlencode($image_name);
+        $url = home_url('/product-category/' . sanitize_title($category) . '/');
+        echo '<li class="product product-card">';
+        echo '<a class="product-card__image" href="' . esc_url($url) . '"><img src="' . esc_url($image) . '" alt="' . esc_attr($name) . '" loading="lazy" /></a>';
+        echo '<div class="product-card__body"><h3>' . esc_html($name) . '</h3>';
+        echo '<p class="product-card__summary">' . esc_html($meta) . '</p>';
+        echo '<div class="buying-row"><span>' . esc_html($moq) . '</span></div>';
+        echo '<div class="product-actions"><a class="btn" href="' . esc_url($url) . '">View Details</a>' . aurora_quote_button(0) . '</div></div>';
+        echo '</li>';
+    }
+    echo '</ul></div>';
+}
+
+function aurora_render_shortcode_or_fallback($shortcode_name, $shortcode, $fallback_callback, $fallback_args = array()) {
+    if (shortcode_exists($shortcode_name)) {
+        try {
+            $output = do_shortcode($shortcode);
+        } catch (Throwable $exception) {
+            $output = '';
+        }
+        if ($output && trim($output) !== trim($shortcode)) {
+            echo $output;
+            return;
+        }
+    }
+    call_user_func_array($fallback_callback, $fallback_args);
+}
+
 function aurora_woocommerce_wrapper_start() {
-    echo '<main><section class="page-title"><div class="container"><h1>' . esc_html(woocommerce_page_title(false)) . '</h1><p>Explore our complete range of bag hardware designed for handbags, luggage, belts and leather goods manufacturing.</p></div></section><section class="section"><div class="container">';
+    $title = function_exists('woocommerce_page_title') ? woocommerce_page_title(false) : get_the_title();
+    echo '<main><section class="page-title"><div class="container"><h1>' . esc_html($title) . '</h1><p>Explore our complete range of bag hardware designed for handbags, luggage, belts and leather goods manufacturing.</p></div></section><section class="section"><div class="container">';
 }
 
 function aurora_woocommerce_wrapper_end() {

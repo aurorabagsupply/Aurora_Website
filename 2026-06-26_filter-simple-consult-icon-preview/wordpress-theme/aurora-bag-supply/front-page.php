@@ -1,6 +1,6 @@
 ﻿<?php get_header(); ?>
 <main>
-  <section class="hero hero-cover" data-hero-carousel data-hero-base="<?php echo esc_url(get_template_directory_uri() . '/assets/hero'); ?>" data-products-url="<?php echo esc_url(function_exists('wc_get_page_permalink') ? wc_get_page_permalink('shop') : home_url('/shop/')); ?>" data-contact-url="<?php echo esc_url(home_url('/contact/')); ?>">
+  <section class="hero hero-cover" data-hero-carousel data-hero-base="<?php echo esc_url(get_template_directory_uri() . '/assets/hero'); ?>" data-products-url="<?php echo esc_url(aurora_wc_page_url('shop', '/shop/')); ?>" data-contact-url="<?php echo esc_url(home_url('/contact/')); ?>">
     <div class="hero-cover__viewport">
       <div class="hero-cover__track" data-hero-track></div>
       <button class="hero-cover__arrow hero-cover__arrow--prev" type="button" data-hero-prev aria-label="Previous slide">‹</button>
@@ -16,7 +16,7 @@
   <section class="section">
     <div class="container">
       <div class="section-head"><h2>Shop by Category</h2><p>Explore Accessories, Bag, Hardware, Leather, Tools and Zipper products.</p></div>
-      <?php echo do_shortcode('[product_categories number="8" columns="4" hide_empty="0"]'); ?>
+      <?php aurora_render_shortcode_or_fallback('product_categories', '[product_categories number="8" columns="4" hide_empty="0"]', 'aurora_render_fallback_categories'); ?>
     </div>
   </section>
   <section class="procurement-strip">
@@ -29,20 +29,20 @@
   </section>
   <section class="section section-alt">
     <div class="container">
-      <div class="section-head section-head--split"><div><h2>Featured Products</h2><p>Core product systems for bag factories, leather workshops and sourcing teams.</p></div><a class="btn" href="<?php echo esc_url(function_exists('wc_get_page_permalink') ? wc_get_page_permalink('shop') : home_url('/shop/')); ?>">View Full Catalog</a></div>
-      <?php echo do_shortcode('[products limit="8" columns="4" visibility="featured"]'); ?>
+      <div class="section-head section-head--split"><div><h2>Featured Products</h2><p>Core product systems for bag factories, leather workshops and sourcing teams.</p></div><a class="btn" href="<?php echo esc_url(aurora_wc_page_url('shop', '/shop/')); ?>">View Full Catalog</a></div>
+      <?php aurora_render_shortcode_or_fallback('products', '[products limit="8" columns="4" visibility="featured"]', 'aurora_render_fallback_products', array('featured', 8)); ?>
     </div>
   </section>
   <section class="section">
     <div class="container">
       <div class="section-head"><h2>New Arrivals</h2><p>Recently prepared materials and components for production buyers.</p></div>
-      <?php echo do_shortcode('[products limit="8" columns="4" orderby="date" order="DESC"]'); ?>
+      <?php aurora_render_shortcode_or_fallback('products', '[products limit="8" columns="4" orderby="date" order="DESC"]', 'aurora_render_fallback_products', array('new', 8)); ?>
     </div>
   </section>
   <section class="section section-alt">
     <div class="container">
       <div class="section-head"><h2>Best Sellers</h2><p>High-demand items for repeat orders, wholesale projects and custom bag manufacturing.</p></div>
-      <?php echo do_shortcode('[best_selling_products limit="8" columns="4"]'); ?>
+      <?php aurora_render_shortcode_or_fallback('best_selling_products', '[best_selling_products limit="8" columns="4"]', 'aurora_render_fallback_products', array('best', 8)); ?>
     </div>
   </section>
   <section class="section">
