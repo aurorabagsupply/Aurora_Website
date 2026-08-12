@@ -307,3 +307,14 @@ WooCommerce 正式导入前需要处理图片：
   - no horizontal overflow
   - logo remains visible
   - logo keeps the wide original ratio
+
+## 2026-08-12 AOLOLA mobile header height refinement
+
+- User issue: the mobile top navigation still had too much vertical padding compared with the Apple-style reference.
+- Backup tag created before this change: `pre-mobile-header-height-20260812`.
+- Reduced mobile header vertical padding and icon row height in both static preview and WordPress theme CSS.
+- Header total height at 390 px is now approximately 65 px.
+- Verified with Playwright at 320, 390, and 430 px mobile widths:
+  - no horizontal overflow
+  - logo and action icons remain aligned
+  - search remains hidden until opened
