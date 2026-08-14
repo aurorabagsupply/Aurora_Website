@@ -6415,3 +6415,335 @@ body {
     gap: 16px 12px;
   }
 }
+
+/* Mobile homepage product-first refinement */
+@media (max-width: 760px) {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main > .hero {
+    order: 1;
+  }
+
+  main > .section:nth-of-type(3) {
+    order: 2;
+  }
+
+  main > .section-alt:nth-of-type(5) {
+    order: 3;
+  }
+
+  main > #new-arrivals {
+    order: 4;
+  }
+
+  main > .section-alt:nth-of-type(7) {
+    order: 5;
+  }
+
+  main > .trust-row {
+    order: 6;
+    margin-top: 56px;
+  }
+
+  main > .procurement-strip {
+    order: 7;
+  }
+
+  main > .section:nth-of-type(8) {
+    order: 8;
+  }
+
+  main > .footer-help {
+    order: 9;
+  }
+
+  main > .newsletter {
+    order: 10;
+  }
+
+  main > .section,
+  main > .section-alt {
+    background: #fff;
+  }
+
+  main > .section-alt:nth-of-type(5),
+  main > #new-arrivals,
+  main > .section-alt:nth-of-type(7) {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+
+  main > .section-alt:nth-of-type(5) .product-card__image,
+  main > #new-arrivals .product-card__image,
+  main > .section-alt:nth-of-type(7) .product-card__image {
+    padding: 6px;
+    background: #fff;
+  }
+
+  main > .section-alt:nth-of-type(5) .product-card__image img,
+  main > #new-arrivals .product-card__image img,
+  main > .section-alt:nth-of-type(7) .product-card__image img {
+    transform: scale(1.12);
+    transform-origin: center;
+  }
+
+  main > .section-alt:nth-of-type(5) .product-card,
+  main > #new-arrivals .product-card,
+  main > .section-alt:nth-of-type(7) .product-card {
+    background: #fff;
+  }
+}
+/* AOLOLA Quality page */
+.quality-page {
+  background: #fff;
+  color: #1d1d1f;
+}
+
+.quality-hero {
+  padding: clamp(88px, 11vw, 140px) 0 clamp(64px, 8vw, 112px);
+  background:
+    linear-gradient(180deg, rgba(245, 245, 247, 0.88), rgba(255, 255, 255, 0.96)),
+    url("../images/bag-hardware.jpg") center 42% / cover no-repeat;
+}
+
+.quality-hero__inner {
+  max-width: 760px;
+}
+
+.quality-hero h1 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(54px, 8vw, 92px);
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  font-weight: 700;
+}
+
+.quality-hero p:not(.kicker) {
+  max-width: 560px;
+  margin: 24px 0 0;
+  color: #6e6e73;
+  font-size: clamp(18px, 2.1vw, 22px);
+  line-height: 1.55;
+}
+
+.quality-section {
+  padding: clamp(76px, 9vw, 124px) 0;
+}
+
+.quality-section__head {
+  max-width: 720px;
+  margin-bottom: 36px;
+}
+
+.quality-section__head h2,
+.quality-testing__copy h2,
+.quality-final h2 {
+  margin: 0;
+  color: #1d1d1f;
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  font-weight: 650;
+}
+
+.quality-material-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.quality-material-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f5f5f7;
+}
+
+.quality-material-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: #fff;
+}
+
+.quality-material-card div {
+  padding: 22px 22px 26px;
+}
+
+.quality-material-card h3 {
+  margin: 0 0 10px;
+  color: #1d1d1f;
+  font-size: 20px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 650;
+}
+
+.quality-material-card p {
+  margin: 0;
+  color: #6e6e73;
+  font-size: 15px;
+  line-height: 1.48;
+}
+
+.quality-testing {
+  background: #f5f5f7;
+}
+
+.quality-testing__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(32px, 6vw, 72px);
+  align-items: center;
+}
+
+.quality-testing__copy p:not(.kicker) {
+  max-width: 540px;
+  margin: 20px 0 28px;
+  color: #6e6e73;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.quality-report-preview {
+  overflow: hidden;
+  border-radius: 26px;
+  background: #fff;
+}
+
+.quality-report-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+.quality-report-preview div {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+}
+
+.quality-report-preview strong {
+  color: #1d1d1f;
+  font-size: 18px;
+  letter-spacing: -0.015em;
+}
+
+.quality-report-preview span {
+  max-width: 520px;
+  color: #6e6e73;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.quality-final {
+  padding: clamp(96px, 14vw, 180px) 0;
+}
+
+.quality-final__inner {
+  max-width: 760px;
+  text-align: center;
+}
+
+.quality-final__inner p:not(.kicker) {
+  max-width: 580px;
+  margin: 22px auto 30px;
+  color: #6e6e73;
+  font-size: 18px;
+  line-height: 1.58;
+}
+
+@media (max-width: 767px) {
+  .quality-hero {
+    padding: 74px 0 62px;
+    background-position: center top;
+  }
+
+  .quality-hero h1 {
+    max-width: 9.4em;
+    font-size: clamp(48px, 14.6vw, 68px);
+    letter-spacing: -0.06em;
+  }
+
+  .quality-hero p:not(.kicker) {
+    max-width: 22em;
+    margin-top: 18px;
+    font-size: 17px;
+  }
+
+  .quality-section {
+    padding: 74px 0;
+  }
+
+  .quality-section__head {
+    margin-bottom: 28px;
+  }
+
+  .quality-section__head h2,
+  .quality-testing__copy h2,
+  .quality-final h2 {
+    font-size: clamp(34px, 10vw, 44px);
+    line-height: 1.05;
+  }
+
+  .quality-material-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .quality-material-card {
+    border-radius: 20px;
+  }
+
+  .quality-material-card img {
+    aspect-ratio: 1 / 1;
+  }
+
+  .quality-material-card div {
+    padding: 16px 15px 18px;
+  }
+
+  .quality-material-card h3 {
+    font-size: 16px;
+    margin-bottom: 7px;
+  }
+
+  .quality-material-card p {
+    font-size: 13px;
+    line-height: 1.42;
+  }
+
+  .quality-testing__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .quality-testing__copy p:not(.kicker) {
+    margin: 16px 0 24px;
+    font-size: 15px;
+  }
+
+  .quality-report-preview {
+    border-radius: 22px;
+  }
+
+  .quality-report-preview div {
+    padding: 20px;
+  }
+
+  .quality-final {
+    padding: 86px 0 96px;
+  }
+
+  .quality-final__inner p:not(.kicker) {
+    font-size: 16px;
+  }
+}

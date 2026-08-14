@@ -24,11 +24,11 @@ function aurora_setup() {
 add_action('after_setup_theme', 'aurora_setup');
 
 function aurora_assets() {
-    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.101-sync');
-    wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.101-sync');
-    wp_enqueue_style('aurora-mobile-v2-final', get_template_directory_uri() . '/assets/css/aurora-mobile-v2-final.css', array('aurora-category-clean-float'), '1.0.101-sync');
-    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.101-sync', true);
-    wp_enqueue_script('aurora-image-search', get_template_directory_uri() . '/assets/js/aurora-image-search.js', array('aurora-commerce'), '1.0.101-sync', true);
+    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.104-product-first-order');
+    wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.104-product-first-order');
+    wp_enqueue_style('aurora-mobile-v2-final', get_template_directory_uri() . '/assets/css/aurora-mobile-v2-final.css', array('aurora-category-clean-float'), '1.0.104-product-first-order');
+    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.104-product-first-order', true);
+    wp_enqueue_script('aurora-image-search', get_template_directory_uri() . '/assets/js/aurora-image-search.js', array('aurora-commerce'), '1.0.104-product-first-order', true);
     wp_add_inline_script('aurora-commerce', 'window.AURORA_THEME_ASSET_BASE = ' . wp_json_encode(get_template_directory_uri() . '/assets') . ';', 'before');
     wp_add_inline_script('aurora-commerce', 'window.AURORA_WP_URLS = ' . wp_json_encode(array(
         'productDetail' => add_query_arg('aurora_product_detail', '1', home_url('/')),
@@ -40,6 +40,37 @@ function aurora_assets() {
     wp_add_inline_script('aurora-image-search', 'window.AURORA_IMAGE_SEARCH_ENDPOINT = ' . wp_json_encode(rest_url('aurora/v1/image-search')) . ';', 'before');
 }
 add_action('wp_enqueue_scripts', 'aurora_assets');
+
+function aurora_is_quality_request() {
+    if (empty($_SERVER['REQUEST_URI'])) {
+        return false;
+    }
+    $request_path = trim((string) parse_url(wp_unslash($_SERVER['REQUEST_URI']), PHP_URL_PATH), '/');
+    $home_path = trim((string) parse_url(home_url('/'), PHP_URL_PATH), '/');
+    if ($home_path && strpos($request_path, $home_path . '/') === 0) {
+        $request_path = substr($request_path, strlen($home_path) + 1);
+    }
+    return $request_path === 'quality';
+}
+
+add_filter('pre_handle_404', function ($preempt, $wp_query) {
+    if (aurora_is_quality_request()) {
+        $wp_query->is_404 = false;
+        status_header(200);
+        return true;
+    }
+    return $preempt;
+}, 10, 2);
+
+add_filter('template_include', function ($template) {
+    if (aurora_is_quality_request()) {
+        $quality_template = get_template_directory() . '/page-quality.php';
+        if (file_exists($quality_template)) {
+            return $quality_template;
+        }
+    }
+    return $template;
+}, 20);
 
 function aurora_render_static_product_detail_route() {
     $request_path = isset($_SERVER['REQUEST_URI']) ? wp_parse_url(esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])), PHP_URL_PATH) : '';
@@ -397,6 +428,7 @@ function aurora_render_category_nav() {
         echo '<div class="aurora-mega-menu__cta"><span>' . esc_html($menu['cta']['text']) . '</span><a class="btn btn-brass" href="' . esc_url($menu['cta']['url']) . '">' . esc_html($menu['cta']['button']) . '</a></div>';
         echo '</div></div>';
     }
+    echo '<a class="aurora-mega-menu__simple" href="' . esc_url(home_url('/quality/')) . '">Quality</a>';
     echo '<a class="aurora-mega-menu__simple" href="' . esc_url(home_url('/contact/')) . '">Contact Us</a>';
     echo '<a class="aurora-mega-menu__simple" href="' . esc_url(home_url('/about/')) . '">About Us</a>';
     echo '</div></nav>';

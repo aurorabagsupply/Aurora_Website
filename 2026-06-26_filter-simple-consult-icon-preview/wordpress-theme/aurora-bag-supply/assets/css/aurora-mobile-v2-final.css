@@ -548,6 +548,17 @@
   }
 }
 
+/* Mobile homepage order is now defined by the actual HTML/PHP section order. */
+@media (max-width: 760px) {
+  body.home main {
+    display: block !important;
+  }
+
+  body.home main > * {
+    order: initial !important;
+  }
+}
+
 @media (max-width: 340px) {
   .main-header .container {
     grid-template-columns: 38px minmax(0, 1fr) 48px !important;
