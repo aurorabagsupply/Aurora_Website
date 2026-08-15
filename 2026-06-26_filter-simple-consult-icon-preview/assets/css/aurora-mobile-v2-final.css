@@ -2533,6 +2533,8 @@
     overflow-x: auto !important;
     overflow-y: hidden !important;
     scroll-padding-left: 0 !important;
+    scroll-padding-inline: 0 !important;
+    scroll-padding-right: 0 !important;
     scroll-snap-type: x mandatory !important;
     -webkit-overflow-scrolling: touch !important;
     box-sizing: border-box !important;
