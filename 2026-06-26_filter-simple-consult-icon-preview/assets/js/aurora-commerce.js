@@ -2227,11 +2227,16 @@ function startProductCarousel(target) {
   stopProductCarousel(target);
   const viewport = target.querySelector(".product-carousel__viewport");
   if (!viewport || viewport.scrollWidth <= viewport.clientWidth + 2) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (viewport.dataset.loopCarousel === "true" && !viewport.dataset.loopReady) {
     viewport.dataset.loopReady = "true";
     window.requestAnimationFrame(() => scrollCarouselCardIntoCenter(viewport, loopingCarouselStartIndex(viewport), "auto"));
   }
-  const timer = window.setInterval(() => productCarouselStep(viewport), PRODUCT_CAROUSEL_MS);
+  const requestedInterval = Number.parseInt(viewport.dataset.carouselInterval || "", 10);
+  const interval = Number.isFinite(requestedInterval) ? Math.max(3200, requestedInterval) : PRODUCT_CAROUSEL_MS;
+  const timer = window.setInterval(() => {
+    if (!document.hidden) productCarouselStep(viewport);
+  }, interval);
   productCarouselTimers.set(target, timer);
 }
 
@@ -2282,11 +2287,17 @@ function renderProductGrids() {
       return;
     }
     if (mode === "new") {
+      const mobileLoop = window.matchMedia("(max-width: 760px)").matches && products.length > 1;
+      const visibleProducts = mobileLoop ? products.slice(0, 6) : products;
+      const carouselProducts = mobileLoop ? [...visibleProducts, ...visibleProducts, ...visibleProducts] : visibleProducts;
+      const loopAttributes = mobileLoop
+        ? `data-loop-carousel="true" data-loop-start="${visibleProducts.length}" data-loop-count="${visibleProducts.length}"`
+        : "";
       target.classList.add("product-carousel", "product-carousel--new");
       target.innerHTML = `
-        <div class="product-carousel__viewport" tabindex="0" aria-label="${t("new")}">
+        <div class="product-carousel__viewport" tabindex="0" aria-label="${t("new")}" data-carousel-interval="5600" ${loopAttributes}>
           <div class="product-carousel__track">
-            ${products.map((item) => productCard(item, { variant: "carousel" })).join("")}
+            ${carouselProducts.map((item, index) => productCard(item, { variant: mobileLoop && (index < visibleProducts.length || index >= visibleProducts.length * 2) ? "carousel is-carousel-clone" : "carousel" })).join("")}
           </div>
         </div>
       `;
