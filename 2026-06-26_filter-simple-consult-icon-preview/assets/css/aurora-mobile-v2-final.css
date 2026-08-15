@@ -2545,19 +2545,20 @@
     width: 100% !important;
     min-width: 100% !important;
     max-width: none !important;
+    padding-inline: 0 !important;
     align-items: stretch !important;
   }
 
   .product-grid[data-products="featured"].product-featured-layout .product-card {
-    flex: 0 0 calc(100% - 4px) !important;
-    width: calc(100% - 4px) !important;
-    max-width: calc(100% - 4px) !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     height: auto !important;
     min-height: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    scroll-snap-align: start !important;
+    scroll-snap-align: center !important;
     scroll-snap-stop: always !important;
     background: transparent !important;
     border: 0 !important;
