@@ -2638,18 +2638,18 @@
   }
 }
 
-/* Mobile v11.3: softer Apple-style frosted header surface. */
+/* Mobile v11.5: neutral white frosted header without warm color cast. */
 @media (max-width: 760px) {
   .main-header {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
     overflow: hidden !important;
-    background: rgba(251, 251, 253, .68) !important;
+    background: rgba(255, 255, 255, .92) !important;
     border-bottom: 1px solid rgba(0, 0, 0, .045) !important;
-    -webkit-backdrop-filter: saturate(190%) blur(30px) !important;
-    backdrop-filter: saturate(190%) blur(30px) !important;
-    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .42) !important;
+    -webkit-backdrop-filter: saturate(150%) blur(28px) !important;
+    backdrop-filter: saturate(150%) blur(28px) !important;
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .72) !important;
   }
 
   .main-header::before {
@@ -2658,9 +2658,7 @@
     inset: 0 !important;
     z-index: -1 !important;
     pointer-events: none !important;
-    background:
-      radial-gradient(circle at 32% 0%, rgba(191, 151, 128, .16), rgba(191, 151, 128, 0) 46%),
-      linear-gradient(180deg, rgba(255, 255, 255, .62), rgba(255, 255, 255, .22)) !important;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .24), rgba(255, 255, 255, .08)) !important;
   }
 
   .main-header .container {
