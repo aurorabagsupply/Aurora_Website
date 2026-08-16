@@ -27,6 +27,7 @@
       <img class="brand__mark" src="<?php echo esc_url(get_template_directory_uri() . '/assets/logo/aurora-ab-logo.jpg'); ?>" alt="AOLOLA logo" />
       <span><span class="brand__name">AOLOLA</span><span class="brand__tagline">Hardware | Leather | Custom Supply</span></span>
     </a>
+    <span class="mobile-header-wordmark" aria-hidden="true">aolola</span>
     <?php aurora_render_product_search_form(); ?>
     <div class="header-actions">
       <a class="header-action" href="<?php echo esc_url(aurora_wc_page_url('myaccount', '/my-account/')); ?>">Account</a>
