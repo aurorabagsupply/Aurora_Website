@@ -14,4 +14,6 @@
 ## Validation
 
 - Checked JavaScript syntax with `node --check`.
-- Checked the mobile menu at 390px after publishing.
+- Checked the staged diff with `git diff --check`.
+- Confirmed the published GitHub Pages HTML, CSS, and JavaScript return HTTP 200 and contain the new menu version.
+- Playwright was not available in this workspace, so no automated 390px click-through screenshot was generated.
