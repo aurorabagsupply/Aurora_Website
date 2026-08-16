@@ -3136,3 +3136,47 @@
   }
 }
 }
+
+/* Mobile catalog filter: compact the option list without changing filter behavior. */
+@media (max-width: 760px) {
+  .filters[data-filter-panel] .filter-intro {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+    margin: 8px 0 12px !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  .filters[data-filter-panel] .filter-group {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+    row-gap: 2px;
+    padding: 12px 0 !important;
+  }
+
+  .filters[data-filter-panel] .filter-group > strong {
+    grid-column: 1 / -1;
+    margin-bottom: 4px !important;
+    font-size: 13px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .filters[data-filter-panel] .filter-group label {
+    min-width: 0;
+    min-height: 34px;
+    padding: 6px 0 !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+  }
+
+  .filters[data-filter-panel] .filter-group--tree {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filters[data-filter-panel] .filter-group--tree > strong {
+    margin-bottom: 2px !important;
+  }
+}
