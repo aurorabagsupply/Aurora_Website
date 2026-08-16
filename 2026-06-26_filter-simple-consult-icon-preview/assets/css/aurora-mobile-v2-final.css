@@ -30,6 +30,7 @@
     display: block !important;
     position: relative !important;
     flex: 0 0 auto !important;
+    margin-right: 10px !important;
     margin-left: auto !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -38,10 +39,10 @@
   .category-nav.is-open .language-select--menu .language-select__button {
     display: inline-grid !important;
     place-items: center !important;
-    width: 40px !important;
-    min-width: 40px !important;
-    height: 40px !important;
-    min-height: 40px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
     padding: 0 !important;
     border: 0 !important;
     border-radius: 50% !important;
@@ -60,8 +61,8 @@
 
   .category-nav.is-open .language-select--menu .language-select__glyph svg {
     display: block !important;
-    width: 18px !important;
-    height: 18px !important;
+    width: 21px !important;
+    height: 21px !important;
     fill: none !important;
     stroke: currentColor !important;
     stroke-width: 1.7 !important;

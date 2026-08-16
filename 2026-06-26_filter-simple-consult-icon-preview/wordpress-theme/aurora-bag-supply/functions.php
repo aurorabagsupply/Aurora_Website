@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if (!defined('ABSPATH')) {
     exit;
 }
@@ -24,10 +24,10 @@ function aurora_setup() {
 add_action('after_setup_theme', 'aurora_setup');
 
 function aurora_assets() {
-    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.106-mobile-menu-language-v2');
+    wp_enqueue_style('aurora-commerce', get_template_directory_uri() . '/assets/css/aurora-commerce.css', array(), '1.0.106-mobile-menu-language-v3');
     wp_enqueue_style('aurora-category-clean-float', get_template_directory_uri() . '/assets/css/aurora-category-clean-float.css', array('aurora-commerce'), '1.0.104-product-first-order');
-    wp_enqueue_style('aurora-mobile-v2-final', get_template_directory_uri() . '/assets/css/aurora-mobile-v2-final.css', array('aurora-category-clean-float'), '1.0.125-mobile-menu-language-v2');
-    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.112-mobile-menu-language-v2', true);
+    wp_enqueue_style('aurora-mobile-v2-final', get_template_directory_uri() . '/assets/css/aurora-mobile-v2-final.css', array('aurora-category-clean-float'), '1.0.125-mobile-menu-language-v3');
+    wp_enqueue_script('aurora-commerce', get_template_directory_uri() . '/assets/js/aurora-commerce.js', array(), '1.0.112-mobile-menu-language-v3', true);
     wp_enqueue_script('aurora-image-search', get_template_directory_uri() . '/assets/js/aurora-image-search.js', array('aurora-commerce'), '1.0.104-product-first-order', true);
     if (aurora_is_materials_craftsmanship_request() || is_page('materials-craftsmanship')) {
         wp_enqueue_style('aolola-materials-craftsmanship', get_template_directory_uri() . '/assets/css/aolola-materials-craftsmanship.css', array('aurora-mobile-v2-final'), '1.0.0-layout-preview');
