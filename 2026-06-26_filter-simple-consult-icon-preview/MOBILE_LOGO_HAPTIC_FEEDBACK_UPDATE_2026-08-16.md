@@ -17,6 +17,7 @@ Date: 2026-08-16
 - Centered the mobile search, quote and menu icons on one vertical alignment line by removing the quote icon offset and normalizing the final icon containers.
 - Shortened and lightened the mobile two-line menu mark to match the compact reference shape.
 - Tightened the vertical spacing between the two mobile menu lines so they sit closer together.
+- Applied the compact two-line menu treatment to the actual `.mobile-menu` button as well as the dynamically moved mobile action button, preventing the old wide spacing from returning.
 
 ## Note
 

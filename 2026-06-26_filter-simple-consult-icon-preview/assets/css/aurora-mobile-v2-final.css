@@ -2983,18 +2983,33 @@
 
 /* Mobile menu mark: use the shorter, lighter two-line reference shape. */
 @media (max-width: 760px) {
+  .mobile-menu,
+  .mobile-header-actions .mobile-menu {
+    width: 24px !important;
+    min-width: 24px !important;
+    height: 24px !important;
+    min-height: 24px !important;
+  }
+
+  .mobile-menu::before,
+  .mobile-menu::after,
   .mobile-header-actions .mobile-menu::before,
   .mobile-header-actions .mobile-menu::after {
     left: 3px !important;
     width: 18px !important;
     height: 1.5px !important;
+    box-shadow: none !important;
   }
 
+  .mobile-menu::before,
   .mobile-header-actions .mobile-menu::before {
     top: 8px !important;
+    bottom: auto !important;
   }
 
+  .mobile-menu::after,
   .mobile-header-actions .mobile-menu::after {
     bottom: 8px !important;
+    top: auto !important;
   }
 }
