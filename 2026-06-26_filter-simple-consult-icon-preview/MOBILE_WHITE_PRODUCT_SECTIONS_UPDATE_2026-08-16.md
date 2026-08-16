@@ -11,6 +11,7 @@ Date: 2026-08-16
 
 - Changed the shared mobile `.section-alt` canvas from light gray to pure white.
 - Changed the shared mobile product image containers to pure white as well.
+- Added a higher-specificity override for the Featured Products and Best Sellers outer canvases.
 - Bumped static and WordPress CSS cache versions again.
 
 ## Validation

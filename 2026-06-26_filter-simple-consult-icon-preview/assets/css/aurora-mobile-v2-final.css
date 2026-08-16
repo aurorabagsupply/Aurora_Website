@@ -2819,6 +2819,11 @@
     background: #fff !important;
   }
 
+  main > .section-alt:has(.product-grid[data-products="featured"]),
+  main > .section-alt:has(.product-grid[data-products="best"]) {
+    background: #fff !important;
+  }
+
   .product-grid[data-products] .product-card__image,
   .product-grid--best .product-card__image,
   .product-carousel--new .product-card__image,
