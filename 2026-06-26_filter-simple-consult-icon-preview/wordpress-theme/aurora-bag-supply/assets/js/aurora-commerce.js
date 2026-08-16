@@ -1922,15 +1922,50 @@ function ensureMobileCatalogFilterControls() {
   backdrop.setAttribute("aria-label", currentLang() === "zh" ? "关闭筛选" : "Close filters");
 }
 
+let mobileFilterScrollY = 0;
+let mobileFilterLockStyles = null;
+
 function setMobileFilterDrawer(open) {
   const panel = document.querySelector("[data-filter-panel]");
   const backdrop = document.querySelector("[data-filter-backdrop]");
   const trigger = document.querySelector("[data-mobile-filter-toggle]");
   if (!panel) return;
-  panel.classList.toggle("is-mobile-open", Boolean(open));
-  document.body.classList.toggle("aurora-filter-open", Boolean(open));
-  if (backdrop) backdrop.classList.toggle("is-open", Boolean(open));
-  if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
+  const nextOpen = Boolean(open);
+  const root = document.documentElement;
+  const body = document.body;
+
+  if (nextOpen && !root.classList.contains("aurora-filter-open")) {
+    mobileFilterScrollY = window.scrollY;
+    mobileFilterLockStyles = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+    };
+    root.classList.add("aurora-filter-open");
+    body.classList.add("aurora-filter-open");
+    body.style.position = "fixed";
+    body.style.top = `-${mobileFilterScrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+  } else if (!nextOpen && root.classList.contains("aurora-filter-open")) {
+    root.classList.remove("aurora-filter-open");
+    body.classList.remove("aurora-filter-open");
+    const previous = mobileFilterLockStyles || {};
+    body.style.position = previous.position || "";
+    body.style.top = previous.top || "";
+    body.style.left = previous.left || "";
+    body.style.right = previous.right || "";
+    body.style.width = previous.width || "";
+    mobileFilterLockStyles = null;
+    window.requestAnimationFrame(() => window.scrollTo(0, mobileFilterScrollY));
+  }
+
+  panel.classList.toggle("is-mobile-open", nextOpen);
+  if (backdrop) backdrop.classList.toggle("is-open", nextOpen);
+  if (trigger) trigger.setAttribute("aria-expanded", nextOpen ? "true" : "false");
 }
 
 function updateFilterOptionStates(scope = document) {

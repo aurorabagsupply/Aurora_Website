@@ -3090,9 +3090,46 @@
     bottom: auto !important;
   }
 
-  .mobile-menu::after,
-  .mobile-header-actions .mobile-menu::after {
-    bottom: 8px !important;
-    top: auto !important;
+.mobile-menu::after,
+.mobile-header-actions .mobile-menu::after {
+  bottom: 8px !important;
+  top: auto !important;
+}
+
+/* Mobile catalog filter: keep touch scrolling inside the drawer and leave the catalog visible underneath. */
+@media (max-width: 760px) {
+  html.aurora-filter-open,
+  body.aurora-filter-open {
+    overscroll-behavior: none !important;
   }
+
+  .filters[data-filter-panel] {
+    z-index: 10000 !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain !important;
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .filters[data-filter-panel].is-mobile-open {
+    transform: translateX(0) !important;
+  }
+
+  .mobile-filter-backdrop {
+    z-index: 9990 !important;
+    background: rgba(29, 29, 31, .10) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    touch-action: none !important;
+    -webkit-backdrop-filter: blur(3px) !important;
+    backdrop-filter: blur(3px) !important;
+  }
+
+  .mobile-filter-backdrop.is-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
 }
