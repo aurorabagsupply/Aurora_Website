@@ -2814,7 +2814,19 @@
 
 @media (max-width: 760px) {
   /* Keep mobile product-led sections on a clean white canvas. */
-  .section-alt {
+  .section-alt,
+  .section-alt:has(.product-grid[data-products="best"]) {
     background: #fff !important;
+  }
+
+  .product-grid[data-products] .product-card__image,
+  .product-grid--best .product-card__image,
+  .product-carousel--new .product-card__image,
+  .product-featured-layout .product-card__image,
+  [data-catalog-grid] .product-card__image,
+  .product-grid[data-products="best"].product-grid--best .product-card__image {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
   }
 }

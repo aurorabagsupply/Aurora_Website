@@ -10,10 +10,10 @@ Date: 2026-08-16
 ## Change
 
 - Changed the shared mobile `.section-alt` canvas from light gray to pure white.
-- Kept product image surfaces neutral so product photography remains separated from the page canvas.
-- Bumped static and WordPress CSS cache versions.
+- Changed the shared mobile product image containers to pure white as well.
+- Bumped static and WordPress CSS cache versions again.
 
 ## Validation
 
 - Checked the affected mobile styling at 390px.
-- Confirmed the shared section background resolves to `#fff`.
+- Confirmed the shared section and product image container backgrounds resolve to `#fff`.
