@@ -14,6 +14,7 @@ Date: 2026-08-16
 - Applied a second quarter reduction to the mobile navigation row, with smaller icon containers and matching menu-line spacing.
 - Simplified the mobile menu mark to two centered lines by removing the inherited third-line box shadow.
 - Reduced the mobile frosted header white opacity so Hero imagery shows through more softly while retaining the blur effect.
+- Centered the mobile search, quote and menu icons on one vertical alignment line by removing the quote icon offset and normalizing the final icon containers.
 
 ## Note
 

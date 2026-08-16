@@ -2960,3 +2960,23 @@
     background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04)) !important;
   }
 }
+
+/* Mobile header actions: keep search, quote and menu on one vertical centerline. */
+@media (max-width: 760px) {
+  .mobile-header-actions {
+    align-items: center !important;
+    line-height: 0 !important;
+  }
+
+  .mobile-header-actions .mobile-header-icon,
+  .mobile-header-actions .mobile-menu {
+    align-self: center !important;
+    place-items: center !important;
+    line-height: 0 !important;
+    transform: none !important;
+  }
+
+  .mobile-header-actions .mobile-header-icon--quote svg {
+    transform: none !important;
+  }
+}
