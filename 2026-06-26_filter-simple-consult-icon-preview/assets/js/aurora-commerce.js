@@ -1832,6 +1832,16 @@ function applyUrlFiltersToPanel(panel) {
   });
 }
 
+function syncFilterSectionVisibility(panel) {
+  panel.querySelectorAll(".filter-group").forEach((group) => {
+    const toggle = group.querySelector("[data-filter-section-toggle]");
+    if (!toggle) return;
+    const hasCheckedOption = Boolean(group.querySelector("[data-filter-group]:checked"));
+    group.classList.toggle("is-collapsed", !hasCheckedOption);
+    toggle.setAttribute("aria-expanded", hasCheckedOption ? "true" : "false");
+  });
+}
+
 function renderFilterPanel() {
   const panel = document.querySelector("[data-filter-panel]");
   if (!panel) return;
@@ -1848,7 +1858,9 @@ function renderFilterPanel() {
   const categorySections = FILTER_SECTIONS_BY_CATEGORY[activeCategory] || FILTER_SECTIONS_BY_CATEGORY.All;
   const sections = categorySections.map(([titleKey, options]) => `
     <div class="filter-group">
-      <strong>${ui[titleKey]}</strong>
+      <button type="button" class="filter-section-toggle" data-filter-section-toggle aria-expanded="false">
+        <span>${ui[titleKey]}</span><span class="filter-section-chevron" aria-hidden="true">⌄</span>
+      </button>
       ${options.map(([filterGroup, labelKey, value, count]) => `
         <label class="aurora-filter-option">
           <input type="checkbox" data-filter-group="${filterGroup}" value="${value}" />
@@ -1860,11 +1872,17 @@ function renderFilterPanel() {
   panel.innerHTML = `
     <div class="filter-head"><strong>${t("filtersTitle")}</strong><button type="button" data-clear-filters>${t("clearFilters")}</button></div>
     <p class="filter-intro">${ui.intro}</p>
-    <div class="filter-group filter-group--tree"><strong>${ui.categories}</strong>${categoryOptions}</div>
+    <div class="filter-group filter-group--tree">
+      <button type="button" class="filter-section-toggle" data-filter-section-toggle aria-expanded="false">
+        <span>${ui.categories}</span><span class="filter-section-chevron" aria-hidden="true">⌄</span>
+      </button>
+      ${categoryOptions}
+    </div>
     ${sections}
   `;
   applyUrlFiltersToPanel(panel);
   updateFilterOptionStates(panel);
+  syncFilterSectionVisibility(panel);
   panel.dataset.renderedLang = lang;
   panel.dataset.renderedCategory = activeCategory;
 }
@@ -4001,6 +4019,7 @@ function bindActions() {
     const heroDot = event.target.closest("[data-hero-dot]");
     const filterToggle = event.target.closest("[data-mobile-filter-toggle]");
     const filterBackdrop = event.target.closest("[data-filter-backdrop]");
+    const filterSectionToggle = event.target.closest("[data-filter-section-toggle]");
     if (quick) openQuickView(quick.dataset.quickView);
     if (add) addToQuote(add.dataset.addQuote);
     if (closeModal) document.querySelector(".quick-view")?.classList.remove("is-open");
@@ -4053,8 +4072,19 @@ function bindActions() {
     if (filterBackdrop) {
       setMobileFilterDrawer(false);
     }
+    if (filterSectionToggle && window.matchMedia("(max-width: 760px)").matches) {
+      const group = filterSectionToggle.closest(".filter-group");
+      const collapsed = group?.classList.toggle("is-collapsed");
+      if (group) filterSectionToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    }
   });
   document.addEventListener("keydown", (event) => {
+    const filterSectionToggle = event.target.closest?.("[data-filter-section-toggle]");
+    if (filterSectionToggle && window.matchMedia("(max-width: 760px)").matches && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      filterSectionToggle.click();
+      return;
+    }
     if (event.key === "Escape") setMobileFilterDrawer(false);
   });
 }
