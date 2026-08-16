@@ -2813,6 +2813,16 @@
 }
 
 @media (max-width: 760px) {
+  .brand.is-haptic-tap {
+    animation: aurora-brand-haptic-tap 120ms cubic-bezier(.2, .8, .2, 1);
+  }
+
+  @keyframes aurora-brand-haptic-tap {
+    0% { transform: scale(1); }
+    45% { transform: scale(.965); }
+    100% { transform: scale(1); }
+  }
+
   /* Keep the category showcase and its image canvases on the same pure-white surface. */
   main > .section:has([data-category-grid]),
   main > .section:has([data-category-grid]) .container,
@@ -2862,5 +2872,11 @@
   .product-card__image img {
     background: #fff !important;
     background-color: #fff !important;
+  }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .brand.is-haptic-tap {
+    animation: none !important;
   }
 }

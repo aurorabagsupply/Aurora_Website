@@ -4329,6 +4329,20 @@ function tuneWhatsAppForFooter() {
   observer.observe(footer);
 }
 
+function bindBrandHapticFeedback() {
+  document.querySelectorAll(".brand").forEach((brand) => {
+    if (brand.dataset.hapticBound) return;
+    brand.dataset.hapticBound = "true";
+    brand.addEventListener("pointerdown", () => {
+      if (window.matchMedia("(max-width: 760px)").matches) {
+        brand.classList.remove("is-haptic-tap");
+        window.requestAnimationFrame(() => brand.classList.add("is-haptic-tap"));
+        if (typeof navigator.vibrate === "function") navigator.vibrate(10);
+      }
+    }, { passive: true });
+  });
+}
+
 function applyMobileDesignSystemV2() {
   enhanceMobileAccountTabs();
   enhanceBusinessCertificateUpload();
@@ -4337,6 +4351,7 @@ function applyMobileDesignSystemV2() {
   enhanceFaqAccordions();
   compactFooterCopy();
   tuneWhatsAppForFooter();
+  bindBrandHapticFeedback();
   document.body.classList.add("aurora-mobile-v2");
 }
 
