@@ -2980,3 +2980,13 @@
     transform: none !important;
   }
 }
+
+/* Mobile menu mark: use the shorter, lighter two-line reference shape. */
+@media (max-width: 760px) {
+  .mobile-header-actions .mobile-menu::before,
+  .mobile-header-actions .mobile-menu::after {
+    left: 3px !important;
+    width: 18px !important;
+    height: 1.5px !important;
+  }
+}
