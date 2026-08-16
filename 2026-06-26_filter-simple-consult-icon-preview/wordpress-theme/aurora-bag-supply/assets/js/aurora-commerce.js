@@ -8,13 +8,13 @@
 ];
 
 const LANGUAGES = [
-  ["en", "EN"],
-  ["ru", "RU"],
-  ["es", "ES"],
-  ["fr", "FR"],
-  ["de", "DE"],
-  ["it", "IT"],
-  ["ar", "AR"],
+  ["en", "English"],
+  ["ru", "Русский"],
+  ["es", "Español"],
+  ["fr", "Français"],
+  ["de", "Deutsch"],
+  ["it", "Italiano"],
+  ["ar", "العربية"],
   ["zh", "中文"],
 ];
 
