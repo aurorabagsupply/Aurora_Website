@@ -18,8 +18,6 @@ Date: 2026-08-16
 - Shortened and lightened the mobile two-line menu mark to match the compact reference shape.
 - Tightened the vertical spacing between the two mobile menu lines so they sit closer together.
 - Applied the compact two-line menu treatment to the actual `.mobile-menu` button as well as the dynamically moved mobile action button, preventing the old wide spacing from returning.
-- Added a centered lowercase `aolola` mobile wordmark with a subtle frosted-glass treatment between the logo and navigation actions; it fades while the search overlay is open.
-- Added the lowercase `aolola` wordmark directly to both shared mobile header templates, with the script fallback retained so it renders even before JavaScript enhancement or after a stale JS cache.
 
 ## Note
 

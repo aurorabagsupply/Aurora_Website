@@ -4103,15 +4103,6 @@ function ensureSharedMobileHeader() {
   if (search) headerContainer.append(search);
   if (brand) brand.setAttribute("aria-label", "AOLOLA home");
 
-  let mobileWordmark = headerContainer.querySelector(".mobile-header-wordmark");
-  if (!mobileWordmark) {
-    mobileWordmark = document.createElement("span");
-    mobileWordmark.className = "mobile-header-wordmark";
-    mobileWordmark.setAttribute("aria-hidden", "true");
-    mobileWordmark.textContent = "aolola";
-    headerContainer.append(mobileWordmark);
-  }
-
   let overlay = document.querySelector(".mobile-search-overlay");
   if (!overlay) {
     overlay = document.createElement("div");
