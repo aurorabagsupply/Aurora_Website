@@ -3111,6 +3111,8 @@
     overscroll-behavior: contain !important;
     touch-action: pan-y !important;
     -webkit-overflow-scrolling: touch !important;
+    background: #ffffff !important;
+    opacity: 1 !important;
   }
 
   .filters[data-filter-panel].is-mobile-open {
@@ -3128,6 +3130,7 @@
   }
 
   .mobile-filter-backdrop.is-open {
+    background: rgba(29, 29, 31, .06) !important;
     opacity: 1 !important;
     pointer-events: auto !important;
   }

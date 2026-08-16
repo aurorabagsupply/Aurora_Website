@@ -1924,6 +1924,20 @@ function ensureMobileCatalogFilterControls() {
 
 let mobileFilterScrollY = 0;
 let mobileFilterLockStyles = null;
+let mobileFilterTouchLockBound = false;
+
+function bindMobileFilterTouchLock() {
+  if (mobileFilterTouchLockBound) return;
+  document.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!document.documentElement.classList.contains("aurora-filter-open")) return;
+      if (!event.target.closest("[data-filter-panel]")) event.preventDefault();
+    },
+    { passive: false },
+  );
+  mobileFilterTouchLockBound = true;
+}
 
 function setMobileFilterDrawer(open) {
   const panel = document.querySelector("[data-filter-panel]");
@@ -1933,6 +1947,7 @@ function setMobileFilterDrawer(open) {
   const nextOpen = Boolean(open);
   const root = document.documentElement;
   const body = document.body;
+  bindMobileFilterTouchLock();
 
   if (nextOpen && !root.classList.contains("aurora-filter-open")) {
     mobileFilterScrollY = window.scrollY;
