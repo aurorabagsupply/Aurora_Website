@@ -9,6 +9,8 @@ Date: 2026-08-16
 - Respects `prefers-reduced-motion` and mirrors the change in the WordPress theme.
 - Added a restrained mobile 3D tilt effect driven by device orientation when available.
 - iPhone Safari requests motion permission from the Logo touch; pointer movement remains a fallback.
+- Compressed the mobile navigation row by reducing its vertical padding and icon containers by about one quarter.
+- Mirrored the header height refinement in the WordPress theme without changing desktop styles or header interactions.
 
 ## Note
 
