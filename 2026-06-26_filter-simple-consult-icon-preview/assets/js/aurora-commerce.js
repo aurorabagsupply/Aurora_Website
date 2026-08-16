@@ -2644,9 +2644,10 @@ function openQuoteDrawer() {
   drawer.classList.add("is-open");
 }
 
-function languageSwitcherHtml(active) {
+function languageSwitcherHtml(active, iconOnly = false) {
+  const activeLabel = LANGUAGES.find(([code]) => code === active)?.[1] || "EN";
   return `
-    <button class="language-select__button" type="button" data-lang-toggle aria-label="Select language">${LANGUAGES.find(([code]) => code === active)?.[1] || "EN"}</button>
+    <button class="language-select__button" type="button" data-lang-toggle aria-label="Select language${iconOnly ? ` (${activeLabel})` : ""}">${iconOnly ? '<span class="language-select__glyph" aria-hidden="true">A/文</span>' : activeLabel}</button>
     <div class="language-select__menu">
       ${LANGUAGES.map(([code, label]) => `<button type="button" data-lang="${code}">${label}</button>`).join("")}
     </div>
@@ -2675,7 +2676,13 @@ function insertLanguageSwitcher() {
 
 function syncLanguageSwitcherLabel() {
   document.querySelectorAll(".language-select__button").forEach((button) => {
-    button.textContent = LANGUAGES.find(([code]) => code === currentLang())?.[1] || "EN";
+    const activeLabel = LANGUAGES.find(([code]) => code === currentLang())?.[1] || "EN";
+    if (button.closest(".language-select--menu")) {
+      button.innerHTML = '<span class="language-select__glyph" aria-hidden="true">A/文</span>';
+      button.setAttribute("aria-label", `Select language (${activeLabel})`);
+      return;
+    }
+    button.textContent = activeLabel;
   });
 }
 
@@ -3726,6 +3733,28 @@ function enhanceStaticMegaMenu() {
   });
 }
 
+function ensureMobileMenuLanguageSwitcher() {
+  const nav = document.querySelector(".category-nav .container");
+  if (!nav || nav.querySelector(".language-select--menu")) return;
+  const home = Array.from(nav.children).find((node) => {
+    if (!(node instanceof HTMLAnchorElement)) return false;
+    const label = (node.textContent || "").trim().toLowerCase();
+    const href = node.getAttribute("href") || "";
+    return label === "home" || label === "首页" || href === "index.html" || href === "/";
+  });
+  if (!home) return;
+
+  const row = document.createElement("div");
+  row.className = "mobile-nav-home-row";
+  home.parentNode.insertBefore(row, home);
+  row.appendChild(home);
+
+  const wrapper = document.createElement("div");
+  wrapper.className = "language-select language-select--menu";
+  wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+  row.appendChild(wrapper);
+}
+
 function setMegaMenuOpen(menu, open) {
   menu.classList.toggle("is-open", open);
   menu.querySelector(".aurora-mega-menu__toggle")?.setAttribute("aria-expanded", open ? "true" : "false");
@@ -4475,6 +4504,7 @@ function guardWhatsAppProductOverlap() {
 }
 
 enhanceStaticMegaMenu();
+ensureMobileMenuLanguageSwitcher();
 ensureSharedMobileHeader();
 insertLanguageSwitcher();
 rerenderDynamicContent();
