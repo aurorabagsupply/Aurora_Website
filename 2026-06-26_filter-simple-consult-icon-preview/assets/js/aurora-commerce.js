@@ -4126,18 +4126,38 @@ function bindForms() {
   });
   const menu = document.querySelector("[data-mobile-menu]");
   const nav = document.querySelector(".category-nav");
+  const navContainer = nav?.querySelector(".container");
+  if (navContainer && !navContainer.querySelector("[data-mobile-menu-close]")) {
+    const closeButton = document.createElement("button");
+    closeButton.className = "mobile-menu-close";
+    closeButton.type = "button";
+    closeButton.dataset.mobileMenuClose = "";
+    closeButton.setAttribute("aria-label", "Close menu");
+    closeButton.textContent = "×";
+    navContainer.prepend(closeButton);
+  }
+  const menuClose = nav?.querySelector("[data-mobile-menu-close]");
+  const openMobileNav = () => {
+    if (!nav) return;
+    nav.classList.add("is-open");
+    document.body.classList.add("aurora-mobile-menu-open");
+    menu?.setAttribute("aria-expanded", "true");
+    setMegaBackdropOpen(false);
+  };
   const closeMobileNav = () => {
     if (!nav) return;
     nav.classList.remove("is-open");
+    document.body.classList.remove("aurora-mobile-menu-open");
+    menu?.setAttribute("aria-expanded", "false");
     setMegaBackdropOpen(false);
     document.querySelectorAll(".aurora-mega-menu.is-open").forEach((item) => setMegaMenuOpen(item, false));
   };
   if (menu && nav) {
     menu.addEventListener("click", () => {
-      nav.classList.toggle("is-open");
-      setMegaBackdropOpen(false);
-      if (!nav.classList.contains("is-open")) closeMobileNav();
+      if (nav.classList.contains("is-open")) closeMobileNav();
+      else openMobileNav();
     });
+    menuClose?.addEventListener("click", closeMobileNav);
     document.addEventListener("click", (event) => {
       const target = event.target instanceof Element ? event.target : null;
       if (!nav.classList.contains("is-open") || target?.closest(".category-nav .container, [data-mobile-menu]")) return;

@@ -3224,3 +3224,214 @@
     transition: none;
   }
 }
+
+/* Mobile menu: a quiet, full-screen navigation layer. */
+@media (max-width: 760px) {
+  body.aurora-mobile-menu-open {
+    overflow: hidden !important;
+  }
+
+  .category-nav {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2000 !important;
+    display: block !important;
+    visibility: hidden !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    padding: 0 !important;
+    overflow-y: auto !important;
+    background: rgba(250, 250, 252, .98) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(-10px) !important;
+    -webkit-backdrop-filter: blur(22px) saturate(110%) !important;
+    backdrop-filter: blur(22px) saturate(110%) !important;
+    transition: opacity .28s ease, transform .28s ease, visibility .28s ease !important;
+  }
+
+  .category-nav.is-open {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .category-nav .container,
+  .category-nav .aurora-mega-menu__nav {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: calc(78px + env(safe-area-inset-top, 0px)) 32px calc(32px + env(safe-area-inset-bottom, 0px)) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .mobile-menu-close {
+    position: absolute !important;
+    top: calc(20px + env(safe-area-inset-top, 0px)) !important;
+    right: 24px !important;
+    z-index: 2 !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font: 400 36px/40px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important;
+  }
+
+  .category-nav .mobile-nav-home-row {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 0 22px !important;
+    border: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a,
+  .category-nav .mobile-nav-home-row > a.aurora-mega-menu__simple {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    color: #1d1d1f !important;
+    font-size: 34px !important;
+    line-height: 1.12 !important;
+    font-weight: 650 !important;
+  }
+
+  .category-nav .language-select--menu {
+    position: absolute !important;
+    top: calc(20px + env(safe-area-inset-top, 0px)) !important;
+    right: 76px !important;
+    margin: 0 !important;
+  }
+
+  .category-nav .language-select--menu .language-select__button {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+  }
+
+  .category-nav .language-select--menu .language-select__glyph,
+  .category-nav .language-select--menu .language-select__glyph svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .category-nav .language-select--menu .language-select__menu {
+    top: 42px !important;
+    right: 0 !important;
+    left: auto !important;
+  }
+
+  .category-nav .aurora-mega-menu {
+    position: relative !important;
+    display: block !important;
+    margin: 0 !important;
+    border: 0 !important;
+  }
+
+  .category-nav .aurora-mega-menu__top {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 8px 38px 8px 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    font-weight: 600 !important;
+  }
+
+  .category-nav .aurora-mega-menu__toggle {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    width: 32px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #6e6e73 !important;
+  }
+
+  .category-nav .aurora-mega-menu__toggle::after {
+    content: "›" !important;
+    display: block !important;
+    font-size: 28px !important;
+    line-height: 44px !important;
+    transition: transform .25s ease !important;
+  }
+
+  .category-nav .aurora-mega-menu.is-open .aurora-mega-menu__toggle::after {
+    transform: rotate(90deg) !important;
+  }
+
+  .category-nav .aurora-mega-menu__panel {
+    display: block !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    padding: 0 0 0 16px !important;
+    opacity: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: max-height .3s ease, opacity .25s ease, padding .3s ease !important;
+  }
+
+  .category-nav .aurora-mega-menu.is-open .aurora-mega-menu__panel {
+    max-height: 520px !important;
+    padding: 0 0 10px 16px !important;
+    opacity: 1 !important;
+  }
+
+  .category-nav .aurora-mega-menu__column h3,
+  .category-nav .aurora-mega-menu__cta {
+    display: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__link {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 7px 0 !important;
+    border: 0 !important;
+    color: #6e6e73 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    font-weight: 450 !important;
+  }
+
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    display: block !important;
+    min-height: 0 !important;
+    margin-top: 20px !important;
+    padding: 8px 0 !important;
+    border: 0 !important;
+    color: #1d1d1f !important;
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    font-weight: 600 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .category-nav,
+  .category-nav .aurora-mega-menu__panel,
+  .category-nav .aurora-mega-menu__toggle::after {
+    transition: none !important;
+  }
+}
