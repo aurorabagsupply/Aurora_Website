@@ -3988,13 +3988,24 @@ function bindForms() {
   });
   const menu = document.querySelector("[data-mobile-menu]");
   const nav = document.querySelector(".category-nav");
-  if (menu && nav) menu.addEventListener("click", () => {
-    nav.classList.toggle("is-open");
+  const closeMobileNav = () => {
+    if (!nav) return;
+    nav.classList.remove("is-open");
     setMegaBackdropOpen(false);
-    if (!nav.classList.contains("is-open")) {
-      document.querySelectorAll(".aurora-mega-menu.is-open").forEach((item) => setMegaMenuOpen(item, false));
-    }
-  });
+    document.querySelectorAll(".aurora-mega-menu.is-open").forEach((item) => setMegaMenuOpen(item, false));
+  };
+  if (menu && nav) {
+    menu.addEventListener("click", () => {
+      nav.classList.toggle("is-open");
+      setMegaBackdropOpen(false);
+      if (!nav.classList.contains("is-open")) closeMobileNav();
+    });
+    document.addEventListener("click", (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      if (!nav.classList.contains("is-open") || target?.closest(".category-nav .container, [data-mobile-menu]")) return;
+      closeMobileNav();
+    });
+  }
   document.addEventListener("click", (event) => {
     const toggle = event.target.closest(".aurora-mega-menu__toggle");
     const top = event.target.closest(".aurora-mega-menu__top");
