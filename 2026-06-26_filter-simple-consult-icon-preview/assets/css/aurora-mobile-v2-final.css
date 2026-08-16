@@ -2938,6 +2938,7 @@
   .mobile-header-actions .mobile-menu::after {
     left: 2px !important;
     width: 20px !important;
+    box-shadow: none !important;
   }
 
   .mobile-header-actions .mobile-menu::before {
