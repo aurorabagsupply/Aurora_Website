@@ -2813,6 +2813,20 @@
 }
 
 @media (max-width: 760px) {
+  /* Keep the category showcase and its image canvases on the same pure-white surface. */
+  main > .section:has([data-category-grid]),
+  main > .section:has([data-category-grid]) .container,
+  .category-grid[data-category-grid],
+  .category-card,
+  .category-card__media,
+  .category-card__media img,
+  .category-card__image,
+  .category-card__image img {
+    background: #fff !important;
+    background-color: #fff !important;
+    background-image: none !important;
+  }
+
   /* Keep mobile product-led sections on a clean white canvas. */
   .section-alt,
   .section-alt:has(.product-grid[data-products="best"]) {
