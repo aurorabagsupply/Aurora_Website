@@ -2813,6 +2813,15 @@
 }
 
 @media (max-width: 760px) {
+  .brand__mark {
+    --brand-tilt-x: 0deg;
+    --brand-tilt-y: 0deg;
+    transform: perspective(240px) rotateX(var(--brand-tilt-x)) rotateY(var(--brand-tilt-y)) !important;
+    transform-origin: center;
+    transition: transform 180ms cubic-bezier(.2, .8, .2, 1);
+    will-change: transform;
+  }
+
   .brand.is-haptic-tap {
     animation: aurora-brand-haptic-tap 120ms cubic-bezier(.2, .8, .2, 1);
   }
@@ -2876,6 +2885,11 @@
 }
 
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .brand__mark {
+    transform: none !important;
+    transition: none !important;
+  }
+
   .brand.is-haptic-tap {
     animation: none !important;
   }

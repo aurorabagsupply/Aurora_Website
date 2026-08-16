@@ -4343,6 +4343,73 @@ function bindBrandHapticFeedback() {
   });
 }
 
+function bindBrandTiltFeedback() {
+  const brands = Array.from(document.querySelectorAll(".brand"));
+  if (!brands.length || !window.matchMedia("(max-width: 760px)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  let orientationEnabled = false;
+  let permissionRequested = false;
+  let baseBeta = null;
+  let baseGamma = null;
+
+  const applyTilt = (rotateX, rotateY) => {
+    brands.forEach((brand) => {
+      const mark = brand.querySelector(".brand__mark");
+      if (!mark) return;
+      mark.style.setProperty("--brand-tilt-x", `${clamp(rotateX, -5, 5).toFixed(2)}deg`);
+      mark.style.setProperty("--brand-tilt-y", `${clamp(rotateY, -6, 6).toFixed(2)}deg`);
+    });
+  };
+
+  const resetTilt = () => applyTilt(0, 0);
+
+  const onOrientation = (event) => {
+    if (!Number.isFinite(event.beta) || !Number.isFinite(event.gamma)) return;
+    if (baseBeta === null || baseGamma === null) {
+      baseBeta = event.beta;
+      baseGamma = event.gamma;
+      return;
+    }
+    applyTilt((event.beta - baseBeta) * -0.16, (event.gamma - baseGamma) * 0.2);
+  };
+
+  const enableOrientation = () => {
+    if (orientationEnabled) return;
+    orientationEnabled = true;
+    window.addEventListener("deviceorientation", onOrientation, { passive: true });
+  };
+
+  const requestOrientationPermission = () => {
+    if (permissionRequested) return;
+    permissionRequested = true;
+    const orientation = window.DeviceOrientationEvent;
+    if (orientation && typeof orientation.requestPermission === "function") {
+      orientation.requestPermission().then((state) => {
+        if (state === "granted") enableOrientation();
+      }).catch(() => {});
+      return;
+    }
+    enableOrientation();
+  };
+
+  brands.forEach((brand) => {
+    if (brand.dataset.tiltBound) return;
+    brand.dataset.tiltBound = "true";
+    brand.addEventListener("pointerdown", requestOrientationPermission, { passive: true });
+    brand.addEventListener("pointermove", (event) => {
+      if (orientationEnabled || !brand.clientWidth || !brand.clientHeight) return;
+      const rect = brand.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      applyTilt(-y * 4, x * 5);
+    }, { passive: true });
+    brand.addEventListener("pointerleave", resetTilt, { passive: true });
+    brand.addEventListener("pointerup", resetTilt, { passive: true });
+  });
+}
+
 function applyMobileDesignSystemV2() {
   enhanceMobileAccountTabs();
   enhanceBusinessCertificateUpload();
@@ -4352,6 +4419,7 @@ function applyMobileDesignSystemV2() {
   compactFooterCopy();
   tuneWhatsAppForFooter();
   bindBrandHapticFeedback();
+  bindBrandTiltFeedback();
   document.body.classList.add("aurora-mobile-v2");
 }
 

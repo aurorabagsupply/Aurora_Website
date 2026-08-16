@@ -7,6 +7,8 @@ Date: 2026-08-16
 - Added a short mobile Logo press response without changing the existing home link.
 - Uses the browser vibration API when available and a 120ms scale feedback fallback.
 - Respects `prefers-reduced-motion` and mirrors the change in the WordPress theme.
+- Added a restrained mobile 3D tilt effect driven by device orientation when available.
+- iPhone Safari requests motion permission from the Logo touch; pointer movement remains a fallback.
 
 ## Note
 
