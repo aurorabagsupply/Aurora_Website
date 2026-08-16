@@ -2949,3 +2949,14 @@
     bottom: 6px !important;
   }
 }
+
+/* Mobile frosted header: let the hero show through more naturally. */
+@media (max-width: 760px) {
+  .main-header {
+    background: rgba(255, 255, 255, .74) !important;
+  }
+
+  .main-header::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .04)) !important;
+  }
+}

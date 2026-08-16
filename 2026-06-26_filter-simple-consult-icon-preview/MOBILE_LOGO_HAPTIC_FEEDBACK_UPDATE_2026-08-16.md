@@ -13,6 +13,7 @@ Date: 2026-08-16
 - Mirrored the header height refinement in the WordPress theme without changing desktop styles or header interactions.
 - Applied a second quarter reduction to the mobile navigation row, with smaller icon containers and matching menu-line spacing.
 - Simplified the mobile menu mark to two centered lines by removing the inherited third-line box shadow.
+- Reduced the mobile frosted header white opacity so Hero imagery shows through more softly while retaining the blur effect.
 
 ## Note
 
