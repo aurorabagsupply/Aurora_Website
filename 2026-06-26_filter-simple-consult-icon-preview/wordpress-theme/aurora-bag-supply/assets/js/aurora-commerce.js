@@ -2008,7 +2008,8 @@ function auroraAssetBase() {
 }
 
 function imagePath(category, index) {
-  return `${auroraAssetBase()}/catalog/${category}/${category} (${index}).jpg`;
+  const path = `${auroraAssetBase()}/catalog/${category}/${category} (${index}).jpg`;
+  return category === "Bag" && Number(index) === 3 ? `${path}?v=20260816-bag3-white` : path;
 }
 
 function categoryThumbnailPath(category) {
