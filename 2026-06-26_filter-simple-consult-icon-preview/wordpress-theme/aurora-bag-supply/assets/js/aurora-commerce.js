@@ -136,6 +136,7 @@ const I18N = {
     contact: "Contact Us",
     about: "About Us",
     newArrivals: "New Arrivals",
+    quality: "Quality",
     heroKicker: "Inspired by design | Engineered with care",
     heroTitle: "Beyond Design. Built to Last.",
     heroText: "Great accessories do not just look good. They are developed to perform across Accessories, Bag, Hardware, Leather, Tools and Zipper supply.",
@@ -350,6 +351,7 @@ const I18N = {
     contact: "联系我们",
     about: "关于我们",
     newArrivals: "新品",
+    quality: "品质",
     heroKicker: "源于设计 | 精工制造",
     heroTitle: "超越设计。经久耐用。",
     heroText: "优秀配件不只是好看，更要经得起真实使用。我们专注配件、包、五金、皮革、工具和拉链供应。",
@@ -556,6 +558,7 @@ const I18N = {
     contact: "Контакты",
     about: "О нас",
     newArrivals: "Новинки",
+    quality: "Качество",
     heroKicker: "Дизайн и надежная разработка",
     heroTitle: "За пределами дизайна. Сделано надолго.",
     heroText: "Хорошие аксессуары должны не только выглядеть хорошо, но и работать стабильно.",
@@ -619,6 +622,7 @@ const I18N = {
     contact: "Contacto",
     about: "Nosotros",
     newArrivals: "Novedades",
+    quality: "Calidad",
     heroKicker: "Inspirado por el diseno | Fabricado con cuidado",
     heroTitle: "Mas alla del diseno. Hecho para durar.",
     heroText: "Los buenos accesorios no solo se ven bien. Estan desarrollados para rendir.",
@@ -682,6 +686,7 @@ const I18N = {
     contact: "Contact",
     about: "A propos",
     newArrivals: "Nouveautes",
+    quality: "Qualite",
     heroKicker: "Inspire par le design | Concu avec soin",
     heroTitle: "Au-dela du design. Fait pour durer.",
     heroText: "Les bons accessoires ne sont pas seulement beaux. Ils sont concus pour performer.",
@@ -745,6 +750,7 @@ const I18N = {
     contact: "Kontakt",
     about: "Uber uns",
     newArrivals: "Neuheiten",
+    quality: "Qualitaet",
     heroKicker: "Vom Design inspiriert | Mit Sorgfalt entwickelt",
     heroTitle: "Mehr als Design. Fur Dauer gemacht.",
     heroText: "Gute Accessoires sehen nicht nur gut aus. Sie sind fur Leistung entwickelt.",
@@ -808,6 +814,7 @@ const I18N = {
     contact: "Contatto",
     about: "Chi siamo",
     newArrivals: "Novita",
+    quality: "Qualita",
     heroKicker: "Ispirato dal design | Progettato con cura",
     heroTitle: "Oltre il design. Fatto per durare.",
     heroText: "I buoni accessori non sono solo belli. Sono sviluppati per funzionare.",
@@ -871,6 +878,7 @@ const I18N = {
     contact: "تواصل معنا",
     about: "من نحن",
     newArrivals: "وصل حديثا",
+    quality: "الجودة",
     heroKicker: "تصميم ملهم | تصنيع بعناية",
     heroTitle: "ما بعد التصميم. مصنوع ليدوم.",
     heroText: "الاكسسوارات الجيدة لا تبدو جميلة فقط، بل يتم تطويرها لتعمل بثبات.",
@@ -1592,6 +1600,17 @@ const CATEGORY_LABELS = {
   ar: { Accessories: "اكسسوارات", Bag: "حقائب", Hardware: "معدات", Leather: "جلود", Tools: "ادوات", Zipper: "سحابات" },
 };
 
+const HERO_CATEGORY_ACTIONS = {
+  en: { Bag: "View Bag", Hardware: "View Hardware", Leather: "View Leather", Zipper: "View Zipper", Accessories: "View Accessories", Tools: "View Tools" },
+  zh: { Bag: "查看包袋", Hardware: "查看五金", Leather: "查看皮革", Zipper: "查看拉链", Accessories: "查看配件", Tools: "查看工具" },
+  ru: { Bag: "Открыть сумки", Hardware: "Открыть фурнитуру", Leather: "Открыть кожу", Zipper: "Открыть молнии", Accessories: "Открыть аксессуары", Tools: "Открыть инструменты" },
+  es: { Bag: "Ver bolsos", Hardware: "Ver herrajes", Leather: "Ver cuero", Zipper: "Ver cremalleras", Accessories: "Ver accesorios", Tools: "Ver herramientas" },
+  fr: { Bag: "Voir les sacs", Hardware: "Voir la quincaillerie", Leather: "Voir le cuir", Zipper: "Voir les fermetures", Accessories: "Voir les accessoires", Tools: "Voir les outils" },
+  de: { Bag: "Taschen ansehen", Hardware: "Hardware ansehen", Leather: "Leder ansehen", Zipper: "Reissverschlusse ansehen", Accessories: "Accessoires ansehen", Tools: "Werkzeuge ansehen" },
+  it: { Bag: "Vedi borse", Hardware: "Vedi hardware", Leather: "Vedi pelle", Zipper: "Vedi cerniere", Accessories: "Vedi accessori", Tools: "Vedi strumenti" },
+  ar: { Bag: "عرض الحقائب", Hardware: "عرض مستلزمات الحقائب", Leather: "عرض الجلود", Zipper: "عرض السحابات", Accessories: "عرض الإكسسوارات", Tools: "عرض الأدوات" },
+};
+
 const GENERIC_PRODUCT_TEXT = {
   ru: ["товар", "Профессиональный товар для B2B закупок, образцов и повторных заказов.", "Материал по категории / индивидуальная опция", "Покрытие и цвет по запросу", "Сумки, кожа, багаж и производственные проекты"],
   es: ["producto", "Producto profesional para compras B2B, muestras y pedidos repetidos.", "Material segun categoria / opcion personalizada", "Acabado y color bajo solicitud", "Bolsos, cuero, equipaje y proyectos de produccion"],
@@ -1618,6 +1637,11 @@ function t(key) {
 function categoryLabel(category) {
   const labels = CATEGORY_LABELS[currentLang()] || CATEGORY_LABELS.en;
   return labels[category] || category;
+}
+
+function heroCategoryAction(category) {
+  const actions = HERO_CATEGORY_ACTIONS[currentLang()] || HERO_CATEGORY_ACTIONS.en;
+  return actions[category] || categoryLabel(category);
 }
 
 function normalizeCategory(value) {
@@ -2858,6 +2882,7 @@ function renderHeroCarousel() {
   track.innerHTML = HERO_SLIDES.map((slide, index) => {
     const copy = heroSlideCopy(slide);
     const category = categoryLabel(slide.category);
+    const actionLabel = heroCategoryAction(slide.category);
     const active = index === activeHeroIndex ? " is-active" : "";
     return `
       <article class="hero-cover__slide${active}" data-hero-slide="${index}" aria-hidden="${index === activeHeroIndex ? "false" : "true"}">
@@ -2868,7 +2893,7 @@ function renderHeroCarousel() {
           <p class="hero-cover__subtitle">${copy.subtitle}</p>
           <p>${copy.text}</p>
           <div class="hero-cover__actions">
-            <a class="btn btn-primary" href="${productsUrl}${productsUrl.includes("?") ? "&" : "?"}category=${encodeURIComponent(slide.category)}">${category}</a>
+            <a class="btn btn-primary" href="${productsUrl}${productsUrl.includes("?") ? "&" : "?"}category=${encodeURIComponent(slide.category)}">${actionLabel}</a>
             <a class="btn btn-brass" href="${contactUrl}">${t("requestQuote")}</a>
           </div>
         </div>
@@ -3853,6 +3878,7 @@ function updateCommonLinks() {
     const category = categoryFromHref(href);
     if (category) link.textContent = link.classList.contains("aurora-mega-menu__top") ? megaTopLabel(category) : categoryLabel(category);
     if (href === "#new-arrivals") link.textContent = t("newArrivals");
+    if (href === "quality.html") link.textContent = t("quality");
     if (href === "contact.html") link.textContent = t("contact");
     if (href === "about.html") link.textContent = t("about");
   });
@@ -3861,6 +3887,7 @@ function updateCommonLinks() {
     const href = link.getAttribute("href") || "";
     const category = categoryFromHref(href);
     if (category) link.textContent = link.classList.contains("aurora-mega-menu__top") ? megaTopLabel(category) : categoryLabel(category);
+    if (href === "quality.html") link.textContent = t("quality");
     if (href === "contact.html" && /Contact|联系|Contacto|Kontakt|تواصل/.test(link.textContent)) link.textContent = t("contact");
     if (href === "about.html" && /About|关于|Nosotros|A propos|Uber|Chi|من/.test(link.textContent)) link.textContent = t("about");
   });
