@@ -5,6 +5,88 @@
   display: none;
 }
 
+/* Mobile menu language switcher: keep the control visible above legacy menu rules. */
+.language-select--menu {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .category-nav.is-open .mobile-nav-home-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 56px !important;
+    border-top: 1px solid rgba(0, 0, 0, .06) !important;
+  }
+
+  .category-nav.is-open .mobile-nav-home-row > a {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    min-height: 56px !important;
+    border-top: 0 !important;
+  }
+
+  .category-nav.is-open .language-select--menu {
+    display: block !important;
+    position: relative !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .category-nav.is-open .language-select--menu .language-select__button {
+    display: inline-grid !important;
+    place-items: center !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font-size: 12px !important;
+    font-weight: 650 !important;
+    letter-spacing: -.02em !important;
+  }
+
+  .category-nav.is-open .language-select--menu .language-select__glyph {
+    display: inline-block !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .category-nav.is-open .language-select--menu .language-select__glyph svg {
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.7 !important;
+    stroke-linecap: round !important;
+    stroke-linejoin: round !important;
+  }
+
+  .category-nav.is-open .language-select--menu .language-select__menu {
+    top: calc(100% + 6px) !important;
+    right: 0 !important;
+    left: auto !important;
+    min-width: 132px !important;
+    padding: 6px !important;
+    border: 1px solid rgba(0, 0, 0, .08) !important;
+    border-radius: 14px !important;
+    background: rgba(255, 255, 255, .98) !important;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, .10) !important;
+  }
+
+  .category-nav.is-open .language-select--menu.is-open .language-select__menu {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
 @media (max-width: 760px) {
   :root {
     --v2-pad: clamp(16px, 5.2vw, 24px);

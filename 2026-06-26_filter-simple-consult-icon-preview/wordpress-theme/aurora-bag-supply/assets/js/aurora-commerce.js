@@ -2670,7 +2670,7 @@ function openQuoteDrawer() {
 function languageSwitcherHtml(active, iconOnly = false) {
   const activeLabel = LANGUAGES.find(([code]) => code === active)?.[1] || "EN";
   return `
-    <button class="language-select__button" type="button" data-lang-toggle aria-label="Select language${iconOnly ? ` (${activeLabel})` : ""}">${iconOnly ? '<span class="language-select__glyph" aria-hidden="true">A/文</span>' : activeLabel}</button>
+    <button class="language-select__button" type="button" data-lang-toggle aria-label="Select language${iconOnly ? ` (${activeLabel})` : ""}">${iconOnly ? '<span class="language-select__glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z"></path></svg></span>' : activeLabel}</button>
     <div class="language-select__menu">
       ${LANGUAGES.map(([code, label]) => `<button type="button" data-lang="${code}">${label}</button>`).join("")}
     </div>
@@ -2701,7 +2701,7 @@ function syncLanguageSwitcherLabel() {
   document.querySelectorAll(".language-select__button").forEach((button) => {
     const activeLabel = LANGUAGES.find(([code]) => code === currentLang())?.[1] || "EN";
     if (button.closest(".language-select--menu")) {
-      button.innerHTML = '<span class="language-select__glyph" aria-hidden="true">A/文</span>';
+      button.innerHTML = '<span class="language-select__glyph" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.4 2.5 3.6 5.5 3.6 9s-1.2 6.5-3.6 9c-2.4-2.5-3.6-5.5-3.6-9S9.6 5.5 12 3Z"></path></svg></span>';
       button.setAttribute("aria-label", `Select language (${activeLabel})`);
       return;
     }
@@ -3757,13 +3757,15 @@ function enhanceStaticMegaMenu() {
 }
 
 function ensureMobileMenuLanguageSwitcher() {
-  const nav = document.querySelector(".category-nav .container");
-  if (!nav || nav.querySelector(".language-select--menu")) return;
+  const nav = document.querySelector(".category-nav .container, .category-nav .aurora-mega-menu__nav");
+  if (!nav) return;
+  const existing = nav.querySelector(".language-select--menu");
+  if (existing) return;
   const home = Array.from(nav.children).find((node) => {
     if (!(node instanceof HTMLAnchorElement)) return false;
     const label = (node.textContent || "").trim().toLowerCase();
     const href = node.getAttribute("href") || "";
-    return label === "home" || label === "首页" || href === "index.html" || href === "/";
+    return label === "home" || label === "首页" || href === "index.html" || href === "/" || href.endsWith("/");
   });
   if (!home) return;
 
@@ -4527,8 +4529,8 @@ function guardWhatsAppProductOverlap() {
 }
 
 enhanceStaticMegaMenu();
-ensureMobileMenuLanguageSwitcher();
 ensureSharedMobileHeader();
+ensureMobileMenuLanguageSwitcher();
 insertLanguageSwitcher();
 rerenderDynamicContent();
 bindMegaMenuBackdrop();
@@ -4540,3 +4542,5 @@ enhanceMobileFooterAccordions();
 guardWhatsAppProductOverlap();
 applyMobileDesignSystemV2();
 startHeroAutoplay();
+window.setTimeout(ensureMobileMenuLanguageSwitcher, 0);
+window.setTimeout(ensureMobileMenuLanguageSwitcher, 450);
