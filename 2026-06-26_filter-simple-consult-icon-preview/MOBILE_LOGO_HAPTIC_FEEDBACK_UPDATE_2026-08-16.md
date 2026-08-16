@@ -16,6 +16,7 @@ Date: 2026-08-16
 - Reduced the mobile frosted header white opacity so Hero imagery shows through more softly while retaining the blur effect.
 - Centered the mobile search, quote and menu icons on one vertical alignment line by removing the quote icon offset and normalizing the final icon containers.
 - Shortened and lightened the mobile two-line menu mark to match the compact reference shape.
+- Tightened the vertical spacing between the two mobile menu lines so they sit closer together.
 
 ## Note
 

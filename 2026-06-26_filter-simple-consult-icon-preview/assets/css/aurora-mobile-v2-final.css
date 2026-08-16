@@ -2989,4 +2989,12 @@
     width: 18px !important;
     height: 1.5px !important;
   }
+
+  .mobile-header-actions .mobile-menu::before {
+    top: 8px !important;
+  }
+
+  .mobile-header-actions .mobile-menu::after {
+    bottom: 8px !important;
+  }
 }
