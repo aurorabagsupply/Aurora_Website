@@ -4139,10 +4139,14 @@ function bindForms() {
   const menuClose = nav?.querySelector("[data-mobile-menu-close]");
   const openMobileNav = () => {
     if (!nav) return;
+    nav.scrollTop = 0;
     nav.classList.add("is-open");
     document.body.classList.add("aurora-mobile-menu-open");
     menu?.setAttribute("aria-expanded", "true");
     setMegaBackdropOpen(false);
+    requestAnimationFrame(() => {
+      nav.scrollTop = 0;
+    });
   };
   const closeMobileNav = () => {
     if (!nav) return;

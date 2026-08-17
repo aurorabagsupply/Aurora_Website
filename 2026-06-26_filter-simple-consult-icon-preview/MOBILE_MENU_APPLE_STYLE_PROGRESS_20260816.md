@@ -17,3 +17,7 @@
 - Checked the staged diff with `git diff --check`.
 - Confirmed the published GitHub Pages HTML, CSS, and JavaScript return HTTP 200 and contain the new menu version.
 - Playwright was not available in this workspace, so no automated 390px click-through screenshot was generated.
+
+## Follow-up
+
+2026-08-17 - Tightened mobile menu spacing, forced the menu layer above the page/header, reset its scroll position on open, and added cache-busting for the published preview.
