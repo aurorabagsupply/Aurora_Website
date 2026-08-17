@@ -3862,3 +3862,13 @@
     margin-bottom: 18px !important;
   }
 }
+
+/* Keep every first-level menu label on the same comfortable inset. */
+@media (max-width: 760px) {
+  .category-nav .mobile-nav-home-row > a,
+  .category-nav .aurora-mega-menu__top,
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    padding-left: 24px !important;
+  }
+}
