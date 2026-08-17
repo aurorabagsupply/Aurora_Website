@@ -3905,3 +3905,58 @@
     transform: rotate(-45deg) !important;
   }
 }
+
+/* Stable mobile menu geometry: Home is the first item, and the in-menu close
+   control is the only close affordance while the drawer is open. */
+@media (max-width: 760px) {
+  .category-nav .container,
+  .category-nav .aurora-mega-menu__nav {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+
+  .category-nav .mobile-nav-home-row {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 0 18px !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 0 0 24px !important;
+    transform: none !important;
+  }
+
+  .category-nav .aurora-mega-menu,
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    margin-bottom: 18px !important;
+  }
+
+  .category-nav .mobile-menu-close {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    top: calc(20px + env(safe-area-inset-top, 0px)) !important;
+    right: 24px !important;
+    z-index: 20 !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font: 400 34px/40px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important;
+  }
+
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
