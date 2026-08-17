@@ -4126,17 +4126,6 @@ function bindForms() {
   });
   const menu = document.querySelector("[data-mobile-menu]");
   const nav = document.querySelector(".category-nav");
-  const navContainer = nav?.querySelector(".container");
-  if (navContainer && !navContainer.querySelector("[data-mobile-menu-close]")) {
-    const closeButton = document.createElement("button");
-    closeButton.className = "mobile-menu-close";
-    closeButton.type = "button";
-    closeButton.dataset.mobileMenuClose = "";
-    closeButton.setAttribute("aria-label", "Close menu");
-    closeButton.textContent = "×";
-    navContainer.prepend(closeButton);
-  }
-  const menuClose = nav?.querySelector("[data-mobile-menu-close]");
   const openMobileNav = () => {
     if (!nav) return;
     nav.scrollTop = 0;
@@ -4161,7 +4150,6 @@ function bindForms() {
       if (nav.classList.contains("is-open")) closeMobileNav();
       else openMobileNav();
     });
-    menuClose?.addEventListener("click", closeMobileNav);
     document.addEventListener("click", (event) => {
       const target = event.target instanceof Element ? event.target : null;
       if (!nav.classList.contains("is-open") || target?.closest(".category-nav .container, [data-mobile-menu]")) return;

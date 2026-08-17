@@ -3882,6 +3882,12 @@
     display: none !important;
   }
 
+  .category-nav [data-mobile-menu-close] {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
   body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
     position: relative !important;
     color: #1d1d1f !important;
