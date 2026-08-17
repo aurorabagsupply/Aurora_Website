@@ -3873,13 +3873,13 @@
   }
 
   .category-nav .mobile-nav-home-row > a {
-    margin-left: 0 !important;
+    margin-left: 32px !important;
     transform: translateY(16px);
   }
 
-  /* Use the header menu button as the open-state close toggle. */
+  /* Keep the close control in the same corner as the menu trigger. */
   .category-nav .mobile-menu-close {
-    display: none !important;
+    display: flex !important;
   }
 
   body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
