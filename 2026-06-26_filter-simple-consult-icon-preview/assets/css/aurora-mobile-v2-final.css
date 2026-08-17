@@ -3873,7 +3873,35 @@
   }
 
   .category-nav .mobile-nav-home-row > a {
-    margin-left: 32px !important;
+    margin-left: 0 !important;
     transform: translateY(16px);
+  }
+
+  /* Use the header menu button as the open-state close toggle. */
+  .category-nav .mobile-menu-close {
+    display: none !important;
+  }
+
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
+    position: relative !important;
+    color: #1d1d1f !important;
+  }
+
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::before,
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::after {
+    top: 17px !important;
+    bottom: auto !important;
+    left: 5px !important;
+    width: 26px !important;
+    height: 1.9px !important;
+    transform-origin: center !important;
+  }
+
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::before {
+    transform: rotate(45deg) !important;
+  }
+
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::after {
+    transform: rotate(-45deg) !important;
   }
 }
