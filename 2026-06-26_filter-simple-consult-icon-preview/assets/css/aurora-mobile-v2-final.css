@@ -3428,6 +3428,179 @@
   }
 }
 
+/* Apple-inspired mobile menu refinement: full-screen, quiet, and unclipped. */
+@media (max-width: 760px) {
+  body.aurora-mobile-menu-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+  }
+
+  .category-nav,
+  .category-nav.is-open {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10000 !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, .985) !important;
+    box-shadow: none !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+    backdrop-filter: blur(18px) !important;
+  }
+
+  .category-nav .container,
+  .category-nav .aurora-mega-menu__nav {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    padding: calc(82px + env(safe-area-inset-top, 0px)) 32px calc(32px + env(safe-area-inset-bottom, 0px)) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .mobile-menu-close {
+    position: absolute !important;
+    top: calc(18px + env(safe-area-inset-top, 0px)) !important;
+    right: 24px !important;
+    z-index: 5 !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font: 400 34px/40px -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif !important;
+  }
+
+  .category-nav .mobile-nav-home-row {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 0 34px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a,
+  .category-nav .aurora-mega-menu__top,
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font-size: 31px !important;
+    line-height: 1.18 !important;
+    font-weight: 600 !important;
+    letter-spacing: -.015em !important;
+    text-align: left !important;
+  }
+
+  .category-nav .aurora-mega-menu {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 22px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__top {
+    padding-right: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .category-nav .aurora-mega-menu__toggle {
+    display: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__panel {
+    display: block !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 0 0 18px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: max-height .28s ease, opacity .22s ease, padding .28s ease !important;
+  }
+
+  .category-nav .aurora-mega-menu.is-open .aurora-mega-menu__panel {
+    max-height: 520px !important;
+    padding-bottom: 10px !important;
+    opacity: 1 !important;
+  }
+
+  .category-nav .aurora-mega-menu__column h3,
+  .category-nav .aurora-mega-menu__cta {
+    display: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__link {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 7px 0 !important;
+    border: 0 !important;
+    color: #6e6e73 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    font-weight: 400 !important;
+  }
+
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    margin: 0 0 22px !important;
+  }
+
+  .category-nav .language-select--menu {
+    position: absolute !important;
+    top: calc(22px + env(safe-area-inset-top, 0px)) !important;
+    right: 76px !important;
+    margin: 0 !important;
+  }
+
+  .category-nav .language-select--menu .language-select__button {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .category-nav .language-select--menu .language-select__glyph,
+  .category-nav .language-select--menu .language-select__glyph svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .category-nav::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .category-nav,
   .category-nav .aurora-mega-menu__panel,
@@ -3538,5 +3711,131 @@
     height: 36px !important;
     font-size: 32px !important;
     line-height: 36px !important;
+  }
+}
+
+/* Final cascade guard for the full-screen mobile menu. */
+@media (max-width: 760px) {
+  .category-nav,
+  .category-nav.is-open {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10000 !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: none !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, .985) !important;
+    box-shadow: none !important;
+  }
+
+  .category-nav .container,
+  .category-nav .aurora-mega-menu__nav {
+    min-width: 0 !important;
+    min-height: 100% !important;
+    padding: calc(82px + env(safe-area-inset-top, 0px)) 32px calc(32px + env(safe-area-inset-bottom, 0px)) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 0 34px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a,
+  .category-nav .aurora-mega-menu__top,
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    font-size: 31px !important;
+    line-height: 1.18 !important;
+    font-weight: 600 !important;
+    letter-spacing: -.015em !important;
+    text-align: left !important;
+  }
+
+  .category-nav .aurora-mega-menu {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 0 22px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__top {
+    padding-right: 0 !important;
+    cursor: pointer !important;
+  }
+
+  .category-nav .aurora-mega-menu__toggle {
+    display: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__panel {
+    display: block !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 0 0 18px !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: max-height .28s ease, opacity .22s ease, padding .28s ease !important;
+  }
+
+  .category-nav .aurora-mega-menu.is-open .aurora-mega-menu__panel {
+    max-height: 520px !important;
+    padding-bottom: 10px !important;
+    opacity: 1 !important;
+  }
+
+  .category-nav .aurora-mega-menu__column h3,
+  .category-nav .aurora-mega-menu__cta {
+    display: none !important;
+  }
+
+  .category-nav .aurora-mega-menu__link {
+    display: block !important;
+    min-height: 0 !important;
+    padding: 7px 0 !important;
+    border: 0 !important;
+    color: #6e6e73 !important;
+    font-size: 16px !important;
+    line-height: 1.35 !important;
+    font-weight: 400 !important;
+  }
+
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    margin: 0 0 22px !important;
+  }
+
+  .category-nav .language-select--menu {
+    position: absolute !important;
+    top: calc(22px + env(safe-area-inset-top, 0px)) !important;
+    right: 76px !important;
+    margin: 0 !important;
   }
 }

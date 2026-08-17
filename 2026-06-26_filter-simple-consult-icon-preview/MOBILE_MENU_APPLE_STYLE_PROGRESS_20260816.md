@@ -21,3 +21,5 @@
 ## Follow-up
 
 2026-08-17 - Tightened mobile menu spacing, forced the menu layer above the page/header, reset its scroll position on open, and added cache-busting for the published preview.
+
+2026-08-17 - Refined the mobile menu into a full-screen Apple-inspired list: opaque white surface, unclipped left alignment, simplified close control, hidden category chevrons, and expandable secondary links retained for functionality.
