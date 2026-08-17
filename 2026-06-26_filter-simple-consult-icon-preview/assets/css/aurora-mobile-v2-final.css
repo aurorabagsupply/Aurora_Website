@@ -3871,4 +3871,8 @@
   .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
     padding-left: 24px !important;
   }
+
+  .category-nav .mobile-nav-home-row > a {
+    margin-left: 32px !important;
+  }
 }
