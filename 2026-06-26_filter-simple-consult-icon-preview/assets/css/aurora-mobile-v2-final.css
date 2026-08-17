@@ -3874,5 +3874,6 @@
 
   .category-nav .mobile-nav-home-row > a {
     margin-left: 32px !important;
+    transform: translateY(16px);
   }
 }
