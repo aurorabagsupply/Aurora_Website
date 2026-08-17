@@ -3873,13 +3873,13 @@
   }
 
   .category-nav .mobile-nav-home-row > a {
-    margin-left: 32px !important;
-    transform: translateY(16px);
+    margin-left: 0 !important;
+    transform: translateY(24px);
   }
 
-  /* Keep the close control in the same corner as the menu trigger. */
+  /* The header menu button becomes the sole close control when open. */
   .category-nav .mobile-menu-close {
-    display: flex !important;
+    display: none !important;
   }
 
   body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
