@@ -3960,3 +3960,60 @@
     pointer-events: none !important;
   }
 }
+
+/* Final mobile menu request: align Home with the category list, restore the
+   language control, and keep the original header toggle as the close action. */
+@media (max-width: 760px) {
+  .category-nav .mobile-nav-home-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 0 !important;
+    margin: 0 0 18px !important;
+    padding: 0 24px !important;
+    border: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .category-nav .language-select--menu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin-left: auto !important;
+    flex: 0 0 auto !important;
+  }
+
+  .category-nav .language-select--menu .language-select__button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .language-select--menu .language-select__glyph,
+  .category-nav .language-select--menu .language-select__glyph svg {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .category-nav .mobile-menu-close {
+    display: none !important;
+  }
+
+  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
