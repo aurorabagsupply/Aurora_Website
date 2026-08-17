@@ -3839,3 +3839,26 @@
     margin: 0 !important;
   }
 }
+
+/* Final mobile menu scale and inset adjustment. */
+@media (max-width: 760px) {
+  .category-nav .container,
+  .category-nav .aurora-mega-menu__nav {
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a,
+  .category-nav .aurora-mega-menu__top,
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    font-size: 27px !important;
+    line-height: 1.24 !important;
+  }
+
+  .category-nav .aurora-mega-menu,
+  .category-nav > .container > .aurora-mega-menu__simple,
+  .category-nav .aurora-mega-menu__nav > .aurora-mega-menu__simple {
+    margin-bottom: 18px !important;
+  }
+}
