@@ -3877,7 +3877,7 @@
     transform: translateY(24px);
   }
 
-  /* The header menu button becomes the sole close control when open. */
+  /* Keep the header menu icon unchanged while the drawer is open. */
   .category-nav .mobile-menu-close {
     display: none !important;
   }
@@ -3888,32 +3888,9 @@
     pointer-events: none !important;
   }
 
-  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu {
-    position: relative !important;
-    color: #1d1d1f !important;
-  }
-
-  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::before,
-  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::after {
-    top: 17px !important;
-    bottom: auto !important;
-    left: 5px !important;
-    width: 26px !important;
-    height: 1.9px !important;
-    transform-origin: center !important;
-  }
-
-  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::before {
-    transform: rotate(45deg) !important;
-  }
-
-  body.aurora-mobile-menu-open .mobile-header-actions .mobile-menu::after {
-    transform: rotate(-45deg) !important;
-  }
 }
 
-/* Stable mobile menu geometry: Home is the first item, and the in-menu close
-   control is the only close affordance while the drawer is open. */
+/* Stable mobile menu geometry: Home is the first item and language control. */
 @media (max-width: 760px) {
   .category-nav .container,
   .category-nav .aurora-mega-menu__nav {
