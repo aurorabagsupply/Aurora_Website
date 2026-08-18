@@ -3844,10 +3844,22 @@ function ensureMobileMenuLanguageSwitcher() {
   home.parentNode.insertBefore(row, home);
   row.appendChild(home);
 
+  const close = document.createElement("button");
+  close.className = "mobile-menu-close mobile-nav-close-line";
+  close.type = "button";
+  close.dataset.mobileMenuClose = "true";
+  close.setAttribute("aria-label", currentLang() === "zh" ? "关闭菜单" : "Close menu");
+  close.innerHTML = '<span aria-hidden="true"></span>';
+  row.appendChild(close);
+
+  const languageRow = document.createElement("div");
+  languageRow.className = "mobile-nav-language-row";
+  row.insertAdjacentElement("afterend", languageRow);
+
   const wrapper = document.createElement("div");
   wrapper.className = "language-select language-select--menu";
   wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
-  row.appendChild(wrapper);
+  languageRow.appendChild(wrapper);
 }
 
 function setMegaMenuOpen(menu, open) {
@@ -4156,6 +4168,10 @@ function bindForms() {
       closeMobileNav();
     });
   }
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (target?.closest("[data-mobile-menu-close]")) closeMobileNav();
+  });
   document.addEventListener("click", (event) => {
     const toggle = event.target.closest(".aurora-mega-menu__toggle");
     const top = event.target.closest(".aurora-mega-menu__top");

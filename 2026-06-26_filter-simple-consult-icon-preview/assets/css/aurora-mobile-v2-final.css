@@ -4000,3 +4000,89 @@
     pointer-events: auto !important;
   }
 }
+
+/* Mobile menu: give Home, close, and language their own quiet rows. */
+@media (max-width: 760px) {
+  .category-nav .mobile-nav-home-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 44px !important;
+    margin: 28px 0 0 !important;
+    padding: 0 24px !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a {
+    display: block !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .category-nav .mobile-nav-home-row .mobile-nav-close-line,
+  .category-nav [data-mobile-menu-close] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: static !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    color: #1d1d1f !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  .category-nav .mobile-nav-close-line > span,
+  .category-nav [data-mobile-menu-close] > span {
+    display: block !important;
+    width: 28px !important;
+    height: 2px !important;
+    border-radius: 999px !important;
+    background: currentColor !important;
+  }
+
+  .category-nav .mobile-nav-language-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    min-height: 52px !important;
+    margin: 0 24px 28px !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-language-row .language-select--menu {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 !important;
+  }
+
+  .category-nav .mobile-nav-language-row .language-select__button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-language-row .language-select__glyph,
+  .category-nav .mobile-nav-language-row .language-select__glyph svg {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .category-nav .mobile-nav-home-row + .mobile-nav-language-row ~ .aurora-mega-menu,
+  .category-nav .mobile-nav-home-row + .mobile-nav-language-row ~ .aurora-mega-menu__simple {
+    margin-top: 0 !important;
+  }
+}
