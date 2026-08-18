@@ -3854,7 +3854,7 @@ function ensureMobileMenuLanguageSwitcher() {
 
   const languageRow = document.createElement("div");
   languageRow.className = "mobile-nav-language-row";
-  row.insertAdjacentElement("afterend", languageRow);
+  row.appendChild(languageRow);
 
   const wrapper = document.createElement("div");
   wrapper.className = "language-select language-select--menu";

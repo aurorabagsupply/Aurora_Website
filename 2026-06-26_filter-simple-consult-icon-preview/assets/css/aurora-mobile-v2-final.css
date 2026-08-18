@@ -5,6 +5,95 @@
   display: none;
 }
 
+/* Final mobile menu composition: the short line sits above Home, the
+   language icon shares Home's row, and Bags follows without a blank band. */
+@media (max-width: 760px) {
+  .category-nav .mobile-nav-home-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    grid-template-rows: 34px 58px !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 92px !important;
+    min-height: 92px !important;
+    margin: 0 !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: flex !important;
+    position: static !important;
+    width: 40px !important;
+    height: 34px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line::before,
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line > span {
+    display: block !important;
+    width: 38px !important;
+    height: 2px !important;
+    border-radius: 0 !important;
+    background: #1d1d1f !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-language-row {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: 44px !important;
+    height: 58px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row .language-select--menu,
+  .category-nav .mobile-nav-home-row .language-select__button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .category-nav .mobile-nav-home-row .language-select__button {
+    width: 32px !important;
+    height: 32px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row + a,
+  .category-nav .mobile-nav-home-row + .aurora-mega-menu,
+  .category-nav .mobile-nav-home-row + .aurora-mega-menu__simple {
+    margin-top: 0 !important;
+  }
+}
+
 /* Mobile menu language switcher: keep the control visible above legacy menu rules. */
 .language-select--menu {
   display: none !important;
@@ -85,6 +174,69 @@
   .category-nav.is-open .language-select--menu.is-open .language-select__menu {
     display: flex !important;
     flex-direction: column !important;
+  }
+}
+
+/* Mobile menu composition: the close line sits above Home, while the
+   language control shares Home's row so the category list starts immediately. */
+@media (max-width: 760px) {
+  .category-nav .mobile-nav-home-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) 40px !important;
+    grid-template-rows: 32px 48px !important;
+    align-items: center !important;
+    width: 100% !important;
+    height: 80px !important;
+    min-height: 80px !important;
+    margin: 0 !important;
+    padding: 0 24px !important;
+  }
+
+  .category-nav .mobile-nav-home-row > a {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    align-self: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row .mobile-nav-close-line {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+    display: flex !important;
+    position: static !important;
+    width: 40px !important;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-language-row {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: 40px !important;
+    height: 48px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row .language-select__button {
+    width: 32px !important;
+    height: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .category-nav .mobile-nav-home-row + a,
+  .category-nav .mobile-nav-home-row + .aurora-mega-menu,
+  .category-nav .mobile-nav-home-row + .aurora-mega-menu__simple {
+    margin-top: 0 !important;
   }
 }
 
@@ -4087,29 +4239,31 @@
   }
 }
 
-/* Final mobile menu alignment: keep the compact Home header and bring the
-   category list directly below the language control. */
+/* Final mobile menu composition: the short line sits above Home, the
+   language icon shares Home's row, and Bags follows without a blank band. */
 @media (max-width: 760px) {
   .category-nav .mobile-nav-home-row {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 40px !important;
-    grid-template-rows: 44px !important;
+    grid-template-columns: minmax(0, 1fr) 44px !important;
+    grid-template-rows: 34px 58px !important;
     align-items: center !important;
-    min-height: 44px !important;
-    height: 44px !important;
-    margin: 16px 0 0 !important;
+    width: 100% !important;
+    height: 92px !important;
+    min-height: 92px !important;
+    margin: 0 !important;
     padding: 0 24px !important;
+    box-sizing: border-box !important;
   }
 
   .category-nav .mobile-nav-home-row > a {
     grid-column: 1 !important;
-    grid-row: 1 !important;
+    grid-row: 2 !important;
     align-self: center !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  .category-nav .mobile-nav-home-row .mobile-nav-close-line {
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line {
     grid-column: 2 !important;
     grid-row: 1 !important;
     justify-self: end !important;
@@ -4117,38 +4271,59 @@
     display: flex !important;
     position: static !important;
     width: 40px !important;
-    height: 40px !important;
+    height: 34px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line::before,
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line::after {
+    display: none !important;
+    content: none !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-close-line > span {
+    display: block !important;
+    width: 38px !important;
+    height: 2px !important;
+    border-radius: 0 !important;
+    background: #1d1d1f !important;
+  }
+
+  .category-nav .mobile-nav-home-row > .mobile-nav-language-row {
+    grid-column: 2 !important;
+    grid-row: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: 44px !important;
+    height: 58px !important;
+    min-height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
 
-  .category-nav .mobile-nav-language-row {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    height: 36px !important;
-    min-height: 36px !important;
-    margin: 0 24px 4px !important;
-    padding: 0 !important;
-  }
-
-  .category-nav .mobile-nav-language-row .language-select--menu,
-  .category-nav .mobile-nav-language-row .language-select__button {
+  .category-nav .mobile-nav-home-row .language-select--menu,
+  .category-nav .mobile-nav-home-row .language-select__button {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
   }
 
-  .category-nav .mobile-nav-language-row .language-select__button {
+  .category-nav .mobile-nav-home-row .language-select__button {
     width: 32px !important;
     height: 32px !important;
+    min-height: 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
   }
 
-  .category-nav .mobile-nav-home-row + .mobile-nav-language-row ~ .aurora-mega-menu,
-  .category-nav .mobile-nav-home-row + .mobile-nav-language-row ~ .aurora-mega-menu__simple,
-  .category-nav .mobile-nav-language-row + .aurora-mega-menu,
-  .category-nav .mobile-nav-language-row + .aurora-mega-menu__simple {
+  .category-nav .mobile-nav-home-row + a,
+  .category-nav .mobile-nav-home-row + .aurora-mega-menu,
+  .category-nav .mobile-nav-home-row + .aurora-mega-menu__simple {
     margin-top: 0 !important;
   }
 }
