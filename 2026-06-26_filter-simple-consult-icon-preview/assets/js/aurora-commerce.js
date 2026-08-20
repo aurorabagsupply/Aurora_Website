@@ -4703,8 +4703,6 @@ function repairMobileMenuLayout() {
     row.className = "mobile-nav-home-row";
     nav.insertBefore(row, lineRow.nextElementSibling || null);
   }
-  home.classList.add("mobile-nav-home-link");
-  row.appendChild(home);
 
   let languageRow = row.querySelector(".mobile-nav-language-row");
   if (!languageRow) {
@@ -4712,7 +4710,11 @@ function repairMobileMenuLayout() {
     languageRow.className = "mobile-nav-language-row";
     row.appendChild(languageRow);
   }
-  let wrapper = nav.querySelector(":scope > .language-select--menu");
+  home.classList.add("mobile-nav-home-link");
+  row.insertBefore(home, languageRow);
+
+  const wrappers = Array.from(nav.querySelectorAll(".language-select--menu"));
+  let wrapper = wrappers.find((item) => item.querySelector("[data-lang-toggle]")) || wrappers[0];
   if (!wrapper) {
     wrapper = document.createElement("div");
     wrapper.className = "language-select language-select--menu";
@@ -4721,6 +4723,9 @@ function repairMobileMenuLayout() {
     wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
   }
   languageRow.appendChild(wrapper);
+  wrappers.forEach((item) => {
+    if (item !== wrapper) item.remove();
+  });
 }
 
 enhanceStaticMegaMenu();

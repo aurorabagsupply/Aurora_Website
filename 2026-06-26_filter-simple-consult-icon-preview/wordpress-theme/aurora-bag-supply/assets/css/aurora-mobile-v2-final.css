@@ -3224,3 +3224,33 @@
     transition: none;
   }
 }
+
+@media (max-width: 767px) {
+  .category-nav.is-open .mobile-nav-home-row {
+    display: flex !important;
+    position: relative !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 42px !important;
+    min-height: 42px !important;
+    margin: 0 !important;
+  }
+
+  .category-nav.is-open .mobile-nav-home-row > .mobile-nav-home-link,
+  .category-nav.is-open .mobile-nav-home-row > a {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    flex: 1 1 auto !important;
+  }
+
+  .category-nav.is-open .mobile-nav-home-row > .mobile-nav-language-row {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    flex: 0 0 auto !important;
+    margin-left: auto !important;
+  }
+}

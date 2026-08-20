@@ -3852,25 +3852,45 @@ function enhanceStaticMegaMenu() {
 function ensureMobileMenuLanguageSwitcher() {
   const nav = document.querySelector(".category-nav .container, .category-nav .aurora-mega-menu__nav");
   if (!nav) return;
-  const existing = nav.querySelector(".language-select--menu");
-  if (existing) return;
-  const home = Array.from(nav.children).find((node) => {
-    if (!(node instanceof HTMLAnchorElement)) return false;
+  let home = nav.querySelector(".mobile-nav-home-link");
+  if (!home) {
+    home = Array.from(nav.querySelectorAll(":scope > a, :scope a")).find((node) => {
     const label = (node.textContent || "").trim().toLowerCase();
     const href = node.getAttribute("href") || "";
     return label === "home" || label === "首页" || href === "index.html" || href === "/" || href.endsWith("/");
   });
+  }
   if (!home) return;
 
-  const row = document.createElement("div");
+  let row = nav.querySelector(".mobile-nav-home-row");
+  if (!row) {
+    row = document.createElement("div");
+    home.parentNode.insertBefore(row, home);
+  }
   row.className = "mobile-nav-home-row";
-  home.parentNode.insertBefore(row, home);
-  row.appendChild(home);
 
-  const wrapper = document.createElement("div");
-  wrapper.className = "language-select language-select--menu";
-  wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
-  row.appendChild(wrapper);
+  let languageRow = row.querySelector(".mobile-nav-language-row");
+  if (!languageRow) {
+    languageRow = document.createElement("div");
+    languageRow.className = "mobile-nav-language-row";
+    row.appendChild(languageRow);
+  }
+  home.classList.add("mobile-nav-home-link");
+  row.insertBefore(home, languageRow);
+
+  const wrappers = Array.from(nav.querySelectorAll(".language-select--menu"));
+  let wrapper = wrappers.find((item) => item.querySelector("[data-lang-toggle]")) || wrappers[0];
+  if (!wrapper) {
+    wrapper = document.createElement("div");
+    wrapper.className = "language-select language-select--menu";
+    wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+  } else if (!wrapper.querySelector("[data-lang-toggle]")) {
+    wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+  }
+  languageRow.appendChild(wrapper);
+  wrappers.forEach((item) => {
+    if (item !== wrapper) item.remove();
+  });
 }
 
 function setMegaMenuOpen(menu, open) {
