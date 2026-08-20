@@ -5037,7 +5037,7 @@
   }
 }
 
-@media (width: 390px) {
+@media (min-width: 375px) and (max-width: 430px) {
   .category-nav > .container,
   .category-nav .container.aurora-mega-menu__nav {
     height: calc(100svh - 80px) !important;
