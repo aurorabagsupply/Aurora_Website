@@ -5051,7 +5051,7 @@
 
   .mobile-nav-home-row {
     position: relative !important;
-    top: 26px !important;
+    top: -25px !important;
     left: 0 !important;
   }
 
