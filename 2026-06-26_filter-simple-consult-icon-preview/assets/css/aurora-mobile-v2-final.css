@@ -5057,13 +5057,13 @@
 
   .category-nav .language-select--menu {
     position: relative !important;
-    top: -12.5px !important;
-    right: -31.5px !important;
+    top: -2px !important;
+    right: -21px !important;
   }
 
   .mobile-nav-close-line-row {
     position: relative !important;
-    top: -10px !important;
+    top: -18px !important;
     left: 24px !important;
   }
 }
