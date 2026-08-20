@@ -67,3 +67,10 @@ Do not break the current header, footer, product category pages, WooCommerce str
 3. Record only confirmed findings. Do not turn guesses or unverified workarounds into permanent project rules.
 4. Add the record immediately after the fix is verified so later Codex sessions do not repeat the same failure.
 5. Keep records concise and append them to the most relevant section of this file without removing earlier project history.
+
+### GitHub Pages deploy failure (2026-08-20)
+- Symptom: the commit was present on `origin/master`, but GitHub Pages continued serving the previous asset version.
+- Confirmed cause: the Pages workflow build and artifact upload succeeded, but the `Deploy to GitHub Pages` step failed. Waiting alone could not publish the new version.
+- Avoid: reporting the deployment as merely pending without checking the Actions conclusion and the asset version returned by the live page.
+- Working solution: create and push an empty commit with `git commit --allow-empty` to trigger a new Pages workflow, then wait for the live HTML to reference the expected cache-busting asset version.
+- Verification: confirm the new workflow is triggered and fetch the GitHub Pages HTML with a unique query string until it returns the expected CSS version.
