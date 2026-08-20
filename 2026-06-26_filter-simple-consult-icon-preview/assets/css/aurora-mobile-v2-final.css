@@ -3003,7 +3003,7 @@
   .mobile-search-overlay {
     position: fixed !important;
     inset: 0 !important;
-    z-index: 1200 !important;
+    z-index: 11000 !important;
     display: block !important;
     padding: calc(56px + env(safe-area-inset-top, 0px)) 24px calc(32px + env(safe-area-inset-bottom, 0px)) !important;
     background: rgba(245, 245, 247, .96) !important;
@@ -3173,6 +3173,10 @@
 
   .mobile-search-is-open {
     overflow: hidden !important;
+  }
+
+  .mobile-search-is-open .category-nav .mobile-nav-close-line {
+    pointer-events: none !important;
   }
 
   @media (prefers-reduced-motion: reduce) {
