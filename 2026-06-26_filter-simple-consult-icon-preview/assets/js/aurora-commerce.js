@@ -3826,41 +3826,63 @@ function enhanceStaticMegaMenu() {
   });
 }
 
-function ensureMobileMenuLanguageSwitcher() {
-  const nav = document.querySelector(".category-nav .container, .category-nav .aurora-mega-menu__nav");
-  if (!nav) return;
-  const existing = nav.querySelector(".language-select--menu");
-  if (existing) return;
-  const home = Array.from(nav.children).find((node) => {
-    if (!(node instanceof HTMLAnchorElement)) return false;
-    const label = (node.textContent || "").trim().toLowerCase();
-    const href = node.getAttribute("href") || "";
-    return label === "home" || label === "首页" || href === "index.html" || href === "/" || href.endsWith("/");
-  });
-  if (!home) return;
+  function ensureMobileMenuLanguageSwitcher() {
+    const nav = document.querySelector(".category-nav > .container, .category-nav .container.aurora-mega-menu__nav");
+    if (!nav) return;
+    let home = nav.querySelector(".mobile-nav-home-link");
+    if (!home) {
+      home = Array.from(nav.children).map((node) => node.matches?.("a") ? node : node.querySelector?.("a")).find((node) => {
+        if (!node) return false;
+        const label = (node.textContent || "").trim().toLowerCase();
+        const href = node.getAttribute("href") || "";
+        return label === "home" || label === "首页" || href === "index.html" || href === "/" || href.endsWith("/");
+      });
+    }
+    if (!home) return;
 
-  const row = document.createElement("div");
-  row.className = "mobile-nav-home-row";
-  home.parentNode.insertBefore(row, home);
-  row.appendChild(home);
+    let lineRow = nav.querySelector(":scope > .mobile-nav-close-line-row");
+    if (!lineRow) {
+      lineRow = document.createElement("div");
+      lineRow.className = "mobile-nav-close-line-row";
+      nav.insertBefore(lineRow, nav.firstElementChild);
+    }
+    let close = lineRow.querySelector(".mobile-nav-close-line") || nav.querySelector(".mobile-menu-close");
+    if (!close) close = document.createElement("button");
+    close.className = "mobile-menu-close mobile-nav-close-line";
+    close.type = "button";
+    close.dataset.mobileMenuClose = "true";
+    close.setAttribute("aria-label", currentLang() === "zh" ? "关闭菜单" : "Close menu");
+    close.innerHTML = '<span aria-hidden="true"></span>';
+    lineRow.appendChild(close);
+    nav.querySelectorAll(".mobile-menu-close").forEach((button) => {
+      if (button !== close) button.remove();
+    });
 
-  const close = document.createElement("button");
-  close.className = "mobile-menu-close mobile-nav-close-line";
-  close.type = "button";
-  close.dataset.mobileMenuClose = "true";
-  close.setAttribute("aria-label", currentLang() === "zh" ? "关闭菜单" : "Close menu");
-  close.innerHTML = '<span aria-hidden="true"></span>';
-  row.appendChild(close);
+    let row = nav.querySelector(":scope > .mobile-nav-home-row");
+    if (!row) {
+      row = document.createElement("div");
+      row.className = "mobile-nav-home-row";
+      nav.insertBefore(row, lineRow.nextElementSibling || null);
+    }
+    home.classList.add("mobile-nav-home-link");
+    row.appendChild(home);
 
-  const languageRow = document.createElement("div");
-  languageRow.className = "mobile-nav-language-row";
-  row.appendChild(languageRow);
-
-  const wrapper = document.createElement("div");
-  wrapper.className = "language-select language-select--menu";
-  wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
-  languageRow.appendChild(wrapper);
-}
+    let languageRow = row.querySelector(".mobile-nav-language-row");
+    if (!languageRow) {
+      languageRow = document.createElement("div");
+      languageRow.className = "mobile-nav-language-row";
+      row.appendChild(languageRow);
+    }
+    let wrapper = nav.querySelector(".language-select--menu");
+    if (!wrapper) {
+      wrapper = document.createElement("div");
+      wrapper.className = "language-select language-select--menu";
+      wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+    } else if (!wrapper.querySelector("[data-lang-toggle]")) {
+      wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+    }
+    languageRow.appendChild(wrapper);
+  }
 
 function setMegaMenuOpen(menu, open) {
   menu.classList.toggle("is-open", open);
@@ -4640,9 +4662,70 @@ function guardWhatsAppProductOverlap() {
   window.setTimeout(update, 900);
 }
 
+function repairMobileMenuLayout() {
+  const nav = document.querySelector(
+    ".category-nav > .container, .category-nav .container.aurora-mega-menu__nav, .category-nav .aurora-mega-menu__nav"
+  );
+  if (!nav) return;
+
+  let home = nav.querySelector(":scope > .mobile-nav-home-link");
+  if (!home) {
+    home = Array.from(nav.querySelectorAll(":scope > a, :scope a")).find((node) => {
+      const label = (node.textContent || "").trim().toLowerCase();
+      const href = node.getAttribute("href") || "";
+      return label === "home" || label === "首页" || href === "index.html" || href === "/" || href.endsWith("/");
+    });
+  }
+  if (!home) return;
+
+  let lineRow = nav.querySelector(":scope > .mobile-nav-close-line-row");
+  if (!lineRow) {
+    lineRow = document.createElement("div");
+    lineRow.className = "mobile-nav-close-line-row";
+    nav.insertBefore(lineRow, nav.firstElementChild);
+  }
+
+  let line = lineRow.querySelector(".mobile-nav-close-line");
+  if (!line) line = document.createElement("button");
+  line.className = "mobile-menu-close mobile-nav-close-line";
+  line.type = "button";
+  line.dataset.mobileMenuClose = "true";
+  line.setAttribute("aria-label", currentLang() === "zh" ? "关闭菜单" : "Close menu");
+  line.innerHTML = '<span aria-hidden="true"></span>';
+  lineRow.appendChild(line);
+  nav.querySelectorAll(".mobile-menu-close").forEach((button) => {
+    if (button !== line) button.remove();
+  });
+
+  let row = nav.querySelector(":scope > .mobile-nav-home-row");
+  if (!row) {
+    row = document.createElement("div");
+    row.className = "mobile-nav-home-row";
+    nav.insertBefore(row, lineRow.nextElementSibling || null);
+  }
+  home.classList.add("mobile-nav-home-link");
+  row.appendChild(home);
+
+  let languageRow = row.querySelector(".mobile-nav-language-row");
+  if (!languageRow) {
+    languageRow = document.createElement("div");
+    languageRow.className = "mobile-nav-language-row";
+    row.appendChild(languageRow);
+  }
+  let wrapper = nav.querySelector(":scope > .language-select--menu");
+  if (!wrapper) {
+    wrapper = document.createElement("div");
+    wrapper.className = "language-select language-select--menu";
+    wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+  } else if (!wrapper.querySelector("[data-lang-toggle]")) {
+    wrapper.innerHTML = languageSwitcherHtml(currentLang(), true);
+  }
+  languageRow.appendChild(wrapper);
+}
+
 enhanceStaticMegaMenu();
 ensureSharedMobileHeader();
-ensureMobileMenuLanguageSwitcher();
+repairMobileMenuLayout();
 insertLanguageSwitcher();
 rerenderDynamicContent();
 bindMegaMenuBackdrop();
@@ -4654,5 +4737,5 @@ enhanceMobileFooterAccordions();
 guardWhatsAppProductOverlap();
 applyMobileDesignSystemV2();
 startHeroAutoplay();
-window.setTimeout(ensureMobileMenuLanguageSwitcher, 0);
-window.setTimeout(ensureMobileMenuLanguageSwitcher, 450);
+window.setTimeout(repairMobileMenuLayout, 0);
+window.setTimeout(repairMobileMenuLayout, 450);

@@ -3180,3 +3180,47 @@
     margin-bottom: 2px !important;
   }
 }
+
+/* Mobile catalog filter: keep detailed options closed until a section is opened. */
+@media (max-width: 760px) {
+  .filters[data-filter-panel] .filter-group > .filter-section-toggle {
+    grid-column: 1 / -1;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 34px;
+    margin: 0 !important;
+    padding: 6px 0 !important;
+    font-size: 13px !important;
+    font-weight: 700;
+    letter-spacing: 0 !important;
+    cursor: pointer;
+  }
+
+  .filters[data-filter-panel] .filter-section-chevron {
+    display: inline-block;
+    color: #6e6e73;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform .25s ease;
+  }
+
+  .filters[data-filter-panel] .filter-group.is-collapsed > .filter-section-toggle .filter-section-chevron {
+    transform: rotate(-90deg);
+  }
+
+  .filters[data-filter-panel] .filter-group.is-collapsed > .aurora-filter-option {
+    display: none !important;
+  }
+
+  .filters[data-filter-panel] .filter-group.is-collapsed {
+    row-gap: 0;
+    padding: 10px 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filters[data-filter-panel] .filter-section-chevron {
+    transition: none;
+  }
+}
