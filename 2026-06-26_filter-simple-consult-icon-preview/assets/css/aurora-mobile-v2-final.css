@@ -5043,6 +5043,22 @@
 }
 
 @media (max-width: 760px) {
+  body:not(.aurora-mobile-menu-open) .category-nav .mobile-nav-close-line,
+  body:not(.aurora-mobile-menu-open) .category-nav [data-mobile-menu-close],
+  body:not(.aurora-mobile-menu-open) .category-nav .mobile-menu-close {
+    pointer-events: none !important;
+  }
+
+  a,
+  button,
+  [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-header-actions .mobile-menu {
+    touch-action: manipulation;
+  }
+
   .category-nav > .container,
   .category-nav .container.aurora-mega-menu__nav {
     height: calc(100svh - 80px) !important;
