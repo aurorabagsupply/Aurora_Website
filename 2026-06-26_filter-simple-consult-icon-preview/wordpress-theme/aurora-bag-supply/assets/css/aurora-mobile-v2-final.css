@@ -3224,3 +3224,17 @@
     transition: none;
   }
 }
+/* Mobile menu top alignment: transform-only offsets, keep the category list flow unchanged. */
+@media (max-width: 760px) {
+  .category-nav.is-open .mobile-nav-home-row > a {
+    transform: translate(-32px, -22px) !important;
+  }
+
+  .category-nav.is-open .mobile-nav-language-row {
+    transform: translate(46px, -22px) !important;
+  }
+
+  .category-nav.is-open .mobile-nav-close-line-row {
+    transform: translate(8px, -16px) !important;
+  }
+}
