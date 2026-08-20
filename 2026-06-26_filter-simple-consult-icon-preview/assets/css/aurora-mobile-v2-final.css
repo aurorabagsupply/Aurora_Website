@@ -5036,3 +5036,22 @@
     margin-left: auto !important;
   }
 }
+
+@media (width: 390px) {
+  .mobile-nav-home-row {
+    position: relative !important;
+    top: 26px !important;
+    left: 25px !important;
+  }
+
+  .category-nav .language-select--menu {
+    position: relative !important;
+    top: 36px !important;
+    right: 75px !important;
+  }
+
+  .mobile-nav-close-line-row {
+    position: relative !important;
+    left: 12px !important;
+  }
+}
