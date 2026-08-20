@@ -60,3 +60,10 @@ Do not break the current header, footer, product category pages, WooCommerce str
 3. Use 390px for the requested mobile verification, but keep the implementation on the shared mobile breakpoint so it also applies to the user's real phone viewport.
 4. After every requested website change, update the relevant asset cache-busting parameter, commit and push the exact changed files to GitHub, verify that GitHub Pages serves the new asset version, and send the user a fresh mobile preview URL without waiting to be reminded.
 5. Incident record (2026-08-20): mobile menu position changes were published correctly but did not appear on the user's phone because the final override was restricted to `375px-430px`. Changing the override to the shared `max-width: 760px` breakpoint resolved the mismatch.
+
+## Resolved issue knowledge log
+1. Whenever an area repeatedly fails and a confirmed solution is later found, record it in this file. This applies to all project areas, not only mobile breakpoints.
+2. Each record must include the visible symptom, confirmed root cause, unsuccessful approach to avoid, final working solution, affected files or selectors, and the verification method.
+3. Record only confirmed findings. Do not turn guesses or unverified workarounds into permanent project rules.
+4. Add the record immediately after the fix is verified so later Codex sessions do not repeat the same failure.
+5. Keep records concise and append them to the most relevant section of this file without removing earlier project history.
