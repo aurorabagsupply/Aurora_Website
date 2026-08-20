@@ -53,3 +53,10 @@ Use these standard translations:
 
 ## Do not break
 Do not break the current header, footer, product category pages, WooCommerce structure, filter sidebar, Mega Menu, WhatsApp floating button or payment methods area.
+
+## Mobile breakpoint and preview rule
+1. Do not use an exact-width or narrow-range media query for a mobile fix, such as `width: 390px` or `375px-430px`. A real phone browser may report a different effective CSS viewport, causing a tested change to have no effect on the user's phone.
+2. Reuse the project's existing mobile breakpoint, currently `@media (max-width: 760px)`, unless the user explicitly requests a different breakpoint.
+3. Use 390px for the requested mobile verification, but keep the implementation on the shared mobile breakpoint so it also applies to the user's real phone viewport.
+4. After every requested website change, update the relevant asset cache-busting parameter, commit and push the exact changed files to GitHub, verify that GitHub Pages serves the new asset version, and send the user a fresh mobile preview URL without waiting to be reminded.
+5. Incident record (2026-08-20): mobile menu position changes were published correctly but did not appear on the user's phone because the final override was restricted to `375px-430px`. Changing the override to the shared `max-width: 760px` breakpoint resolved the mismatch.
