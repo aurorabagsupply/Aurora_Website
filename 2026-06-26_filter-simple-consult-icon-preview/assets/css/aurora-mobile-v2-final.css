@@ -3175,7 +3175,8 @@
     overflow: hidden !important;
   }
 
-  .mobile-search-is-open .category-nav .mobile-nav-close-line {
+  .mobile-search-is-open .category-nav .mobile-nav-close-line,
+  .mobile-search-is-open .main-header .mobile-menu {
     pointer-events: none !important;
   }
 
