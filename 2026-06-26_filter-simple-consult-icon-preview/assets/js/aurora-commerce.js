@@ -4196,9 +4196,10 @@ function bindForms() {
   });
   document.addEventListener("click", (event) => {
     const target = event.target instanceof Element ? event.target : null;
-    const link = target?.closest(".category-nav .aurora-mega-menu__top");
-    if (!link || !isMobileMegaMenu()) return;
-    const href = link.getAttribute("href");
+    const menuItem = target?.closest(".category-nav .aurora-mega-menu");
+    if (!menuItem || target?.closest(".aurora-mega-menu__panel") || !isMobileMegaMenu()) return;
+    const link = menuItem.querySelector(".aurora-mega-menu__top");
+    const href = link?.getAttribute("href");
     if (!href) return;
     event.preventDefault();
     event.stopPropagation();
