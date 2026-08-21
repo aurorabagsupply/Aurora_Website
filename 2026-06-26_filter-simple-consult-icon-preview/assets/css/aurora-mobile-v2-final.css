@@ -5086,6 +5086,13 @@
     top: 1.5px !important;
     right: -13.5px !important;
   }
+  .category-nav .mobile-nav-home-link {
+    display: none !important;
+  }
+
+  .category-nav .mobile-nav-language-row {
+    margin-left: 0 !important;
+  }
 
   .mobile-nav-close-line-row {
     position: relative !important;
