@@ -4195,6 +4195,16 @@ function bindForms() {
     if (target?.closest("[data-mobile-menu-close]")) closeMobileNav();
   });
   document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const link = target?.closest(".category-nav .aurora-mega-menu__top");
+    if (!link || !isMobileMegaMenu()) return;
+    const href = link.getAttribute("href");
+    if (!href) return;
+    event.preventDefault();
+    event.stopPropagation();
+    window.location.assign(href);
+  }, true);
+  document.addEventListener("click", (event) => {
     const toggle = event.target.closest(".aurora-mega-menu__toggle");
     if (!toggle) return;
     const megaMenu = toggle.closest(".aurora-mega-menu");
