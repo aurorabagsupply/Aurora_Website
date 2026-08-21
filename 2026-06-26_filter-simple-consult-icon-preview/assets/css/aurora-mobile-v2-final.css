@@ -5061,7 +5061,7 @@
 
   .mobile-search-overlay__field input,
   .mobile-search-overlay__field input:focus {
-    font-size: clamp(25.5px, 7.65vw, 31.5px) !important;
+    font-size: clamp(19.125px, 5.7375vw, 23.625px) !important;
   }
 
   .category-nav > .container,
