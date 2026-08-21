@@ -3032,7 +3032,7 @@
   .mobile-search-overlay__close {
     position: absolute !important;
     top: calc(0px + env(safe-area-inset-top, 0px)) !important;
-    right: 24px !important;
+    right: 12px !important;
     width: 48px !important;
     height: 48px !important;
     border: 0 !important;
@@ -5090,7 +5090,7 @@
   .mobile-nav-close-line-row {
     position: relative !important;
     top: -14px !important;
-    left: 24px !important;
+    left: 15px !important;
   }
 }
 
