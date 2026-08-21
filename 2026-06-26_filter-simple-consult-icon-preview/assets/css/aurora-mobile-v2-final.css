@@ -5116,6 +5116,44 @@
     top: -14px !important;
     left: 15px !important;
   }
+
+  .page-title[data-page-title="catalog"] {
+    padding-top: 36px !important;
+    padding-bottom: 32px !important;
+  }
+
+  .page-title[data-page-title="catalog"] .kicker {
+    display: none !important;
+  }
+
+  .page-title[data-page-title="catalog"] h1 {
+    margin: 0 0 12px !important;
+    font-size: 36px !important;
+    font-weight: 700 !important;
+    line-height: 1.1 !important;
+  }
+
+  .page-title[data-page-title="catalog"] p:not(.kicker) {
+    max-width: 100% !important;
+    margin: 0 !important;
+    color: #6f6f6f !important;
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    overflow: hidden !important;
+  }
+
+  html[lang="zh"] .page-title[data-page-title="catalog"] p:not(.kicker) {
+    font-size: 0 !important;
+  }
+
+  html[lang="zh"] .page-title[data-page-title="catalog"] p:not(.kicker)::after {
+    content: "按 SKU、类别、材质、表面处理和用途快速查找产品。";
+    font-size: 16px;
+    line-height: 1.55;
+  }
 }
 
 /* Mobile menu: restore the full-screen frosted layer and reveal its content progressively. */
