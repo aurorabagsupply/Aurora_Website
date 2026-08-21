@@ -1,4 +1,4 @@
-﻿const CATEGORY_CONFIG = [
+const CATEGORY_CONFIG = [
   { name: "Bag", count: 30, prefix: "BAG", moq: 100 },
   { name: "Hardware", count: 20, prefix: "HDW", moq: 500 },
   { name: "Leather", count: 20, prefix: "LTH", moq: 50 },
@@ -4196,10 +4196,8 @@ function bindForms() {
   });
   document.addEventListener("click", (event) => {
     const toggle = event.target.closest(".aurora-mega-menu__toggle");
-    const top = event.target.closest(".aurora-mega-menu__top");
-    const trigger = toggle || top;
-    if (!trigger) return;
-    const megaMenu = trigger.closest(".aurora-mega-menu");
+    if (!toggle) return;
+    const megaMenu = toggle.closest(".aurora-mega-menu");
     if (!megaMenu || !isMobileMegaMenu()) return;
     event.preventDefault();
     const nextState = !megaMenu.classList.contains("is-open");
