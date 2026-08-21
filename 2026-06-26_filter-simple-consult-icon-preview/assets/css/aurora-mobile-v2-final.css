@@ -5094,6 +5094,19 @@
     margin-left: 0 !important;
   }
 
+  .category-nav.is-open .mobile-nav-home-row {
+    z-index: 20 !important;
+  }
+
+  .category-nav.is-open .language-select--menu {
+    z-index: 21 !important;
+  }
+
+  .category-nav.is-open .language-select--menu.is-open .language-select__menu {
+    z-index: 22 !important;
+    pointer-events: auto !important;
+  }
+
   .mobile-nav-close-line-row {
     position: relative !important;
     top: -14px !important;
