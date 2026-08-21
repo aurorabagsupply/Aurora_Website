@@ -4293,7 +4293,7 @@ function ensureSharedMobileHeader() {
             <span class="mobile-search-overlay__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg>
             </span>
-            <input name="q" type="search" placeholder="Search" autocomplete="off" />
+            <input name="q" type="search" placeholder="Search" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" />
           </label>
           <button class="mobile-search-overlay__image" type="button" data-image-search-trigger aria-label="Search by image">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 8.5A2.5 2.5 0 0 1 7 6h1.6l1-1.4h4.8l1 1.4H17a2.5 2.5 0 0 1 2.5 2.5v7A2.5 2.5 0 0 1 17 18H7a2.5 2.5 0 0 1-2.5-2.5v-7Z"></path><circle cx="12" cy="12" r="3.2"></circle></svg>

@@ -5064,6 +5064,11 @@
     font-size: clamp(19.125px, 5.7375vw, 23.625px) !important;
   }
 
+  .mobile-search-overlay__field input::selection {
+    background: transparent;
+    color: inherit;
+  }
+
   .category-nav > .container,
   .category-nav .container.aurora-mega-menu__nav {
     height: calc(100svh - 80px) !important;
