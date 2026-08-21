@@ -4047,7 +4047,7 @@ function bindActions() {
     const langToggle = target?.closest(".category-nav [data-lang-toggle]");
     if (!langToggle || !window.matchMedia("(max-width: 760px)").matches) return;
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
     const select = langToggle.closest(".language-select");
     document.querySelectorAll(".language-select.is-open").forEach((item) => {
       if (item !== select) item.classList.remove("is-open");
