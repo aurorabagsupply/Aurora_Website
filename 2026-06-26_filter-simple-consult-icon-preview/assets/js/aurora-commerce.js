@@ -2318,6 +2318,7 @@ function productCarouselStep(viewport) {
 
 function startProductCarousel(target) {
   stopProductCarousel(target);
+  if (target.dataset.manualMobileCarousel === "true") return;
   const viewport = target.querySelector(".product-carousel__viewport");
   if (!viewport || viewport.scrollWidth <= viewport.clientWidth + 2) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -2360,14 +2361,14 @@ function renderProductGrids() {
     target.className = "product-grid";
     if (mode === "featured") {
       const mobileCarousel = window.matchMedia("(max-width: 760px)").matches && products.length > 2;
+      target.dataset.manualMobileCarousel = mobileCarousel ? "true" : "";
       target.classList.add("product-featured-layout");
       if (mobileCarousel) {
-        const loopProducts = [...products, ...products, ...products];
         target.classList.add("product-carousel", "product-carousel--featured");
         target.innerHTML = `
-          <div class="product-carousel__viewport" tabindex="0" aria-label="${t("featured")}" data-loop-carousel="true" data-loop-start="${products.length}" data-loop-count="${products.length}">
+          <div class="product-carousel__viewport" tabindex="0" aria-label="${t("featured")}">
             <div class="product-carousel__track">
-              ${loopProducts.map((item, index) => productCard(item, { variant: index < products.length || index >= products.length * 2 ? "featured is-carousel-clone" : "featured" })).join("")}
+              ${products.map((item) => productCard(item, { variant: "featured" })).join("")}
             </div>
           </div>
         `;
@@ -2380,8 +2381,10 @@ function renderProductGrids() {
       return;
     }
     if (mode === "new") {
-      const mobileLoop = window.matchMedia("(max-width: 760px)").matches && products.length > 1;
-      const visibleProducts = mobileLoop ? products.slice(0, 6) : products;
+      const manualMobileCarousel = window.matchMedia("(max-width: 760px)").matches && products.length > 1;
+      target.dataset.manualMobileCarousel = manualMobileCarousel ? "true" : "";
+      const mobileLoop = false;
+      const visibleProducts = products;
       const carouselProducts = mobileLoop ? [...visibleProducts, ...visibleProducts, ...visibleProducts] : visibleProducts;
       const loopAttributes = mobileLoop
         ? `data-loop-carousel="true" data-loop-start="${visibleProducts.length}" data-loop-count="${visibleProducts.length}"`
