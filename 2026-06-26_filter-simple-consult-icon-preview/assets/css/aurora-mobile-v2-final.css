@@ -5137,6 +5137,10 @@
   .category-nav.is-open > .container > :nth-child(6) { animation-delay: .20s; }
   .category-nav.is-open > .container > :nth-child(7) { animation-delay: .24s; }
   .category-nav.is-open > .container > :nth-child(8) { animation-delay: .28s; }
+  .category-nav.is-open > .container > :nth-child(9) { animation-delay: .32s; }
+  .category-nav.is-open > .container > :nth-child(10) { animation-delay: .36s; }
+  .category-nav.is-open > .container > :nth-child(11) { animation-delay: .40s; }
+  .category-nav.is-open > .container > :nth-child(12) { animation-delay: .44s; }
 
   @keyframes aurora-mobile-menu-reveal {
     from { opacity: 0; transform: translateY(12px); }
