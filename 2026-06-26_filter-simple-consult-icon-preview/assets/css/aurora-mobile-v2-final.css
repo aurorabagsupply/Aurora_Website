@@ -5093,3 +5093,65 @@
     left: 24px !important;
   }
 }
+
+/* Mobile menu: restore the full-screen frosted layer and reveal its content progressively. */
+@media (max-width: 760px) {
+  .category-nav {
+    background: rgba(245, 245, 247, .96) !important;
+    -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+    backdrop-filter: saturate(180%) blur(24px) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(-10px) !important;
+    transition: opacity .34s cubic-bezier(.22, .61, .36, 1), transform .34s cubic-bezier(.22, .61, .36, 1), visibility .34s !important;
+  }
+
+  .category-nav.is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  .category-nav > .container,
+  .category-nav .container.aurora-mega-menu__nav {
+    width: 100% !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    margin: 0 !important;
+    padding: calc(20px + env(safe-area-inset-top, 0px)) 32px calc(40px + env(safe-area-inset-bottom, 0px)) 19px !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .category-nav.is-open > .container > * {
+    animation: aurora-mobile-menu-reveal .34s cubic-bezier(.22, .61, .36, 1) both;
+  }
+
+  .category-nav.is-open > .container > :nth-child(2) { animation-delay: .04s; }
+  .category-nav.is-open > .container > :nth-child(3) { animation-delay: .08s; }
+  .category-nav.is-open > .container > :nth-child(4) { animation-delay: .12s; }
+  .category-nav.is-open > .container > :nth-child(5) { animation-delay: .16s; }
+  .category-nav.is-open > .container > :nth-child(6) { animation-delay: .20s; }
+  .category-nav.is-open > .container > :nth-child(7) { animation-delay: .24s; }
+  .category-nav.is-open > .container > :nth-child(8) { animation-delay: .28s; }
+
+  @keyframes aurora-mobile-menu-reveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .category-nav,
+    .category-nav.is-open {
+      transition: none !important;
+      transform: none !important;
+    }
+
+    .category-nav.is-open > .container > * {
+      animation: none !important;
+    }
+  }
+}
