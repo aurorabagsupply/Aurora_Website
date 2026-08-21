@@ -5107,6 +5107,10 @@
     pointer-events: auto !important;
   }
 
+  .category-nav.is-open .aurora-mega-menu__top {
+    pointer-events: auto !important;
+  }
+
   .mobile-nav-close-line-row {
     position: relative !important;
     top: -14px !important;
