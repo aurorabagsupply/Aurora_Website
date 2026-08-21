@@ -4043,6 +4043,18 @@ function bindActions() {
     }
   });
   document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null;
+    const langToggle = target?.closest(".category-nav [data-lang-toggle]");
+    if (!langToggle || !window.matchMedia("(max-width: 760px)").matches) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const select = langToggle.closest(".language-select");
+    document.querySelectorAll(".language-select.is-open").forEach((item) => {
+      if (item !== select) item.classList.remove("is-open");
+    });
+    select?.classList.toggle("is-open");
+  }, true);
+  document.addEventListener("click", (event) => {
     const quick = event.target.closest("[data-quick-view]");
     const add = event.target.closest("[data-add-quote]");
     const closeModal = event.target.closest("[data-close-modal]");
