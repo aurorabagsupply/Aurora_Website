@@ -5059,6 +5059,11 @@
     touch-action: manipulation;
   }
 
+  .mobile-search-overlay__field input,
+  .mobile-search-overlay__field input:focus {
+    font-size: clamp(25.5px, 7.65vw, 31.5px) !important;
+  }
+
   .category-nav > .container,
   .category-nav .container.aurora-mega-menu__nav {
     height: calc(100svh - 80px) !important;
