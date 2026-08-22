@@ -5186,6 +5186,39 @@
     opacity: .45;
     cursor: not-allowed;
   }
+
+  .quote-drawer {
+    background: #fff;
+    color: #000;
+    border-left-color: #000;
+    box-shadow: none;
+  }
+
+  .quote-drawer h2,
+  .quote-drawer strong,
+  .quote-drawer .quote-line span {
+    color: #000;
+  }
+
+  .quote-drawer .quote-line {
+    border-bottom-color: #000;
+  }
+
+  .quote-drawer .quote-line img {
+    border: 1px solid #000;
+    background: #fff;
+  }
+
+  .quote-drawer__close {
+    border-color: #000;
+    background: #fff;
+    color: #000;
+  }
+
+  body:has(.quote-drawer.is-open) .aurora-whatsapp-button {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 /* Mobile menu: restore the full-screen frosted layer and reveal its content progressively. */
