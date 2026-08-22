@@ -5222,7 +5222,8 @@
 
   .quote-drawer {
     box-sizing: border-box;
-    height: 100dvh;
+    top: 45px;
+    height: calc(100dvh - 45px);
     padding: 24px !important;
     overflow-y: auto;
     border-left: 0;
