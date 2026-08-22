@@ -5215,7 +5215,7 @@
     color: #000;
   }
 
-  body:has(.quote-drawer.is-open) .aurora-whatsapp-button {
+  body.aurora-quote-drawer-open .aurora-whatsapp-button {
     opacity: 0;
     pointer-events: none;
   }
@@ -5280,11 +5280,9 @@
   }
 
   .quote-drawer__actions {
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
-    margin: 0 -24px;
-    padding: 16px 24px calc(20px + env(safe-area-inset-bottom));
+    position: static;
+    margin: 0;
+    padding: 16px 0 calc(20px + env(safe-area-inset-bottom));
     background: #fff;
   }
 

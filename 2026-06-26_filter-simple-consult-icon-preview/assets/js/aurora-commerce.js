@@ -2772,7 +2772,9 @@ function openQuoteDrawer() {
       ${quoteWhatsAppAction(items)}
     </div>
   `;
+  drawer.scrollTop = 0;
   drawer.classList.add("is-open");
+  document.body.classList.add("aurora-quote-drawer-open");
 }
 
 function languageSwitcherHtml(active, iconOnly = false) {
@@ -4109,7 +4111,10 @@ function bindActions() {
     if (quick) openQuickView(quick.dataset.quickView);
     if (add) addToQuote(add.dataset.addQuote);
     if (closeModal) document.querySelector(".quick-view")?.classList.remove("is-open");
-    if (closeQuote) document.querySelector(".quote-drawer")?.classList.remove("is-open");
+    if (closeQuote) {
+      document.querySelector(".quote-drawer")?.classList.remove("is-open");
+      document.body.classList.remove("aurora-quote-drawer-open");
+    }
     if (langToggle) {
       const select = langToggle.closest(".language-select");
       document.querySelectorAll(".language-select.is-open").forEach((item) => {
