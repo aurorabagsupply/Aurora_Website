@@ -2675,7 +2675,14 @@ function changeQuoteQuantity(sku, change) {
   const items = quoteItems();
   const item = items.find((quoteItem) => quoteItem.sku === sku);
   if (!item) return;
-  item.quantity = Math.max(1, (Number(item.quantity) || 1) + change);
+  setQuoteQuantity(sku, (Number(item.quantity) || 1) + change);
+}
+
+function setQuoteQuantity(sku, quantity) {
+  const items = quoteItems();
+  const item = items.find((quoteItem) => quoteItem.sku === sku);
+  if (!item) return;
+  item.quantity = Math.max(1, Math.round(Number(quantity) || 1));
   const drawer = document.querySelector(".quote-drawer");
   const scrollTop = drawer?.scrollTop || 0;
   saveQuoteItems(items);
@@ -2777,19 +2784,32 @@ function openQuoteDrawer() {
     <h2>${t("quoteList")}</h2>
     ${items.length ? items.map((item) => {
       const product = productBySku(item.sku);
-      return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><div class="quote-line__quantity"><button type="button" data-quote-quantity="-1" data-quote-sku="${product.sku}" aria-label="Decrease quantity">−</button><span>${t("quantity")}: ${item.quantity}</span><button type="button" data-quote-quantity="1" data-quote-sku="${product.sku}" aria-label="Increase quantity">+</button></div></div></div>`;
+      return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><div class="quote-line__quantity"><button type="button" data-quote-quantity="-100" data-quote-sku="${product.sku}" aria-label="Decrease quantity by 100">−</button><input type="number" min="1" step="1" inputmode="numeric" value="${item.quantity}" data-quote-quantity-input data-quote-sku="${product.sku}" aria-label="${t("quantity")}" /><button type="button" data-quote-quantity="100" data-quote-sku="${product.sku}" aria-label="Increase quantity by 100">+</button></div></div></div>`;
     }).join("") : `<p>${t("empty")}</p>`}
     <div class="quote-drawer__actions">
       <a class="btn btn-primary" href="contact.html">${t("checkout")}</a>
       ${quoteWhatsAppAction(items)}
     </div>
   `;
-  drawer.querySelectorAll("[data-quote-quantity]").forEach((button) => {
-    button.addEventListener("click", (event) => {
+  if (!drawer.dataset.quoteQuantityBound) {
+    drawer.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-quote-quantity]");
+      if (!button) return;
       event.stopPropagation();
       changeQuoteQuantity(button.dataset.quoteSku, Number(button.dataset.quoteQuantity));
     });
-  });
+    drawer.addEventListener("change", (event) => {
+      const input = event.target.closest("[data-quote-quantity-input]");
+      if (!input) return;
+      setQuoteQuantity(input.dataset.quoteSku, input.value);
+    });
+    drawer.addEventListener("focusout", (event) => {
+      const input = event.target.closest("[data-quote-quantity-input]");
+      if (!input) return;
+      setQuoteQuantity(input.dataset.quoteSku, input.value);
+    });
+    drawer.dataset.quoteQuantityBound = "true";
+  }
   drawer.scrollTop = 0;
   drawer.classList.add("is-open");
   document.body.classList.add("aurora-quote-drawer-open");
