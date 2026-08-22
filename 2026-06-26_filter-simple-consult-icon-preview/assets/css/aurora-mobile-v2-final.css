@@ -5367,10 +5367,10 @@
 
   .quote-drawer .quote-line__quantity button,
   .quote-drawer .quote-line__remove {
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .quote-drawer__actions {
