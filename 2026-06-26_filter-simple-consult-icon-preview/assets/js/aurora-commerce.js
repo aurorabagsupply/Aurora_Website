@@ -2967,6 +2967,41 @@ function translateCartPage() {
   if (actions[1]) actions[1].textContent = t("requestQuote");
 }
 
+function renderCartPage() {
+  if (!/cart\.html$/.test(window.location.pathname)) return;
+  const items = quoteItems();
+  const copy = CART_PAGE_COPY[currentLang()] || CART_PAGE_COPY.en;
+  const panel = document.querySelector("main .section .panel");
+  if (!items.length) {
+    if (panel) {
+      panel.innerHTML = `
+        <h2>${copy.emptyTitle}</h2>
+        <p>${copy.emptyText}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="products.html">${t("shopProducts")}</a>
+          <a class="btn btn-brass" href="contact.html">${t("requestQuote")}</a>
+        </div>
+      `;
+    }
+    translateCartPage();
+    return;
+  }
+  if (!panel) return;
+  panel.innerHTML = `
+    <h2>${t("quoteList")}</h2>
+    <div class="cart-quote-list">
+      ${items.map((item) => {
+        const product = productBySku(item.sku);
+        return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><span>${t("quantity")}: ${item.quantity}</span></div></div>`;
+      }).join("")}
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="contact.html">${t("requestQuote")}</a>
+      <a class="btn btn-brass" href="products.html">${t("shopProducts")}</a>
+    </div>
+  `;
+}
+
 function translateAccountPage() {
   if (!document.querySelector(".account-grid")) return;
   const copy = pageText();
@@ -4147,6 +4182,7 @@ function rerenderDynamicContent() {
   renderCatalog();
   renderDetail();
   updateQuoteCount();
+  renderCartPage();
   window.requestAnimationFrame(applyMobileDesignSystemV2);
 }
 
