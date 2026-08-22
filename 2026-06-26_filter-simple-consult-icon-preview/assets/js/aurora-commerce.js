@@ -2938,6 +2938,35 @@ function pageText() {
   return PAGE_TEXT[currentLang()] || PAGE_TEXT.en;
 }
 
+const CART_PAGE_COPY = {
+  en: { title: "Quote List", intro: "Your quote list collects selected sourcing items before you send the inquiry.", emptyTitle: "Your quote list is currently empty", emptyText: "Browse products, add items to your quote list, or request a quote for custom hardware and bulk orders." },
+  zh: { title: "询价清单", intro: "已选产品会保存在这里，方便统一发送询价。", emptyTitle: "你的询价清单目前为空", emptyText: "浏览产品后将需要的产品加入询价清单，或直接获取定制五金和大货报价。" },
+  ru: { title: "Список запроса", intro: "Здесь собраны выбранные товары перед отправкой запроса.", emptyTitle: "Ваш список запроса пуст", emptyText: "Просмотрите товары, добавьте позиции в список или запросите расчет для индивидуальных и оптовых заказов." },
+  es: { title: "Lista de cotizacion", intro: "Aqui se guardan los productos seleccionados antes de enviar la consulta.", emptyTitle: "Tu lista de cotizacion esta vacia", emptyText: "Explora productos, agregalos a tu lista o solicita una cotizacion para pedidos personalizados y al por mayor." },
+  fr: { title: "Liste de devis", intro: "Vos produits selectionnes sont regroupes ici avant l'envoi de votre demande.", emptyTitle: "Votre liste de devis est vide", emptyText: "Parcourez les produits, ajoutez des articles a votre liste ou demandez un devis pour les commandes personnalisees et en gros." },
+  de: { title: "Anfrageliste", intro: "Hier werden Ihre ausgewahlten Produkte vor dem Senden der Anfrage gesammelt.", emptyTitle: "Ihre Anfrageliste ist leer", emptyText: "Durchsuchen Sie Produkte, fugen Sie Artikel hinzu oder fordern Sie ein Angebot fur Sonder- und Grossbestellungen an." },
+  it: { title: "Lista preventivo", intro: "Qui vengono raccolti i prodotti selezionati prima di inviare la richiesta.", emptyTitle: "La tua lista preventivo e vuota", emptyText: "Sfoglia i prodotti, aggiungi articoli alla lista o richiedi un preventivo per ordini personalizzati e all'ingrosso." },
+  ar: { title: "قائمة الطلب", intro: "تجتمع المنتجات المختارة هنا قبل إرسال طلبك.", emptyTitle: "قائمة الطلب فارغة", emptyText: "تصفح المنتجات وأضفها إلى القائمة أو اطلب عرض سعر للطلبات المخصصة والجملة." },
+};
+
+function translateCartPage() {
+  if (!/cart\.html$/.test(window.location.pathname)) return;
+  const copy = CART_PAGE_COPY[currentLang()] || CART_PAGE_COPY.en;
+  document.title = `${copy.title} | AOLOLA`;
+  const title = document.querySelector("main .page-title");
+  if (title) {
+    setTextFromNode(title, "h1", copy.title);
+    setTextFromNode(title, "p", copy.intro);
+  }
+  const panel = document.querySelector("main .section .panel");
+  if (!panel) return;
+  setTextFromNode(panel, "h2", copy.emptyTitle);
+  setTextFromNode(panel, "p", copy.emptyText);
+  const actions = panel.querySelectorAll(".hero-actions a");
+  if (actions[0]) actions[0].textContent = t("shopProducts");
+  if (actions[1]) actions[1].textContent = t("requestQuote");
+}
+
 function translateAccountPage() {
   if (!document.querySelector(".account-grid")) return;
   const copy = pageText();
@@ -3153,6 +3182,7 @@ function applyStaticPageText() {
   translateContactPage();
   translateAccountPage();
   translateCheckoutPage();
+  translateCartPage();
 }
 
 function forceCatalogTitleLanguage() {
