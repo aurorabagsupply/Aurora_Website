@@ -5365,6 +5365,14 @@
     box-shadow: none;
   }
 
+  .quote-drawer .quote-line__quantity button,
+  .quote-drawer .quote-line__remove {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
   .quote-drawer__actions {
     position: static;
     margin: 0;
