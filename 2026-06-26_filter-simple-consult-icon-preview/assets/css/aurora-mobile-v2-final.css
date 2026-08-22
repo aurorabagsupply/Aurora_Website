@@ -5280,6 +5280,35 @@
     color: #555;
   }
 
+  .quote-drawer .quote-line__quantity {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .quote-drawer .quote-line__quantity button {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #d8d5d0;
+    border-radius: 50%;
+    background: #fff;
+    color: #171717;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .quote-drawer .quote-line__quantity span {
+    min-width: 54px;
+    margin: 0;
+    color: #555;
+    white-space: nowrap;
+  }
+
   .quote-drawer__actions {
     position: static;
     margin: 0;

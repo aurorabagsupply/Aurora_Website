@@ -2671,6 +2671,18 @@ function addToQuote(sku) {
   openQuoteDrawer();
 }
 
+function changeQuoteQuantity(sku, change) {
+  const items = quoteItems();
+  const item = items.find((quoteItem) => quoteItem.sku === sku);
+  if (!item) return;
+  item.quantity = Math.max(1, (Number(item.quantity) || 1) + change);
+  const drawer = document.querySelector(".quote-drawer");
+  const scrollTop = drawer?.scrollTop || 0;
+  saveQuoteItems(items);
+  openQuoteDrawer();
+  document.querySelector(".quote-drawer").scrollTop = scrollTop;
+}
+
 function updateQuoteCount() {
   const count = quoteItems().reduce((sum, item) => sum + item.quantity, 0);
   document.querySelectorAll(".cart-dot").forEach((item) => { item.textContent = String(count); });
@@ -2765,13 +2777,19 @@ function openQuoteDrawer() {
     <h2>${t("quoteList")}</h2>
     ${items.length ? items.map((item) => {
       const product = productBySku(item.sku);
-      return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><span>${t("quantity")}: ${item.quantity}</span></div></div>`;
+      return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><div class="quote-line__quantity"><button type="button" data-quote-quantity="-1" data-quote-sku="${product.sku}" aria-label="Decrease quantity">−</button><span>${t("quantity")}: ${item.quantity}</span><button type="button" data-quote-quantity="1" data-quote-sku="${product.sku}" aria-label="Increase quantity">+</button></div></div></div>`;
     }).join("") : `<p>${t("empty")}</p>`}
     <div class="quote-drawer__actions">
       <a class="btn btn-primary" href="contact.html">${t("checkout")}</a>
       ${quoteWhatsAppAction(items)}
     </div>
   `;
+  drawer.querySelectorAll("[data-quote-quantity]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      changeQuoteQuantity(button.dataset.quoteSku, Number(button.dataset.quoteQuantity));
+    });
+  });
   drawer.scrollTop = 0;
   drawer.classList.add("is-open");
   document.body.classList.add("aurora-quote-drawer-open");
