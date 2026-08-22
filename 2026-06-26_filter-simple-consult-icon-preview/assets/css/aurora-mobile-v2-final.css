@@ -5210,8 +5210,9 @@
   }
 
   .quote-drawer__close {
-    border-color: #000;
-    background: #fff;
+    top: 24px;
+    border: 0;
+    background: transparent;
     color: #000;
   }
 
@@ -5303,9 +5304,10 @@
   }
 
   .quote-drawer .quote-line__quantity input {
-    width: 72px;
+    width: 48px;
     min-width: 0;
-    height: 28px;
+    height: 35px !important;
+    min-height: 35px !important;
     margin: 0;
     padding: 0;
     border: 0;
@@ -5313,6 +5315,7 @@
     color: #555;
     font: inherit;
     text-align: center;
+    border-radius: 10px;
   }
 
   .quote-drawer__actions {
