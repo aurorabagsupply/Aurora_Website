@@ -2709,6 +2709,9 @@ function removeQuoteItem(sku) {
 function updateQuoteCount() {
   const count = quoteItems().reduce((sum, item) => sum + item.quantity, 0);
   document.querySelectorAll(".cart-dot").forEach((item) => { item.textContent = String(count); });
+  document.querySelectorAll(".mobile-header-icon--quote").forEach((item) => {
+    item.classList.toggle("is-has-quote", count > 0);
+  });
 }
 
 function openQuickView(sku) {
@@ -2996,8 +2999,11 @@ function renderCartPage() {
       }).join("")}
     </div>
     <div class="hero-actions">
-      <a class="btn btn-primary" href="contact.html">${t("requestQuote")}</a>
-      <a class="btn btn-brass" href="products.html">${t("shopProducts")}</a>
+      <div class="cart-quote-actions">
+        <a class="btn btn-primary" href="contact.html">${t("requestQuote")}</a>
+        ${quoteWhatsAppAction(items)}
+        <a class="btn btn-brass" href="products.html">${t("shopProducts")}</a>
+      </div>
     </div>
   `;
 }
@@ -4566,6 +4572,7 @@ function ensureSharedMobileHeader() {
       searchFocus.setAttribute("aria-expanded", "true");
     });
   }
+  updateQuoteCount();
 }
 
 function enhanceMobileAccountTabs() {

@@ -2885,6 +2885,21 @@
     transform: translateY(1px) !important;
   }
 
+  .mobile-header-icon--quote {
+    position: relative !important;
+  }
+
+  .mobile-header-icon--quote.is-has-quote::after {
+    content: "";
+    position: absolute;
+    top: 5px;
+    right: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #171717;
+  }
+
   .mobile-header-actions .mobile-menu::before,
   .mobile-header-actions .mobile-menu::after {
     content: "" !important;
@@ -5359,6 +5374,26 @@
   .quote-drawer__whatsapp {
     color: #171717;
     border-color: #d8d5d0;
+  }
+
+  .cart-quote-actions {
+    display: grid;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .cart-quote-actions .btn {
+    display: inline-flex;
+    width: 100%;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart-quote-actions .quote-drawer__whatsapp {
+    display: inline-flex;
+    border-color: #d8d5d0;
+    color: #171717;
   }
 }
 
