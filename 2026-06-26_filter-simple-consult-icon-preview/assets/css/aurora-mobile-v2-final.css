@@ -5317,14 +5317,16 @@
     color: #555;
   }
 
-  .quote-drawer .quote-line__quantity {
+  .quote-drawer .quote-line__quantity,
+  .cart-quote-list .quote-line__quantity {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     margin-top: 8px;
   }
 
-  .quote-drawer .quote-line__quantity button {
+  .quote-drawer .quote-line__quantity button,
+  .cart-quote-list .quote-line__quantity button {
     display: inline-flex;
     width: 28px;
     height: 28px;
@@ -5339,7 +5341,8 @@
     line-height: 1;
   }
 
-  .quote-drawer .quote-line__quantity input {
+  .quote-drawer .quote-line__quantity input,
+  .cart-quote-list .quote-line__quantity input {
     width: 48px;
     min-width: 0;
     height: 35px !important;

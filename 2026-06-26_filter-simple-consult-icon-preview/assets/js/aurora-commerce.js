@@ -2679,14 +2679,14 @@ function addToQuote(sku) {
   openQuoteDrawer();
 }
 
-function changeQuoteQuantity(sku, change) {
+function changeQuoteQuantity(sku, change, reopenDrawer = true) {
   const items = quoteItems();
   const item = items.find((quoteItem) => quoteItem.sku === sku);
   if (!item) return;
-  setQuoteQuantity(sku, (Number(item.quantity) || 1) + change);
+  setQuoteQuantity(sku, (Number(item.quantity) || 1) + change, reopenDrawer);
 }
 
-function setQuoteQuantity(sku, quantity) {
+function setQuoteQuantity(sku, quantity, reopenDrawer = true) {
   const items = quoteItems();
   const item = items.find((quoteItem) => quoteItem.sku === sku);
   if (!item) return;
@@ -2694,14 +2694,16 @@ function setQuoteQuantity(sku, quantity) {
   const drawer = document.querySelector(".quote-drawer");
   const scrollTop = drawer?.scrollTop || 0;
   saveQuoteItems(items);
+  if (!reopenDrawer) return;
   openQuoteDrawer();
   document.querySelector(".quote-drawer").scrollTop = scrollTop;
 }
 
-function removeQuoteItem(sku) {
+function removeQuoteItem(sku, reopenDrawer = true) {
   const drawer = document.querySelector(".quote-drawer");
   const scrollTop = drawer?.scrollTop || 0;
   saveQuoteItems(quoteItems().filter((item) => item.sku !== sku));
+  if (!reopenDrawer) return;
   openQuoteDrawer();
   document.querySelector(".quote-drawer").scrollTop = scrollTop;
 }
@@ -2995,7 +2997,7 @@ function renderCartPage() {
     <div class="cart-quote-list">
       ${items.map((item) => {
         const product = productBySku(item.sku);
-        return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><span>${t("quantity")}: ${item.quantity}</span></div></div>`;
+        return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><button class="quote-line__remove" type="button" data-cart-remove-quote="${product.sku}" aria-label="Remove ${product.name} from quote list">—</button><strong>${product.name}</strong><span>${product.sku}</span><div class="quote-line__quantity"><button type="button" data-cart-quote-quantity="-100" data-cart-quote-sku="${product.sku}" aria-label="Decrease quantity by 100">−</button><input type="number" min="1" step="1" inputmode="numeric" value="${item.quantity}" data-cart-quote-quantity-input data-cart-quote-sku="${product.sku}" aria-label="${t("quantity")}" /><button type="button" data-cart-quote-quantity="100" data-cart-quote-sku="${product.sku}" aria-label="Increase quantity by 100">+</button></div></div></div>`;
       }).join("")}
     </div>
     <div class="hero-actions">
@@ -4194,6 +4196,12 @@ function rerenderDynamicContent() {
 
 function bindActions() {
   document.addEventListener("change", (event) => {
+    const cartQuantityInput = event.target.closest("[data-cart-quote-quantity-input]");
+    if (cartQuantityInput) {
+      setQuoteQuantity(cartQuantityInput.dataset.cartQuoteSku, cartQuantityInput.value, false);
+      rerenderDynamicContent();
+      return;
+    }
     if (event.target.matches('[data-filter-group="category"]')) {
       const selectedCategory = event.target.checked ? normalizeCategory(event.target.value) : "";
       document.querySelectorAll('[data-filter-group="category"]').forEach((input) => {
@@ -4226,6 +4234,20 @@ function bindActions() {
     select?.classList.toggle("is-open");
   }, true);
   document.addEventListener("click", (event) => {
+    const cartRemove = event.target.closest("[data-cart-remove-quote]");
+    const cartQuantity = event.target.closest("[data-cart-quote-quantity]");
+    if (cartRemove) {
+      event.preventDefault();
+      removeQuoteItem(cartRemove.dataset.cartRemoveQuote, false);
+      rerenderDynamicContent();
+      return;
+    }
+    if (cartQuantity) {
+      event.preventDefault();
+      changeQuoteQuantity(cartQuantity.dataset.cartQuoteSku, Number(cartQuantity.dataset.cartQuoteQuantity), false);
+      rerenderDynamicContent();
+      return;
+    }
     const quick = event.target.closest("[data-quick-view]");
     const add = event.target.closest("[data-add-quote]");
     const closeModal = event.target.closest("[data-close-modal]");
