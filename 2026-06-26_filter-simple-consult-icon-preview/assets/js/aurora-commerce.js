@@ -2116,16 +2116,24 @@ function enrichProduct(product) {
   };
 }
 
+const QUOTE_STORAGE_KEY = "auroraQuoteItems";
+let quoteLegacyStorageCleared = false;
+
 function quoteItems() {
   try {
-    return JSON.parse(localStorage.getItem("auroraQuoteItems") || "[]");
+    if (!quoteLegacyStorageCleared) {
+      localStorage.removeItem(QUOTE_STORAGE_KEY);
+      quoteLegacyStorageCleared = true;
+    }
+    return JSON.parse(sessionStorage.getItem(QUOTE_STORAGE_KEY) || "[]");
   } catch {
     return [];
   }
 }
 
 function saveQuoteItems(items) {
-  localStorage.setItem("auroraQuoteItems", JSON.stringify(items));
+  if (items.length) sessionStorage.setItem(QUOTE_STORAGE_KEY, JSON.stringify(items));
+  else sessionStorage.removeItem(QUOTE_STORAGE_KEY);
   updateQuoteCount();
 }
 
@@ -2690,6 +2698,14 @@ function setQuoteQuantity(sku, quantity) {
   document.querySelector(".quote-drawer").scrollTop = scrollTop;
 }
 
+function removeQuoteItem(sku) {
+  const drawer = document.querySelector(".quote-drawer");
+  const scrollTop = drawer?.scrollTop || 0;
+  saveQuoteItems(quoteItems().filter((item) => item.sku !== sku));
+  openQuoteDrawer();
+  document.querySelector(".quote-drawer").scrollTop = scrollTop;
+}
+
 function updateQuoteCount() {
   const count = quoteItems().reduce((sum, item) => sum + item.quantity, 0);
   document.querySelectorAll(".cart-dot").forEach((item) => { item.textContent = String(count); });
@@ -2784,7 +2800,7 @@ function openQuoteDrawer() {
     <h2>${t("quoteList")}</h2>
     ${items.length ? items.map((item) => {
       const product = productBySku(item.sku);
-      return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><div class="quote-line__quantity"><button type="button" data-quote-quantity="-100" data-quote-sku="${product.sku}" aria-label="Decrease quantity by 100">−</button><input type="number" min="1" step="1" inputmode="numeric" value="${item.quantity}" data-quote-quantity-input data-quote-sku="${product.sku}" aria-label="${t("quantity")}" /><button type="button" data-quote-quantity="100" data-quote-sku="${product.sku}" aria-label="Increase quantity by 100">+</button></div></div></div>`;
+      return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><button class="quote-line__remove" type="button" data-remove-quote="${product.sku}" aria-label="Remove ${product.name} from quote list">—</button><strong>${product.name}</strong><span>${product.sku}</span><div class="quote-line__quantity"><button type="button" data-quote-quantity="-100" data-quote-sku="${product.sku}" aria-label="Decrease quantity by 100">−</button><input type="number" min="1" step="1" inputmode="numeric" value="${item.quantity}" data-quote-quantity-input data-quote-sku="${product.sku}" aria-label="${t("quantity")}" /><button type="button" data-quote-quantity="100" data-quote-sku="${product.sku}" aria-label="Increase quantity by 100">+</button></div></div></div>`;
     }).join("") : `<p>${t("empty")}</p>`}
     <div class="quote-drawer__actions">
       <a class="btn btn-primary" href="contact.html">${t("checkout")}</a>
@@ -2793,6 +2809,12 @@ function openQuoteDrawer() {
   `;
   if (!drawer.dataset.quoteQuantityBound) {
     drawer.addEventListener("click", (event) => {
+      const remove = event.target.closest("[data-remove-quote]");
+      if (remove) {
+        event.stopPropagation();
+        removeQuoteItem(remove.dataset.removeQuote);
+        return;
+      }
       const button = event.target.closest("[data-quote-quantity]");
       if (!button) return;
       event.stopPropagation();

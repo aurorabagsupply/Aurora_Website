@@ -5259,6 +5259,27 @@
 
   .quote-drawer .quote-line > div {
     min-width: 0;
+    position: relative;
+    flex: 1;
+    padding-right: 36px;
+  }
+
+  .quote-drawer .quote-line__remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid #d8d5d0;
+    border-radius: 50%;
+    background: #fff;
+    color: #171717;
+    font-size: 20px;
+    line-height: 1;
   }
 
   .quote-drawer .quote-line strong {
