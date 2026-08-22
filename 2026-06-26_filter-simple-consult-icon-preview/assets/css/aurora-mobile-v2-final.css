@@ -5156,6 +5156,38 @@
   }
 }
 
+/* Mobile quote drawer: retain email inquiry and add a compact WhatsApp action. */
+@media (max-width: 760px) {
+  .quote-drawer__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .quote-drawer__actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    margin: 0;
+    padding: 0 14px;
+    white-space: nowrap;
+  }
+
+  .quote-drawer__whatsapp {
+    display: inline-flex;
+    border: 1px solid #1d1d1f;
+    background: #fff;
+    color: #1d1d1f;
+  }
+
+  .quote-drawer__whatsapp.is-disabled {
+    opacity: .45;
+    cursor: not-allowed;
+  }
+}
+
 /* Mobile menu: restore the full-screen frosted layer and reveal its content progressively. */
 @media (max-width: 760px) {
   .category-nav {

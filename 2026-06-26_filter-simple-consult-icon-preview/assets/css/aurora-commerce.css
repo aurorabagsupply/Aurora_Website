@@ -4066,6 +4066,10 @@ body {
   font-size: 12px;
 }
 
+.quote-drawer__whatsapp {
+  display: none;
+}
+
 @media (max-width: 1040px) {
   .main-header .container {
     flex-wrap: wrap;

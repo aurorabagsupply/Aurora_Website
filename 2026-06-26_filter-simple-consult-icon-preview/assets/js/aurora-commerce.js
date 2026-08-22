@@ -2724,6 +2724,39 @@ function ensureQuoteDrawer() {
   return drawer;
 }
 
+function quoteWhatsAppUrl(items) {
+  const productLines = items.map((item, index) => {
+    const productSource = AURORA_PRODUCTS.find((product) => product.sku === item.sku);
+    const product = productSource ? enrichProduct(productSource) : null;
+    const quantity = Math.max(1, Number(item.quantity) || 1);
+    const lines = [
+      `${index + 1}. ${product?.name || item.name || item.sku}`,
+      `SKU: ${item.sku}`,
+      `Qty: ${quantity}`,
+    ];
+    if (product) {
+      lines.push(`Product: ${new URL(`product-detail.html?sku=${encodeURIComponent(product.sku)}`, window.location.href).href}`);
+      if (product.image) lines.push(`Image: ${new URL(product.image, window.location.href).href}`);
+    }
+    return lines.join("\n");
+  });
+  const message = [
+    "Hello, I would like to request a quotation for the following products:",
+    "",
+    ...productLines,
+    "",
+    "Please send me your quotation, MOQ, lead time and available finishes.",
+  ].join("\n");
+  return `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`;
+}
+
+function quoteWhatsAppAction(items) {
+  if (!items.length) {
+    return '<button class="btn quote-drawer__whatsapp is-disabled" type="button" disabled aria-disabled="true">WhatsApp</button>';
+  }
+  return `<a class="btn quote-drawer__whatsapp" href="${quoteWhatsAppUrl(items)}" target="_blank" rel="noopener" aria-label="Request a quotation through WhatsApp">WhatsApp</a>`;
+}
+
 function openQuoteDrawer() {
   const drawer = ensureQuoteDrawer();
   const items = quoteItems();
@@ -2734,7 +2767,10 @@ function openQuoteDrawer() {
       const product = productBySku(item.sku);
       return `<div class="quote-line"><img src="${encodeURI(product.image)}" alt="${product.name}" /><div><strong>${product.name}</strong><span>${product.sku}</span><span>${t("quantity")}: ${item.quantity}</span></div></div>`;
     }).join("") : `<p>${t("empty")}</p>`}
-    <a class="btn btn-primary" href="contact.html">${t("checkout")}</a>
+    <div class="quote-drawer__actions">
+      <a class="btn btn-primary" href="contact.html">${t("checkout")}</a>
+      ${quoteWhatsAppAction(items)}
+    </div>
   `;
   drawer.classList.add("is-open");
 }
@@ -3265,7 +3301,8 @@ function translateContactPage() {
   }
 }
 
-const WHATSAPP_URL = "https://wa.me/8613500014739?text=Hello%20AOLOLA%2C%20I%E2%80%99m%20interested%20in%20your%20bag%20hardware%20%2F%20leather%20%2F%20zipper%20products.%20I%20would%20like%20to%20ask%20for%20more%20details.";
+const WHATSAPP_PHONE = "8613500014739";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent("Hello AOLOLA, I'm interested in your bag hardware / leather / zipper products. I would like to ask for more details.")}`;
 
 const MEGA_MENU_CONFIG = {
   Bag: {
