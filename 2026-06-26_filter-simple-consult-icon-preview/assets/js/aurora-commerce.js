@@ -2257,6 +2257,97 @@ function scrollCarouselCardIntoCenter(viewport, index, behavior = "auto") {
   });
 }
 
+function mobileCarouselPaginationState(viewport) {
+  const cards = Array.from(viewport?.querySelectorAll(".product-card") || []);
+  if (!viewport || !cards.length) return { cards, cardsPerPage: 1, pageCount: 0, activePage: 0 };
+  const track = viewport.querySelector(".product-carousel__track");
+  const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || "0");
+  const cardWidth = cards[0].getBoundingClientRect().width;
+  const cardsPerPage = Math.max(1, Math.floor((viewport.clientWidth + gap) / Math.max(1, cardWidth + gap)));
+  const itemCount = viewport.dataset.loopCarousel === "true"
+    ? Number.parseInt(viewport.dataset.loopCount || String(cards.length), 10)
+    : cards.length;
+  const pageCount = Math.ceil(Math.max(0, itemCount) / cardsPerPage);
+  const activeCard = nearestCarouselCardIndex(viewport) % Math.max(1, itemCount);
+  return {
+    cards,
+    cardsPerPage,
+    pageCount,
+    activePage: Math.min(pageCount - 1, Math.floor(activeCard / cardsPerPage)),
+  };
+}
+
+function scrollMobileCarouselToPage(viewport, page, cardsPerPage) {
+  const cards = Array.from(viewport?.querySelectorAll(".product-card") || []);
+  const card = cards[Math.min(cards.length - 1, Math.max(0, page * cardsPerPage))];
+  if (!viewport || !card) return;
+  const align = window.getComputedStyle(card).scrollSnapAlign;
+  const left = align.includes("center") ? carouselCardCenterLeft(viewport, card) : card.offsetLeft;
+  viewport.scrollTo({
+    left,
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+  });
+}
+
+function updateMobileCarouselPagination(target) {
+  const viewport = target.querySelector(".product-carousel__viewport");
+  const pagination = target.querySelector(".product-carousel__pagination");
+  if (!pagination) return;
+  if (!window.matchMedia("(max-width: 760px)").matches || !viewport) {
+    pagination.replaceChildren();
+    pagination.hidden = true;
+    return;
+  }
+  const { cardsPerPage, pageCount, activePage } = mobileCarouselPaginationState(viewport);
+  if (pageCount < 2) {
+    pagination.replaceChildren();
+    pagination.hidden = true;
+    return;
+  }
+  const visibleCount = Math.min(5, pageCount);
+  const firstPage = Math.max(0, Math.min(activePage - Math.floor(visibleCount / 2), pageCount - visibleCount));
+  pagination.hidden = false;
+  pagination.innerHTML = Array.from({ length: visibleCount }, (_, offset) => {
+    const page = firstPage + offset;
+    const active = page === activePage;
+    return `<button class="product-carousel__page${active ? " is-active" : ""}" type="button" data-carousel-page="${page}" aria-label="Show product page ${page + 1}"${active ? ' aria-current="true"' : ""}></button>`;
+  }).join("");
+  pagination.dataset.cardsPerPage = String(cardsPerPage);
+}
+
+function bindMobileCarouselPagination(target) {
+  const viewport = target.querySelector(".product-carousel__viewport");
+  const pagination = target.querySelector(".product-carousel__pagination");
+  if (!viewport || !pagination) return;
+  const update = () => updateMobileCarouselPagination(target);
+  if (!viewport.dataset.paginationBound) {
+    viewport.dataset.paginationBound = "true";
+    let frame = 0;
+    viewport.addEventListener("scroll", () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+        update();
+      });
+    }, { passive: true });
+  }
+  if (!pagination.dataset.paginationBound) {
+    pagination.dataset.paginationBound = "true";
+    pagination.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-carousel-page]");
+      if (!button) return;
+      const state = mobileCarouselPaginationState(viewport);
+      scrollMobileCarouselToPage(viewport, Number(button.dataset.carouselPage), state.cardsPerPage);
+    });
+  }
+  if (!target.dataset.paginationResizeBound) {
+    target.dataset.paginationResizeBound = "true";
+    window.addEventListener("resize", update, { passive: true });
+  }
+  window.requestAnimationFrame(update);
+  window.setTimeout(update, 80);
+}
+
 function normalizeLoopingProductCarousel(viewport) {
   if (!viewport || viewport.dataset.loopCarousel !== "true") return;
   const cards = Array.from(viewport.querySelectorAll(".product-card"));
@@ -2343,6 +2434,7 @@ function startProductCarousel(target) {
 }
 
 function bindProductCarousel(target) {
+  bindMobileCarouselPagination(target);
   if (target.dataset.carouselBound) return;
   target.dataset.carouselBound = "true";
   target.addEventListener("mouseenter", () => stopProductCarousel(target));
@@ -2379,6 +2471,7 @@ function renderProductGrids() {
               ${products.map((item) => productCard(item, { variant: "featured" })).join("")}
             </div>
           </div>
+          <div class="product-carousel__pagination" aria-label="Featured product pages" hidden></div>
         `;
         bindProductCarousel(target);
         window.requestAnimationFrame(() => startProductCarousel(target));
@@ -2399,12 +2492,13 @@ function renderProductGrids() {
         : "";
       target.classList.add("product-carousel", "product-carousel--new");
       target.innerHTML = `
-        <div class="product-carousel__viewport" tabindex="0" aria-label="${t("new")}" data-carousel-interval="5600" ${loopAttributes}>
-          <div class="product-carousel__track">
-            ${carouselProducts.map((item, index) => productCard(item, { variant: mobileLoop && (index < visibleProducts.length || index >= visibleProducts.length * 2) ? "carousel is-carousel-clone" : "carousel" })).join("")}
+          <div class="product-carousel__viewport" tabindex="0" aria-label="${t("new")}" data-carousel-interval="5600" ${loopAttributes}>
+            <div class="product-carousel__track">
+              ${carouselProducts.map((item, index) => productCard(item, { variant: mobileLoop && (index < visibleProducts.length || index >= visibleProducts.length * 2) ? "carousel is-carousel-clone" : "carousel" })).join("")}
+            </div>
           </div>
-        </div>
-      `;
+          <div class="product-carousel__pagination" aria-label="New product pages" hidden></div>
+        `;
       bindProductCarousel(target);
       window.requestAnimationFrame(() => startProductCarousel(target));
       return;
