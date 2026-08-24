@@ -2457,7 +2457,7 @@ function renderProductGrids() {
   document.querySelectorAll("[data-products]").forEach((target) => {
     stopProductCarousel(target);
     const mode = target.dataset.products;
-    const products = filteredProducts(mode).slice(0, mode === "featured" ? 6 : mode === "best" ? 4 : 10);
+    const products = filteredProducts(mode).slice(0, mode === "featured" ? 10 : mode === "best" ? 4 : 10);
     target.className = "product-grid";
     if (mode === "featured") {
       const mobileCarousel = window.matchMedia("(max-width: 760px)").matches && products.length > 2;
