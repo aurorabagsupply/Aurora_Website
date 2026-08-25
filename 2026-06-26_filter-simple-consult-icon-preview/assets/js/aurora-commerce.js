@@ -2151,10 +2151,12 @@ function productCard(productInput, options = {}) {
   const product = enrichProduct(productInput);
   const variant = options.variant ? ` product-card--${options.variant}` : "";
   const hideQuote = options.hideQuote === true;
+  const imageLoading = options.eagerImage ? "eager" : "lazy";
+  const imagePriority = options.eagerImage ? ' fetchpriority="high"' : "";
   return `
     <article class="product-card${variant}">
       <a class="product-card__image" href="product-detail.html?sku=${encodeURIComponent(product.sku)}">
-        <img src="${encodeURI(product.image)}" alt="${product.name}" loading="lazy" />
+        <img src="${encodeURI(product.image)}" alt="${product.name}" loading="${imageLoading}" decoding="async"${imagePriority} />
       </a>
       <div class="product-card__body">
         <div class="product-card__meta"><span>${product.sku}</span><span>${categoryLabel(product.category)}</span></div>
@@ -2468,7 +2470,7 @@ function renderProductGrids() {
         target.innerHTML = `
           <div class="product-carousel__viewport" tabindex="0" aria-label="${t("featured")}">
             <div class="product-carousel__track">
-              ${products.map((item) => productCard(item, { variant: "featured" })).join("")}
+              ${products.map((item, index) => productCard(item, { variant: "featured", eagerImage: index === 0 })).join("")}
             </div>
           </div>
           <div class="product-carousel__pagination" aria-label="Featured product pages" hidden></div>
@@ -2476,7 +2478,7 @@ function renderProductGrids() {
         bindProductCarousel(target);
         window.requestAnimationFrame(() => startProductCarousel(target));
       } else {
-        target.innerHTML = products.slice(0, 2).map((item, index) => productCard(item, { variant: index === 0 ? "hero" : "featured" })).join("");
+        target.innerHTML = products.slice(0, 2).map((item, index) => productCard(item, { variant: index === 0 ? "hero" : "featured", eagerImage: index === 0 })).join("");
         animateProductCards(target);
       }
       return;
@@ -3198,7 +3200,7 @@ function renderHeroCarousel() {
     const active = index === activeHeroIndex ? " is-active" : "";
     return `
       <article class="hero-cover__slide${active}" data-hero-slide="${index}" aria-hidden="${index === activeHeroIndex ? "false" : "true"}">
-        <img src="${base}/${slide.image}" alt="${category}" />
+        <img src="${base}/${slide.image}" alt="${category}" loading="${index === activeHeroIndex ? "eager" : "lazy"}" decoding="async"${index === activeHeroIndex ? ' fetchpriority="high"' : ""} />
         <div class="hero-cover__copy">
           <p class="kicker">${copy.eyebrow}</p>
           <h1>${copy.title}</h1>
