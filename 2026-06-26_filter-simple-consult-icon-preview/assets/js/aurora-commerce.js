@@ -3187,6 +3187,7 @@ function renderHeroCarousel() {
   const track = carousel.querySelector("[data-hero-track]");
   const dots = carousel.querySelector("[data-hero-dots]");
   const base = carousel.dataset.heroBase || "assets/hero";
+  const useMobileHeroImages = window.matchMedia("(max-width: 760px)").matches;
   const productsUrl = carousel.dataset.productsUrl || "products.html";
   const contactUrl = carousel.dataset.contactUrl || "contact.html";
   if (!track || !dots) return;
@@ -3196,9 +3197,12 @@ function renderHeroCarousel() {
     const category = categoryLabel(slide.category);
     const actionLabel = heroCategoryAction(slide.category);
     const active = index === activeHeroIndex ? " is-active" : "";
+    const imageSource = useMobileHeroImages
+      ? `${base}/mobile/${slide.image.replace(/\.png$/i, ".jpg")}`
+      : `${base}/${slide.image}`;
     const imageAttributes = index === activeHeroIndex
-      ? `src="${base}/${slide.image}" loading="eager" decoding="async" fetchpriority="high"`
-      : `data-src="${base}/${slide.image}" loading="lazy" decoding="async"`;
+      ? `src="${imageSource}" loading="eager" decoding="async" fetchpriority="high"`
+      : `data-src="${imageSource}" loading="lazy" decoding="async"`;
     return `
       <article class="hero-cover__slide${active}" data-hero-slide="${index}" aria-hidden="${index === activeHeroIndex ? "false" : "true"}">
         <img ${imageAttributes} alt="${category}" />
