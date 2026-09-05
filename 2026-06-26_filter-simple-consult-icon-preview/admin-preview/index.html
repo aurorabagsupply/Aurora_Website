@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>AOLOLA Admin Preview</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <main class="login-screen" data-login-screen>
+      <section class="login-panel" aria-labelledby="login-title">
+        <a class="admin-brand" href="../index.html" aria-label="Open AOLOLA website">
+          <span class="admin-brand__mark" aria-hidden="true">AO</span>
+          <span>AOLOLA</span>
+        </a>
+        <div class="login-copy">
+          <p class="eyebrow">B2B COMMERCE ADMIN</p>
+          <h1 id="login-title">管理你的采购业务</h1>
+          <p>产品、询盘、客户与报价，统一管理。</p>
+        </div>
+        <form class="login-form" data-login-form>
+          <label>邮箱<input name="email" type="email" autocomplete="email" value="admin@aolola.com" required /></label>
+          <label>密码<input name="password" type="password" autocomplete="current-password" value="aolola" required /></label>
+          <button class="button button--primary" type="submit">登录后台 <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="login-note">演示预览，仅用于查看后台布局。</p>
+      </section>
+      <aside class="login-visual" aria-hidden="true">
+        <img src="../assets/catalog/Bag/Bag%20(1).jpg" alt="" />
+        <div><span>AOLOLA</span><strong>Supply, organized.</strong></div>
+      </aside>
+    </main>
+
+    <div class="admin-app" data-admin-app hidden>
+      <aside class="sidebar" data-sidebar>
+        <a class="admin-brand" href="../index.html" aria-label="Open AOLOLA website"><span class="admin-brand__mark" aria-hidden="true">AO</span><span>AOLOLA</span></a>
+        <nav class="sidebar-nav" aria-label="Admin navigation">
+          <button class="sidebar-link is-active" type="button" data-view="overview"><span>概览</span><i>01</i></button>
+          <button class="sidebar-link" type="button" data-view="products"><span>产品目录</span><i>124</i></button>
+          <button class="sidebar-link" type="button" data-view="inquiries"><span>询盘中心</span><i>18</i></button>
+          <button class="sidebar-link" type="button" data-view="customers"><span>客户</span><i>386</i></button>
+          <button class="sidebar-link" type="button" data-view="quotes"><span>报价单</span><i>12</i></button>
+          <button class="sidebar-link" type="button" data-view="orders"><span>订单</span><i>27</i></button>
+        </nav>
+        <div class="sidebar-bottom">
+          <button class="sidebar-link" type="button" data-view="settings"><span>设置</span></button>
+          <button class="profile" type="button"><span class="profile__avatar">L</span><span><strong>Lin Zhang</strong><small>Administrator</small></span><b aria-hidden="true">⋮</b></button>
+        </div>
+      </aside>
+
+      <section class="admin-shell">
+        <header class="topbar">
+          <button class="menu-button" type="button" data-menu-button aria-label="Toggle navigation"><span></span><span></span></button>
+          <div class="topbar__path"><span>AOLOLA</span><b>/</b><strong data-page-label>概览</strong></div>
+          <div class="topbar__actions">
+            <button class="icon-button" type="button" aria-label="Search">⌕</button>
+            <button class="icon-button notification" type="button" aria-label="Notifications">◌<i></i></button>
+            <button class="button button--dark" type="button" data-add-product>+ 新增产品</button>
+          </div>
+        </header>
+
+        <main class="admin-content">
+          <section class="page-head">
+            <div><p class="eyebrow">SEPTEMBER 2026</p><h1 data-page-title>业务概览</h1><p data-page-summary>实时查看 AOLOLA 的产品、询盘与采购机会。</p></div>
+            <button class="period-button" type="button">近 30 天 <span aria-hidden="true">⌄</span></button>
+          </section>
+
+          <section class="metrics" aria-label="Business metrics">
+            <article class="metric"><span>待处理询盘</span><strong>18</strong><small class="trend">+24.1% <em>vs 上月</em></small></article>
+            <article class="metric"><span>报价金额</span><strong>$48,600</strong><small class="trend">+12.5% <em>vs 上月</em></small></article>
+            <article class="metric"><span>活跃客户</span><strong>386</strong><small class="trend">+8.2% <em>vs 上月</em></small></article>
+            <article class="metric"><span>目录产品</span><strong>124</strong><small>6 个主要分类</small></article>
+          </section>
+
+          <section class="dashboard-grid">
+            <section class="panel pipeline-panel">
+              <div class="panel-head"><div><h2>询盘转化</h2><p>本月采购机会状态</p></div><button class="text-button" type="button" data-view="inquiries">查看全部 →</button></div>
+              <div class="pipeline"><div class="pipeline__bar"><span style="--size: 88%"></span><span style="--size: 66%"></span><span style="--size: 43%"></span><span style="--size: 25%"></span></div><div class="pipeline__labels"><span>新询盘 <b>18</b></span><span>已沟通 <b>12</b></span><span>报价中 <b>7</b></span><span>已成交 <b>4</b></span></div></div>
+            </section>
+            <section class="panel activity-panel">
+              <div class="panel-head"><div><h2>最新动态</h2><p>最近的采购动作</p></div></div>
+              <ol class="activity-list"><li><i></i><p><strong>Brightfield Studio</strong> 提交了五金产品询盘<small>12 分钟前</small></p></li><li><i></i><p><strong>成品包 06</strong> 已加入报价单 #Q-2048<small>38 分钟前</small></p></li><li><i></i><p><strong>Horizon Leather</strong> 更新了交货地址<small>2 小时前</small></p></li></ol>
+            </section>
+          </section>
+
+          <section class="panel table-panel">
+            <div class="panel-head"><div><h2>最新询盘</h2><p>需要优先跟进的客户需求</p></div><div class="table-actions"><button class="filter-button" type="button">筛选</button><button class="text-button" type="button" data-view="inquiries">全部询盘 →</button></div></div>
+            <div class="responsive-table"><table><thead><tr><th>客户</th><th>询价产品</th><th>数量</th><th>来源</th><th>状态</th><th></th></tr></thead><tbody>
+              <tr><td><strong>Brightfield Studio</strong><small>London, United Kingdom</small></td><td>Hardware Product 04</td><td>2,000 pcs</td><td>Website</td><td><span class="status status--new">新询盘</span></td><td><button class="row-button" type="button">→</button></td></tr>
+              <tr><td><strong>Novea Goods</strong><small>Melbourne, Australia</small></td><td>Finished Bags 02, 06</td><td>600 pcs</td><td>WhatsApp</td><td><span class="status status--reply">待回复</span></td><td><button class="row-button" type="button">→</button></td></tr>
+              <tr><td><strong>Horizon Leather</strong><small>Toronto, Canada</small></td><td>Leather Material 02</td><td>300 m</td><td>Website</td><td><span class="status status--quote">报价中</span></td><td><button class="row-button" type="button">→</button></td></tr>
+            </tbody></table></div>
+          </section>
+        </main>
+      </section>
+    </div>
+    <script src="admin.js"></script>
+  </body>
+</html>
